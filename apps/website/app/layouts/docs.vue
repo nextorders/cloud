@@ -1,7 +1,9 @@
 <template>
   <Header />
 
-  <slot />
+  <UContainer>
+    <slot />
+  </UContainer>
 
   <Footer />
 </template>

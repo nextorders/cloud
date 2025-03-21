@@ -28,7 +28,7 @@ const items = computed(() => [{
   to: '/pricing',
 }, {
   label: 'Документация',
-  to: '/docs',
+  to: '/docs/getting-started',
   active: route.path.startsWith('/docs'),
 }])
 </script>

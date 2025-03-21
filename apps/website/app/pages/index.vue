@@ -2,7 +2,9 @@
   <UContainer class="flex flex-col py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 text-center">
     <div>
       <div class="mb-4 justify-center font-semibold text-(--ui-primary) flex items-center gap-1.5">
-        Ранний доступ
+        <UBadge color="neutral" variant="soft">
+          Ранний доступ
+        </UBadge>
       </div>
       <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
         Готовый инструмент для увеличения продаж
@@ -17,7 +19,7 @@
           target="_blank"
           color="primary"
           variant="solid"
-          size="xl"
+          size="lg"
           trailing-icon="i-lucide-eye"
         >
           Демо
