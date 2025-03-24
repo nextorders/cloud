@@ -6,16 +6,6 @@ export default defineNuxtConfig({
     url: 'https://nextorders.ru',
     name: 'NextOrders',
   },
-  content: {
-    build: {
-      markdown: {
-        toc: {
-          depth: 3, // include h3 headings
-          searchDepth: 3,
-        },
-      },
-    },
-  },
   css: ['~/assets/css/styles.css'],
   i18n: {
     strategy: 'prefix_except_default',
@@ -86,6 +76,14 @@ export default defineNuxtConfig({
     '/docs/**': { prerender: true },
     '/pricing': { prerender: true },
     '/offer': { prerender: true },
+  },
+  nitro: {
+    prerender: {
+      routes: [
+        '/',
+      ],
+      crawlLinks: true,
+    },
   },
   experimental: {
     typedPages: true,
