@@ -71,7 +71,11 @@ export default defineNuxtConfig({
     '@nuxt/content', // must be after @nuxtjs/seo
   ],
   routeRules: {
+    '/': { static: true },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
+    '/docs/**': { static: true },
+    '/pricing': { static: true },
+    '/offer': { static: true },
   },
   experimental: {
     typedPages: true,
