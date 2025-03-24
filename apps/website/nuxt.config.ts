@@ -81,11 +81,11 @@ export default defineNuxtConfig({
     '@nuxt/content', // must be after @nuxtjs/seo
   ],
   routeRules: {
-    '/': { static: true },
+    '/': { prerender: true },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    '/docs/**': { static: true },
-    '/pricing': { static: true },
-    '/offer': { static: true },
+    '/docs/**': { prerender: true },
+    '/pricing': { prerender: true },
+    '/offer': { prerender: true },
   },
   experimental: {
     typedPages: true,
