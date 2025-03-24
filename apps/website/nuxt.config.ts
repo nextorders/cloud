@@ -2,16 +2,9 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
-  app: {
-    head: {
-      link: [
-        {
-          rel: 'icon',
-          type: 'image/png',
-          href: '/favicon.png',
-        },
-      ],
-    },
+  site: {
+    url: 'https://nextorders.ru',
+    name: 'NextOrders',
   },
   css: ['~/assets/css/styles.css'],
   i18n: {
@@ -28,6 +21,9 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US', name: 'English', file: 'en-US.json' },
       { code: 'ru', language: 'ru-RU', name: 'Русский', file: 'ru-RU.json' },
     ],
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
   },
   zodI18n: {
     localeCodesMapping: {
@@ -65,13 +61,14 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxtjs/seo',
     '@nuxt/ui',
     'nuxt-zod-i18n', // must be before i18n
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@vueuse/nuxt',
     'nuxt-auth-utils',
-    '@nuxt/content',
+    '@nuxt/content', // must be after @nuxtjs/seo
   ],
   routeRules: {
     '/docs': { redirect: '/docs/getting-started', prerender: false },
