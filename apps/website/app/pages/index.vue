@@ -13,16 +13,25 @@
         Современный и удобный способ для ваших клиентов заказать еду. Доставка и самовывоз.
       </div>
 
-      <div class="mt-8 flex flex-row gap-2 justify-center">
+      <div class="mt-10 flex flex-wrap gap-x-6 gap-y-3 justify-center">
         <UButton
           to="https://demo.nextorders.space"
           target="_blank"
           color="primary"
           variant="solid"
-          size="lg"
+          size="xl"
           trailing-icon="i-lucide-eye"
         >
           Демо
+        </UButton>
+
+        <UButton
+          to="/pricing"
+          color="neutral"
+          variant="outline"
+          size="xl"
+        >
+          7 дней бесплатно
         </UButton>
       </div>
     </div>
@@ -77,7 +86,7 @@ useHead({
 })
 
 const colorMode = useColorMode()
-const demoImage = computed(() => colorMode.value === 'dark' ? '/img/main-ru-light.png' : '/img/main-ru-dark.png')
+const demoImage = computed(() => colorMode.value === 'dark' ? '/img/main-ru-light-min.png' : '/img/main-ru-dark-min.png')
 
 const features = [
   {

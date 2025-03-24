@@ -9,8 +9,6 @@
       color="primary"
       size="xl"
       class="px-2 py-2 gap-2"
-    >
-      33
-    </UButton>
+    />
   </UTooltip>
 </template>

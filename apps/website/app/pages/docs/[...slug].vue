@@ -8,7 +8,7 @@
     <div>
       <ContentRenderer v-if="page?.body" :value="page" />
 
-      <USeparator v-if="surround?.length" />
+      <USeparator v-if="surround?.length" class="mb-16" />
     </div>
   </Page>
 </template>
