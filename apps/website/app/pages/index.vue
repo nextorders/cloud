@@ -26,6 +26,7 @@
         </UButton>
 
         <UButton
+          to="/pricing"
           color="neutral"
           variant="outline"
           size="xl"
