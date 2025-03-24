@@ -2,7 +2,7 @@ packages:
   - apps/*
   - packages/*
 catalog:
-  '@antfu/eslint-config': ^4.10.2
+  '@antfu/eslint-config': ^4.11.0
   '@commitlint/cli': ^19.8.0
   '@commitlint/config-conventional': ^19.8.0
   '@date-fns/tz': ^1.2.0
@@ -18,14 +18,15 @@ catalog:
   '@nuxt/devtools': ^2.3.1
   '@nuxt/image': ^1.10.0
   '@nuxt/ui': ^3.0.1
-  '@nuxtjs/i18n': ^9.3.3
+  '@nuxtjs/i18n': ^9.3.4
+  '@nuxtjs/seo': ^3.0.1
   '@paralleldrive/cuid2': ^2.2.2
   '@pinia/nuxt': ^0.10.1
   '@semantic-release/exec': ^7.0.3
   '@semantic-release/git': ^10.0.1
   '@tailwindcss/typography': ^0.5.16
   '@types/bcrypt': ^5.0.2
-  '@types/node': ^22.13.11
+  '@types/node': ^22.13.13
   '@types/nodemailer': ^6.4.17
   '@vitejs/plugin-vue': ^5.2.3
   '@vitest/browser': ^3.0.9
@@ -38,7 +39,7 @@ catalog:
   bcrypt: ^5.1.1
   dotenv: ^16.4.7
   dotenv-cli: ^8.0.0
-  eslint: ^9.22.0
+  eslint: ^9.23.0
   husky: ^9.1.7
   ioredis: ^5.6.0
   libphonenumber-js: ^1.12.6
@@ -53,10 +54,11 @@ catalog:
   semantic-release: ^24.2.3
   semantic-release-monorepo: ^8.0.2
   typescript: ^5.8.2
-  vite: ^6.2.2
+  vite: ^6.2.3
   vite-tsconfig-paths: ^5.1.4
   vitest: ^3.0.9
   vitest-browser-vue: ^0.2.0
+  vue-tsc: ^2.2.8
   zod: ^3.24.2
 ignoredBuiltDependencies:
   - '@parcel/watcher'

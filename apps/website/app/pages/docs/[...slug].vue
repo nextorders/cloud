@@ -31,7 +31,11 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   })
 })
 
-useSeoMeta({
+if (page.value?.ogImage) {
+  defineOgImage(page.value?.ogImage)
+}
+useHead(page.value.head || {})
+useSeoMeta(page.value.seo || {
   title: page.value.title,
   ogTitle: page.value.title,
   description: page.value.description,

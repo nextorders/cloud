@@ -2,7 +2,7 @@
   "name": "nextorders",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.6.4",
+  "packageManager": "pnpm@10.6.5",
   "description": "Food delivery software as a service.",
   "author": "Nick Kosarev <hmbanan666@hotmail.com>",
   "license": "MIT",
@@ -56,10 +56,15 @@
     "playwright": "catalog:",
     "semantic-release": "catalog:",
     "semantic-release-monorepo": "catalog:",
+    "typescript": "catalog:",
     "vite": "catalog:",
     "vite-tsconfig-paths": "catalog:",
     "vitest": "catalog:",
-    "vitest-browser-vue": "catalog:"
+    "vitest-browser-vue": "catalog:",
+    "vue-tsc": "catalog:"
+  },
+  "resolutions": {
+    "vue-tsc": "2.2.2"
   },
   "lint-staged": {
     "*.ts": "pnpm run lint"

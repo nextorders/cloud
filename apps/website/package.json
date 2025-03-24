@@ -30,6 +30,7 @@
     "@iconify-json/simple-icons": "catalog:",
     "@nuxt/devtools": "catalog:",
     "@nuxt/image": "catalog:",
+    "@nuxtjs/seo": "catalog:",
     "@types/node": "catalog:",
     "nuxt": "catalog:",
     "nuxt-auth-utils": "catalog:"

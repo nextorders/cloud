@@ -98,6 +98,12 @@
 <script setup lang="ts">
 useHead({
   title: 'Цены на услуги',
+  meta: [
+    {
+      name: 'description',
+      content: 'Доступно всем. Все максимально просто. От 290 рублей в месяц.',
+    },
+  ],
 })
 
 const questionItems = ref([
