@@ -3,6 +3,15 @@ function _useApp() {
 
   const isMobileMenuOpened = ref(false)
 
+  const mainNavigationItems = computed(() => [{
+    label: 'Цены',
+    to: '/pricing',
+  }, {
+    label: 'Документация',
+    to: '/docs/getting-started',
+    active: route.path.startsWith('/docs'),
+  }])
+
   watch(
     () => route.fullPath,
     () => {
@@ -12,6 +21,7 @@ function _useApp() {
 
   return {
     isMobileMenuOpened,
+    mainNavigationItems,
   }
 }
 
