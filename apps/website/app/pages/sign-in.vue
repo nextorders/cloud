@@ -4,15 +4,43 @@
 
     <div class="my-4 flex flex-col justify-between items-center">
       <div class="flex-grow flex flex-col justify-center items-center">
-        <UContainer>
+        <UContainer class="md:min-w-sm">
           <h1 class="mb-10 text-2xl font-semibold text-center">
             Мы вас заждались!
           </h1>
 
-          <div class="mx-auto max-w-[260px]">
-            <form class="space-y-4" @submit="signIn()">
-              123
-            </form>
+          <div class="flex flex-col gap-2">
+            <UButton
+              to="/api/auth/yandex"
+              icon="i-simple-icons:yandexcloud"
+              size="xl"
+              label="Войти через Яндекс"
+              block
+            />
+
+            <UButton
+              to="/api/auth/vk"
+              icon="i-simple-icons:vk"
+              size="xl"
+              label="Войти через ВКонтакте"
+              block
+            />
+
+            <UButton
+              to="/api/auth/github"
+              icon="i-simple-icons:github"
+              size="xl"
+              label="Войти через GitHub"
+              block
+            />
+
+            <UButton
+              to="/api/auth/twitch"
+              icon="i-simple-icons:twitch"
+              size="xl"
+              label="Войти через Twitch"
+              block
+            />
           </div>
         </UContainer>
       </div>
@@ -31,29 +59,8 @@ useHead({
   title: 'Войти в Кабинет',
 })
 
-const { user, fetch: refreshSession } = useUserSession()
+const { user } = useUserSession()
 if (user.value?.id) {
-  await navigateTo('/')
+  await navigateTo('/cabinet')
 }
-
-const toast = useToast()
-
-const { execute: signIn } = await useFetch('/api/auth/sign-in', {
-  method: 'POST',
-  body: {},
-  immediate: false,
-  watch: false,
-  onResponse: async ({ response }) => {
-    if (response.ok) {
-      await refreshSession()
-      await navigateTo('/')
-    }
-  },
-  onResponseError: async ({ response }) => {
-    toast.add({
-      title: 'Error',
-      description: response.statusText,
-    })
-  },
-})
 </script>

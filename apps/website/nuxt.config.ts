@@ -60,6 +60,26 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    oauth: {
+      twitch: {
+        clientId: '',
+        clientSecret: '',
+      },
+      yandex: {
+        clientId: '',
+        clientSecret: '',
+      },
+      vk: {
+        clientId: '',
+        clientSecret: '',
+      },
+      github: {
+        clientId: '',
+        clientSecret: '',
+      },
+    },
+  },
   modules: [
     '@nuxtjs/seo',
     '@nuxt/ui',
@@ -72,15 +92,21 @@ export default defineNuxtConfig({
   ],
   routeRules: {
     '/': { prerender: true },
+    '/sign-in': { robots: false },
+    '/cabinet/**': { robots: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/**': { prerender: true },
     '/pricing': { prerender: true },
     '/offer': { prerender: true },
+    '/api/**': { prerender: false },
   },
   nitro: {
     prerender: {
       routes: [
         '/',
+      ],
+      ignore: [
+        '/api/**',
       ],
       crawlLinks: true,
     },
