@@ -92,8 +92,8 @@ export default defineNuxtConfig({
   ],
   routeRules: {
     '/': { prerender: true },
-    '/sign-in': { robots: false },
-    '/cabinet/**': { robots: false },
+    '/sign-in': { robots: false, prerender: false },
+    '/cabinet/**': { robots: false, prerender: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/**': { prerender: true },
     '/pricing': { prerender: true },
