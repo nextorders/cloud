@@ -9,6 +9,11 @@ export default defineAppConfig({
     icons: {
       loading: 'food:loader',
     },
+    slideover: {
+      slots: {
+        header: 'py-2',
+      },
+    },
     modal: {
       slots: {
         title: 'text-xl',
