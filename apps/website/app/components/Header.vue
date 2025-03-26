@@ -27,37 +27,64 @@
           <GithubButton />
         </div>
 
-        <UButton
-          v-if="!loggedIn"
-          to="/sign-in"
-          size="lg"
-        >
-          Войти
-        </UButton>
-        <UDropdownMenu
-          v-else
-          :items="userMenuItems"
-          :ui="{
-            content: 'w-56',
-          }"
-        >
-          <UAvatar
-            :src="user?.avatarUrl ?? undefined"
-            :alt="user?.name"
+        <USkeleton
+          v-if="!ready"
+          class="w-12 h-8"
+        />
+        <template v-else>
+          <UButton
+            v-if="!loggedIn"
+            to="/sign-in"
             size="lg"
-            class="cursor-pointer"
-          />
-        </UDropdownMenu>
+          >
+            Войти
+          </UButton>
+          <UDropdownMenu
+            v-else
+            :items="userMenuItems"
+            :ui="{
+              content: 'w-56',
+            }"
+          >
+            <UAvatar
+              :src="user?.avatarUrl ?? undefined"
+              :alt="user?.name"
+              size="lg"
+              class="cursor-pointer hover:scale-95 duration-200"
+            />
+          </UDropdownMenu>
+        </template>
       </div>
     </UContainer>
   </header>
+
+  <USlideover
+    v-model:open="isMobileMenuOpened"
+    side="left"
+  >
+    <template #header>
+      <div class="flex flex-row items-center">
+        <UButton
+          icon="i-lucide-x"
+          color="neutral"
+          variant="outline"
+          size="xl"
+          @click="isMobileMenuOpened = false"
+        />
+      </div>
+    </template>
+
+    <template #body>
+      <Navigation />
+    </template>
+  </USlideover>
 </template>
 
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 
 const { isMobileMenuOpened, mainNavigationItems } = useApp()
-const { user, loggedIn, clear: signOut } = useUserSession()
+const { user, loggedIn, ready, clear: signOut } = useUserSession()
 
 const userMenuItems = computed<DropdownMenuItem[][]>(() => [
   [
