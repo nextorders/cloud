@@ -34,15 +34,55 @@
         >
           Войти
         </UButton>
-        <div v-else>
-          {{ user }}
-        </div>
+        <UDropdownMenu
+          v-else
+          :items="userMenuItems"
+          :ui="{
+            content: 'w-56',
+          }"
+        >
+          <UAvatar
+            :src="user?.avatarUrl ?? undefined"
+            :alt="user?.name"
+            size="lg"
+            class="cursor-pointer"
+          />
+        </UDropdownMenu>
       </div>
     </UContainer>
   </header>
 </template>
 
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
+
 const { isMobileMenuOpened, mainNavigationItems } = useApp()
-const { user, loggedIn } = useUserSession()
+const { user, loggedIn, clear: signOut } = useUserSession()
+
+const userMenuItems = computed<DropdownMenuItem[][]>(() => [
+  [
+    {
+      label: user.value?.name,
+      avatar: {
+        src: user.value?.avatarUrl ?? undefined,
+      },
+      type: 'label' as const,
+    },
+    {
+      label: user.value?.email,
+      icon: 'i-lucide-mail',
+      type: 'label' as const,
+    },
+  ],
+  [
+    {
+      label: 'Выйти',
+      icon: 'i-lucide-log-out',
+      onSelect: async () => {
+        await signOut()
+        await navigateTo('/')
+      },
+    },
+  ],
+])
 </script>
