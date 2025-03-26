@@ -63,8 +63,8 @@ useHead({
   title: 'Войти в Кабинет',
 })
 
-const { user } = useUserSession()
-if (user.value?.id) {
+const { loggedIn } = useUserSession()
+if (loggedIn) {
   await navigateTo('/cabinet')
 }
 </script>

@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware(async () => {
+export default defineNuxtRouteMiddleware(() => {
   const { user } = useUserSession()
 
   if (!user.value?.id) {
