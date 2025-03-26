@@ -1,3 +1,3 @@
 <template>
-  Кабинет
+  <CabinetHeader title="Кабинет" />
 </template>

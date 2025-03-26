@@ -100,6 +100,12 @@ const userMenuItems = computed<DropdownMenuItem[][]>(() => [
       icon: 'i-lucide-mail',
       type: 'label' as const,
     },
+    {
+      label: 'Кабинет',
+      icon: 'i-lucide-briefcase-business',
+      to: '/cabinet',
+      type: 'link' as const,
+    },
   ],
   [
     {
