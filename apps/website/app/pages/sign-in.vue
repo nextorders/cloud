@@ -12,6 +12,7 @@
           <div class="flex flex-col gap-2">
             <UButton
               to="/api/auth/yandex"
+              external
               icon="i-simple-icons:yandexcloud"
               size="xl"
               label="Войти через Яндекс"
@@ -20,6 +21,7 @@
 
             <UButton
               to="/api/auth/vk"
+              external
               icon="i-simple-icons:vk"
               size="xl"
               label="Войти через ВКонтакте"
@@ -28,6 +30,7 @@
 
             <UButton
               to="/api/auth/github"
+              external
               icon="i-simple-icons:github"
               size="xl"
               label="Войти через GitHub"
@@ -36,6 +39,7 @@
 
             <UButton
               to="/api/auth/twitch"
+              external
               icon="i-simple-icons:twitch"
               size="xl"
               label="Войти через Twitch"

@@ -98,7 +98,7 @@ export default defineNuxtConfig({
     '/docs/**': { prerender: true },
     '/pricing': { prerender: true },
     '/offer': { prerender: true },
-    '/api/**': { prerender: false },
+    '/api/**': { cors: true },
   },
   nitro: {
     prerender: {
