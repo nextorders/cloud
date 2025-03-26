@@ -18,7 +18,7 @@ export default defineOAuthGitHubEventHandler({
     const githubUser = user as unknown as UserGitHub
 
     // Get and Update data in DB
-    const userInDB = await repository.user.findByEmail(githubUser.email) ?? await repository.user.create({ email: githubUser.email, name: githubUser?.name || 'Аноним', avatarUrl: githubUser?.avatar_url })
+    const userInDB = await repository.user.findByEmail(githubUser.email) ?? await repository.user.create({ email: githubUser.email, name: githubUser?.name ?? 'Аноним', avatarUrl: githubUser?.avatar_url })
     if (!userInDB) {
       logger.error('GitHub OAuth error: User not found')
       return sendRedirect(event, '/sign-in')
