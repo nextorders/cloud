@@ -108,8 +108,9 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/',
+        '/docs/getting-started',
       ],
-      crawlLinks: true,
+      crawlLinks: false,
     },
   },
   experimental: {
