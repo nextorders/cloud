@@ -29,7 +29,7 @@
 
         <USkeleton
           v-if="!ready"
-          class="w-12 h-8"
+          class="size-9 rounded-full"
         />
         <template v-else>
           <UButton

@@ -81,6 +81,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@pinia/nuxt',
     '@nuxtjs/seo',
     '@nuxt/ui',
     'nuxt-zod-i18n', // must be before i18n
@@ -92,13 +93,14 @@ export default defineNuxtConfig({
   ],
   routeRules: {
     '/': { prerender: true },
-    '/sign-in': { robots: false, prerender: false },
-    '/cabinet/**': { robots: false, prerender: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/**': { prerender: true },
     '/pricing': { prerender: true },
     '/offer': { prerender: true },
     '/api/**': { cors: true, prerender: false },
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
   },
   nitro: {
     prerender: {
@@ -110,6 +112,7 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
+    inlineRouteRules: true,
   },
   compatibilityDate: '2024-08-18',
 })
