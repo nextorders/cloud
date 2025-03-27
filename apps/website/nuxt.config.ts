@@ -93,6 +93,8 @@ export default defineNuxtConfig({
   ],
   routeRules: {
     '/': { prerender: true },
+    '/sign-in': { robots: false, prerender: false },
+    '/cabinet/**': { robots: false, prerender: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/docs/**': { prerender: true },
     '/pricing': { prerender: true },
@@ -112,7 +114,6 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
-    inlineRouteRules: true,
   },
   compatibilityDate: '2024-08-18',
 })
