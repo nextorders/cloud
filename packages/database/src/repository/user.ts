@@ -15,6 +15,15 @@ export class User {
     })
   }
 
+  static async findWithEntities(id: string) {
+    return useDatabase().query.users.findFirst({
+      where: (users, { eq }) => eq(users.id, id),
+      with: {
+        spaces: true,
+      },
+    })
+  }
+
   static async create(data: UserDraft) {
     const [user] = await useDatabase().insert(users).values(data).returning()
     return user

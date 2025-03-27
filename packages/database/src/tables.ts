@@ -1,5 +1,6 @@
 import { cuid2 } from 'drizzle-cuid2/postgres'
-import { pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { relations } from 'drizzle-orm'
+import { integer, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 export const users = pgTable('users', {
   id: cuid2('id').defaultRandom().primaryKey(),
@@ -9,3 +10,44 @@ export const users = pgTable('users', {
   name: varchar('name').notNull(),
   avatarUrl: varchar('avatar_url'),
 })
+
+export const spaces = pgTable('spaces', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  name: varchar('name').notNull(),
+  balance: integer('balance').notNull().default(0),
+  tariffId: cuid2('tariff_id').notNull().references(() => tariffs.id),
+  ownerId: cuid2('owner_id').notNull().references(() => users.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
+export const tariffs = pgTable('tariffs', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  name: varchar('name').notNull(),
+  description: text('description').notNull(),
+  dailyCost: integer('daily_cost').notNull().default(0),
+})
+
+export const usersRelations = relations(users, ({ many }) => ({
+  spaces: many(spaces),
+}))
+
+export const spacesRelations = relations(spaces, ({ one }) => ({
+  owner: one(users, {
+    fields: [spaces.ownerId],
+    references: [users.id],
+  }),
+  tariff: one(tariffs, {
+    fields: [spaces.tariffId],
+    references: [tariffs.id],
+  }),
+}))
+
+export const tariffsRelations = relations(tariffs, ({ many }) => ({
+  spaces: many(spaces),
+}))

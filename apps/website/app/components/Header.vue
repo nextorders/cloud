@@ -29,7 +29,7 @@
 
         <USkeleton
           v-if="!ready"
-          class="w-12 h-8"
+          class="size-9 rounded-full"
         />
         <template v-else>
           <UButton
@@ -98,7 +98,7 @@ const userMenuItems = computed<DropdownMenuItem[][]>(() => [
     {
       label: user.value?.email,
       icon: 'i-lucide-mail',
-      type: 'label' as const,
+      type: 'link' as const,
     },
     {
       label: 'Кабинет',

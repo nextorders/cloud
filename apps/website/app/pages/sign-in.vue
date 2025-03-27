@@ -58,13 +58,17 @@
 definePageMeta({
   layout: 'empty',
 })
+defineRouteRules({
+  prerender: false,
+  robots: false,
+})
 
 useHead({
   title: 'Войти в Кабинет',
 })
 
 const { loggedIn } = useUserSession()
-if (loggedIn) {
+if (loggedIn.value) {
   await navigateTo('/cabinet')
 }
 </script>

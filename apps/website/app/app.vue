@@ -34,4 +34,12 @@ useHead({
     dir,
   },
 })
+
+onMounted(async () => {
+  const user = useUserStore()
+
+  await Promise.all([
+    user.update(),
+  ])
+})
 </script>

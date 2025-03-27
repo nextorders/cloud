@@ -18,9 +18,11 @@
     "@nuxt/content": "catalog:",
     "@nuxt/ui": "catalog:",
     "@nuxtjs/i18n": "catalog:",
+    "@pinia/nuxt": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/nuxt": "catalog:",
     "nuxt-zod-i18n": "catalog:",
+    "pinia": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
