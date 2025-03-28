@@ -39,7 +39,9 @@
     <div class="relative mx-auto">
       <NuxtImg
         :src="demoImage"
-        alt=""
+        format="webp"
+        densities="x1 x2"
+        alt="Демо версия NextOrders: Food"
         class="w-full h-auto rounded-xl"
       />
     </div>

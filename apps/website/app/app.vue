@@ -35,11 +35,6 @@ useHead({
   },
 })
 
-onMounted(async () => {
-  const user = useUserStore()
-
-  await Promise.all([
-    user.update(),
-  ])
-})
+const user = useUserStore()
+await callOnce(user.update)
 </script>

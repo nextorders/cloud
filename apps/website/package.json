@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@nextorders/database": "workspace:*",
-    "@nuxt/content": "catalog:",
     "@nuxt/ui": "catalog:",
     "@nuxtjs/i18n": "catalog:",
     "@pinia/nuxt": "catalog:",
