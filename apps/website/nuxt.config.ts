@@ -89,7 +89,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     'nuxt-auth-utils',
-    '@nuxt/content', // must be after @nuxtjs/seo
   ],
   routeRules: {
     '/': { prerender: true },
@@ -103,15 +102,6 @@ export default defineNuxtConfig({
   },
   pinia: {
     storesDirs: ['./stores/**'],
-  },
-  nitro: {
-    prerender: {
-      routes: [
-        '/',
-        '/docs/getting-started',
-      ],
-      crawlLinks: false,
-    },
   },
   experimental: {
     typedPages: true,
