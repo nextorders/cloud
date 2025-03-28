@@ -36,5 +36,5 @@ useHead({
 })
 
 const user = useUserStore()
-await callOnce(user.update)
+await user.update()
 </script>

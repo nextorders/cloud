@@ -24,6 +24,21 @@ export const spaces = pgTable('spaces', {
   }),
 })
 
+export const spaceMembers = pgTable('space_members', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  roles: text('roles').array().notNull().default([]),
+  spaceId: cuid2('space_id').notNull().references(() => spaces.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+  userId: cuid2('user_id').notNull().references(() => users.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
 export const tariffs = pgTable('tariffs', {
   id: cuid2('id').defaultRandom().primaryKey(),
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
@@ -35,16 +50,29 @@ export const tariffs = pgTable('tariffs', {
 
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
+  memberInSpaces: many(spaceMembers),
 }))
 
-export const spacesRelations = relations(spaces, ({ one }) => ({
+export const spacesRelations = relations(spaces, ({ one, many }) => ({
   owner: one(users, {
     fields: [spaces.ownerId],
     references: [users.id],
   }),
+  members: many(spaceMembers),
   tariff: one(tariffs, {
     fields: [spaces.tariffId],
     references: [tariffs.id],
+  }),
+}))
+
+export const spaceMembersRelations = relations(spaceMembers, ({ one }) => ({
+  space: one(spaces, {
+    fields: [spaceMembers.spaceId],
+    references: [spaces.id],
+  }),
+  user: one(users, {
+    fields: [spaceMembers.userId],
+    references: [users.id],
   }),
 }))
 
