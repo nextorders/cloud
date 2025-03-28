@@ -5,7 +5,11 @@
     class="flex flex-col gap-3"
     @submit="onSubmit"
   >
-    <UFormField label="Название" name="name">
+    <UFormField
+      label="Название"
+      name="name"
+      description="Короткое, но понятное. Например: «Обеды на колёсах»"
+    >
       <UInput
         v-model="state.name"
         size="xl"
