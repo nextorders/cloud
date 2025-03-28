@@ -91,13 +91,13 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
   ],
   routeRules: {
-    '/': { prerender: true },
+    '/': { prerender: false },
     '/sign-in': { robots: false, prerender: false },
     '/cabinet/**': { robots: false, prerender: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
-    '/docs/**': { prerender: true },
-    '/pricing': { prerender: true },
-    '/offer': { prerender: true },
+    '/docs/**': { prerender: false },
+    '/pricing': { prerender: false },
+    '/offer': { prerender: false },
     '/api/**': { cors: true, prerender: false },
   },
   pinia: {
