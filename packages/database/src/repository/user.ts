@@ -19,7 +19,15 @@ export class User {
     return useDatabase().query.users.findFirst({
       where: (users, { eq }) => eq(users.id, id),
       with: {
-        spaces: true,
+        spaces: {
+          with: {
+            members: {
+              with: {
+                user: true,
+              },
+            },
+          },
+        },
       },
     })
   }

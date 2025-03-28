@@ -1,4 +1,7 @@
-import type { Space } from '@nextorders/database'
+import type { Space, SpaceMember, User } from '@nextorders/database'
+
+type SpaceMemberWithUser = SpaceMember & { user: User }
+type SpaceWithMembers = Space & { members: SpaceMemberWithUser[] }
 
 export const useUserStore = defineStore('user', () => {
   const id = ref('')
@@ -6,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('')
   const name = ref('')
   const avatarUrl = ref<string | null>(null)
-  const spaces = ref<Space[]>([])
+  const spaces = ref<SpaceWithMembers[]>([])
 
   async function update() {
     if (import.meta.prerender || import.meta.server) {
