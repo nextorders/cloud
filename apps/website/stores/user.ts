@@ -12,10 +12,6 @@ export const useUserStore = defineStore('user', () => {
   const spaces = ref<SpaceWithMembers[]>([])
 
   async function update() {
-    if (import.meta.prerender || import.meta.server) {
-      return
-    }
-
     const data = await $fetch('/api/user', {
       lazy: true,
       server: true,
@@ -23,7 +19,7 @@ export const useUserStore = defineStore('user', () => {
       getCachedData: undefined,
     })
     if (!data) {
-      throw new Error('User data not found')
+      return
     }
 
     id.value = data.id
