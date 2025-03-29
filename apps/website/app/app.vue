@@ -36,5 +36,7 @@ useHead({
 })
 
 const user = useUserStore()
-await user.update()
+await Promise.all([
+  user.update(),
+])
 </script>
