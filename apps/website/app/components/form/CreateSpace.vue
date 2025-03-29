@@ -17,10 +17,27 @@
       />
     </UFormField>
 
-    <UFormField label="Тариф" name="tariffId">
+    <UFormField
+      label="Тариф"
+      name="tariffId"
+      description="Плюс бонус на первые 7 дней."
+    >
+      <template #help>
+        <UButton
+          to="/pricing"
+          target="_blank"
+          icon="i-lucide-info"
+          size="sm"
+          variant="soft"
+        >
+          Вся информация о тарифах
+        </UButton>
+      </template>
+
       <USelect
         v-model="state.tariffId"
         :items="getTariffsForSelect()"
+        :icon="selectedTariffIcon"
         placeholder="Выберите"
         size="xl"
         class="w-full"
@@ -54,6 +71,8 @@ const state = ref<Partial<SpaceCreateSchema>>({
   tariffId: undefined,
   ownerId: user.id,
 })
+
+const selectedTariffIcon = computed(() => getTariffsForSelect().find((t) => t.value === state.value.tariffId)?.icon)
 
 async function onSubmit(event: FormSubmitEvent<SpaceCreateSchema>) {
   actionToast.start()

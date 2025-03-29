@@ -1,6 +1,7 @@
 import type { SpaceDraft, SpaceMemberDraft } from '../types'
 import { useDatabase } from '../database'
 import { spaceMembers, spaces } from '../tables'
+import { Balance } from './balance'
 
 export class Space {
   static async find(id: string) {
@@ -24,6 +25,15 @@ export class Space {
       spaceId: space.id,
       userId: space.ownerId,
       roles: ['owner'],
+    })
+
+    // Create first bonus change: 7 days
+    const bonusAmount = 9 * 7
+    await Balance.change({
+      type: 'bonus',
+      spaceId: space.id,
+      amount: bonusAmount,
+      description: 'Приветственный бонус',
     })
 
     return space
