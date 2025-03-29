@@ -20,3 +20,6 @@ export type BalanceChangeDraft = InferInsertModel<typeof tables.balanceChanges>
 
 export type Payment = InferSelectModel<typeof tables.payments>
 export type PaymentDraft = InferInsertModel<typeof tables.payments>
+
+export type Cluster = InferSelectModel<typeof tables.clusters>
+export type ClusterDraft = InferInsertModel<typeof tables.clusters>

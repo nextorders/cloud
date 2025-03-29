@@ -14,6 +14,8 @@ export default defineEventHandler(async (event) => {
       id,
     })
 
+    // Create resources on cluster
+
     return {
       ok: true,
       result: space,
