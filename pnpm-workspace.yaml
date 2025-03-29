@@ -24,8 +24,6 @@ catalog:
   '@pinia/nuxt': ^0.10.1
   '@semantic-release/exec': ^7.0.3
   '@semantic-release/git': ^10.0.1
-  '@tailwindcss/typography': ^0.5.16
-  '@types/bcrypt': ^5.0.2
   '@types/node': ^22.13.14
   '@types/nodemailer': ^6.4.17
   '@types/pg': ^8.11.11
@@ -37,7 +35,6 @@ catalog:
   '@vueuse/core': ^13.0.0
   '@vueuse/nuxt': ^13.0.0
   aws4fetch: ^1.0.20
-  bcrypt: ^5.1.1
   dotenv: ^16.4.7
   dotenv-cli: ^8.0.0
   drizzle-cuid2: ^2.0.0
@@ -72,7 +69,6 @@ ignoredBuiltDependencies:
   - msw
   - vue-demi
 onlyBuiltDependencies:
-  - bcrypt
   - better-sqlite3
   - sharp
 supportedArchitectures:
