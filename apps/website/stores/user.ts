@@ -1,7 +1,8 @@
 import type { Space, SpaceMember, User } from '@nextorders/database'
 
-type SpaceMemberWithUser = SpaceMember & { user: User }
+type SpaceMemberWithData = SpaceMember & { space: SpaceWithMembers, user: User }
 type SpaceWithMembers = Space & { members: SpaceMemberWithUser[] }
+type SpaceMemberWithUser = SpaceMember & { user: User }
 
 export const useUserStore = defineStore('user', () => {
   const id = ref('')
@@ -9,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('')
   const name = ref('')
   const avatarUrl = ref<string | null>(null)
-  const spaces = ref<SpaceWithMembers[]>([])
+  const memberInSpaces = ref<SpaceMemberWithData[]>([])
 
   async function update() {
     const data = await $fetch('/api/user', {
@@ -27,7 +28,7 @@ export const useUserStore = defineStore('user', () => {
     email.value = data.email
     name.value = data.name
     avatarUrl.value = data.avatarUrl
-    spaces.value = data.spaces
+    memberInSpaces.value = data.memberInSpaces
   }
 
   return {
@@ -36,7 +37,7 @@ export const useUserStore = defineStore('user', () => {
     email,
     name,
     avatarUrl,
-    spaces,
+    memberInSpaces,
 
     update,
   }

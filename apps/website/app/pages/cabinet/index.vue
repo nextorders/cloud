@@ -4,12 +4,12 @@
   <CabinetContent>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <CabinetSpaceCard
-        v-for="space in user.spaces"
-        :key="space.id"
-        :name="space.name"
-        :tariff-id="space.tariffId"
-        :balance="space.balance"
-        :members="space.members"
+        v-for="member in user.memberInSpaces"
+        :key="member.space.id"
+        :name="member.space.name"
+        :tariff-id="member.space.tariffId"
+        :balance="member.space.balance"
+        :members="member.space.members"
       />
       <CabinetCreateSpaceCard />
     </div>
