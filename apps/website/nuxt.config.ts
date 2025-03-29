@@ -103,6 +103,14 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**'],
   },
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    scheduledTasks: {
+      '0 * * * *': ['space:tariffDebit'],
+    },
+  },
   experimental: {
     typedPages: true,
   },
