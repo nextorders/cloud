@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', () => {
       getCachedData: undefined,
     })
     if (!data) {
-      throw new Error('User data not found')
+      return
     }
 
     id.value = data.id

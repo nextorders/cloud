@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const userInDB = await repository.user.findWithEntities(userId)
+  const userInDB = await repository.user.find(userId)
   if (!userInDB?.id) {
     return
   }
