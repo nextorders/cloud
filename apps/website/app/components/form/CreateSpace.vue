@@ -13,7 +13,17 @@
       <UInput
         v-model="state.name"
         size="xl"
-        class="w-full items-center justify-center"
+        class="w-full"
+      />
+    </UFormField>
+
+    <UFormField label="Тариф" name="tariffId">
+      <USelect
+        v-model="state.tariffId"
+        :items="getTariffsForSelect()"
+        placeholder="Выберите"
+        size="xl"
+        class="w-full"
       />
     </UFormField>
 
@@ -41,7 +51,7 @@ const user = useUserStore()
 
 const state = ref<Partial<SpaceCreateSchema>>({
   name: undefined,
-  tariffId: 'j7gb38bk5p14jbaffbuzggyh',
+  tariffId: undefined,
   ownerId: user.id,
 })
 

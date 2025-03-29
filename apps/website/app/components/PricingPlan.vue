@@ -1,10 +1,15 @@
 <template>
-  <div class="relative grid rounded-[calc(var(--ui-radius)*2.5)] p-6 lg:p-8 xl:p-10 gap-6 bg-(--ui-bg) ring ring-inset ring-(--ui-border)" :class="{ 'ring-2 ring-inset ring-(--ui-primary)': highlight, 'lg:scale-[1.1] lg:z-[1]': scale }">
+  <div class="relative grid rounded-[calc(var(--ui-radius)*2.5)] p-6 lg:p-8 xl:p-10 gap-6 bg-(--ui-bg) ring ring-inset ring-(--ui-border)" :class="{ 'ring-2 ring-inset ring-(--ui-primary)': highlight, 'lg:scale-[1.05] lg:z-[1]': scale }">
     <div class="flex flex-col min-w-0">
       <div class="flex items-center gap-3">
         <div class="text-(--ui-text-highlighted) text-2xl sm:text-3xl text-pretty font-semibold">
           {{ title }}
         </div>
+        <UIcon
+          v-if="titleIcon"
+          :name="titleIcon"
+          class="size-10"
+        />
       </div>
       <div class="text-base text-pretty mt-2 text-(--ui-text-muted)">
         {{ description }}
@@ -46,6 +51,7 @@
 <script setup lang="ts">
 defineProps<{
   title: string
+  titleIcon?: string
   description: string
   price: string
   billingCycle: string

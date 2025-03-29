@@ -72,32 +72,6 @@ function getFirstRoleInfo(roles: string[]) {
   }
 }
 
-function getTariffDailyCost(tariffId: string) {
-  switch (tariffId) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return 0
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return 9
-    case 'uzd1qzders7p6j2idst1td81':
-      return 38
-    default:
-      return 0
-  }
-}
-
-function getTariffName(tariffId: string) {
-  switch (tariffId) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return 'Нулевой'
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return 'Старт'
-    case 'uzd1qzders7p6j2idst1td81':
-      return 'Шеф'
-    default:
-      return ''
-  }
-}
-
 function getEndDate(balance: number, tariffId: string): string | null {
   const dailyCost = getTariffDailyCost(tariffId)
   const daysLeft = dailyCost > 0 ? Math.ceil(balance / dailyCost) : 1000
