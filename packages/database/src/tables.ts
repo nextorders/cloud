@@ -82,6 +82,18 @@ export const payments = pgTable('payments', {
   }),
 })
 
+export const clusters = pgTable('clusters', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  name: varchar('name').notNull(),
+  server: varchar('server').notNull(),
+  certificateAuthorityData: text('certificate_authority_data').notNull(),
+  clientCertificateData: text('client_certificate_data'),
+  clientKeyData: text('client_key_data'),
+  userToken: text('user_token'),
+})
+
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
   memberInSpaces: many(spaceMembers),
