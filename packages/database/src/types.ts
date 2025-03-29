@@ -14,3 +14,9 @@ export type SpaceMemberDraft = InferInsertModel<typeof tables.spaceMembers>
 
 export type Tariff = InferSelectModel<typeof tables.tariffs>
 export type TariffDraft = InferInsertModel<typeof tables.tariffs>
+
+export type BalanceChange = InferSelectModel<typeof tables.balanceChanges>
+export type BalanceChangeDraft = InferInsertModel<typeof tables.balanceChanges>
+
+export type Payment = InferSelectModel<typeof tables.payments>
+export type PaymentDraft = InferInsertModel<typeof tables.payments>

@@ -15,6 +15,8 @@ export const spaces = pgTable('spaces', {
   id: cuid2('id').defaultRandom().primaryKey(),
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  paidTo: timestamp('paid_to', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  status: varchar('status').notNull().default('active'),
   name: varchar('name').notNull(),
   balance: integer('balance').notNull().default(0),
   tariffId: cuid2('tariff_id').notNull().references(() => tariffs.id),
@@ -48,9 +50,42 @@ export const tariffs = pgTable('tariffs', {
   dailyCost: integer('daily_cost').notNull().default(0),
 })
 
+export const balanceChanges = pgTable('balance_changes', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  amount: integer('amount').notNull(),
+  type: varchar('type').notNull(),
+  description: text('description').notNull(),
+  spaceId: cuid2('space_id').notNull().references(() => spaces.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
+export const payments = pgTable('payments', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  amount: integer('amount').notNull(),
+  externalId: varchar('external_id').notNull(),
+  provider: varchar('provider').notNull(),
+  status: varchar('status').notNull(),
+  description: text('description').notNull(),
+  spaceId: cuid2('space_id').notNull().references(() => spaces.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+  userId: cuid2('user_id').notNull().references(() => users.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
   memberInSpaces: many(spaceMembers),
+  payments: many(payments),
 }))
 
 export const spacesRelations = relations(spaces, ({ one, many }) => ({
@@ -63,6 +98,8 @@ export const spacesRelations = relations(spaces, ({ one, many }) => ({
     fields: [spaces.tariffId],
     references: [tariffs.id],
   }),
+  balanceChanges: many(balanceChanges),
+  payments: many(payments),
 }))
 
 export const spaceMembersRelations = relations(spaceMembers, ({ one }) => ({
@@ -78,4 +115,22 @@ export const spaceMembersRelations = relations(spaceMembers, ({ one }) => ({
 
 export const tariffsRelations = relations(tariffs, ({ many }) => ({
   spaces: many(spaces),
+}))
+
+export const balanceChangesRelations = relations(balanceChanges, ({ one }) => ({
+  space: one(spaces, {
+    fields: [balanceChanges.spaceId],
+    references: [spaces.id],
+  }),
+}))
+
+export const paymentsRelations = relations(payments, ({ one }) => ({
+  space: one(spaces, {
+    fields: [payments.spaceId],
+    references: [spaces.id],
+  }),
+  user: one(users, {
+    fields: [payments.userId],
+    references: [users.id],
+  }),
 }))
