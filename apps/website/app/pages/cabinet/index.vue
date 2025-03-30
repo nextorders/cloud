@@ -11,7 +11,7 @@
         :balance="member.space.balance"
         :members="member.space.members"
       />
-      <CabinetCreateSpaceCard />
+      <CabinetCreateSpaceCard v-if="canCreateNewSpace" />
     </div>
 
     <UContainer class="mt-32 max-w-xl text-center">
@@ -28,4 +28,6 @@
 
 <script setup lang="ts">
 const user = useUserStore()
+const ownedSpacesQuota = computed(() => user.quotas.find((q) => q.key === 'owned_spaces'))
+const canCreateNewSpace = computed<boolean>(() => ownedSpacesQuota.value !== undefined && ownedSpacesQuota.value.used < ownedSpacesQuota.value.limit)
 </script>

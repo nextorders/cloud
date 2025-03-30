@@ -23,6 +23,12 @@ const menuItems = ref([
     label: 'Кабинет',
     to: '/cabinet',
     icon: 'i-lucide-briefcase-business',
+    exact: true,
+  },
+  {
+    label: 'Квоты',
+    to: '/cabinet/quotas',
+    icon: 'i-lucide-maximize',
   },
 ])
 

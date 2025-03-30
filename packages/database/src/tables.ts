@@ -11,6 +11,19 @@ export const users = pgTable('users', {
   avatarUrl: varchar('avatar_url'),
 })
 
+export const userQuotas = pgTable('user_quotas', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  key: varchar('key').notNull(),
+  used: integer('used').notNull().default(0),
+  limit: integer('limit').notNull().default(0),
+  userId: cuid2('user_id').notNull().references(() => users.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
 export const spaces = pgTable('spaces', {
   id: cuid2('id').defaultRandom().primaryKey(),
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
@@ -24,6 +37,7 @@ export const spaces = pgTable('spaces', {
     onDelete: 'cascade',
     onUpdate: 'cascade',
   }),
+  clusterId: cuid2('cluster_id').notNull().references(() => clusters.id),
 })
 
 export const spaceMembers = pgTable('space_members', {
@@ -94,10 +108,32 @@ export const clusters = pgTable('clusters', {
   userToken: text('user_token'),
 })
 
+export const buckets = pgTable('buckets', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  name: varchar('name').notNull(),
+  region: varchar('region').notNull(),
+  endpoint: varchar('endpoint').notNull(),
+  accessKeyId: varchar('access_key_id').notNull(),
+  secretAccessKey: varchar('secret_access_key').notNull(),
+  publicUrl: varchar('public_url').notNull(),
+  sizeGb: integer('size_gb').notNull(),
+  status: varchar('status').notNull().default('ready'),
+})
+
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
   memberInSpaces: many(spaceMembers),
   payments: many(payments),
+  quotas: many(userQuotas),
+}))
+
+export const userQuotasRelations = relations(userQuotas, ({ one }) => ({
+  user: one(users, {
+    fields: [userQuotas.userId],
+    references: [users.id],
+  }),
 }))
 
 export const spacesRelations = relations(spaces, ({ one, many }) => ({
@@ -112,6 +148,10 @@ export const spacesRelations = relations(spaces, ({ one, many }) => ({
   }),
   balanceChanges: many(balanceChanges),
   payments: many(payments),
+  cluster: one(clusters, {
+    fields: [spaces.clusterId],
+    references: [clusters.id],
+  }),
 }))
 
 export const spaceMembersRelations = relations(spaceMembers, ({ one }) => ({
@@ -145,4 +185,8 @@ export const paymentsRelations = relations(payments, ({ one }) => ({
     fields: [payments.userId],
     references: [users.id],
   }),
+}))
+
+export const clustersRelations = relations(clusters, ({ many }) => ({
+  spaces: many(spaces),
 }))
