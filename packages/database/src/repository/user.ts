@@ -46,7 +46,28 @@ export class User {
 
   static async create(data: UserDraft) {
     const [user] = await useDatabase().insert(users).values(data).returning()
+    if (!user) {
+      return
+    }
+
+    // Create default quotas
+    await User.createQuota(user.id, 'owned_spaces', 1)
+
     return user
+  }
+
+  static async createQuota(userId: string, key: UserQuotaKey, limit: number) {
+    const [quota] = await useDatabase()
+      .insert(userQuotas)
+      .values({
+        userId,
+        key,
+        used: 0,
+        limit,
+      })
+      .returning()
+
+    return quota
   }
 
   static async updateUsedQuota(userId: string, key: UserQuotaKey, amount: number = 1) {
