@@ -1,8 +1,14 @@
-import type { Space, SpaceMember, User } from '@nextorders/database'
+import type { Space, SpaceMember, User, UserQuota, UserQuotaKey } from '@nextorders/database'
 
 type SpaceMemberWithData = SpaceMember & { space: SpaceWithMembers, user: User }
 type SpaceWithMembers = Space & { members: SpaceMemberWithUser[] }
 type SpaceMemberWithUser = SpaceMember & { user: User }
+
+type UserQuotaWithData = UserQuota & {
+  key: UserQuotaKey
+  name: string
+  icon: string
+}
 
 export const useUserStore = defineStore('user', () => {
   const id = ref('')
@@ -11,6 +17,7 @@ export const useUserStore = defineStore('user', () => {
   const name = ref('')
   const avatarUrl = ref<string | null>(null)
   const memberInSpaces = ref<SpaceMemberWithData[]>([])
+  const quotas = ref<UserQuotaWithData[]>([])
 
   async function update() {
     const data = await $fetch('/api/user', {
@@ -29,6 +36,17 @@ export const useUserStore = defineStore('user', () => {
     name.value = data.name
     avatarUrl.value = data.avatarUrl
     memberInSpaces.value = data.memberInSpaces
+
+    if (data.quotas) {
+      quotas.value = data.quotas.map((quota) => {
+        return {
+          ...quota,
+          key: quota.key as UserQuotaKey,
+          name: getQuotaInfo(quota.key as UserQuotaKey)?.name ?? '',
+          icon: getQuotaInfo(quota.key as UserQuotaKey)?.icon ?? '',
+        }
+      })
+    }
   }
 
   return {
@@ -38,7 +56,17 @@ export const useUserStore = defineStore('user', () => {
     name,
     avatarUrl,
     memberInSpaces,
+    quotas,
 
     update,
   }
 })
+
+function getQuotaInfo(key: UserQuotaKey): { name: string, icon: string } | undefined {
+  if (key === 'owned_spaces') {
+    return {
+      name: 'Пространства',
+      icon: 'i-lucide-hexagon',
+    }
+  }
+}
