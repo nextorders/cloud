@@ -16,7 +16,7 @@ export class KubernetesService {
       name: cluster.name,
       server: cluster.server,
       caData: cluster.certificateAuthorityData,
-      skipTLSVerify: true,
+      skipTLSVerify: false,
     }
 
     const user: User = {

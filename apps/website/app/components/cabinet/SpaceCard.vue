@@ -85,7 +85,7 @@ function getEndDate(balance: number, tariffId: string): string | null {
   return `Хватит до ${date.toLocaleDateString('ru-RU', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric',
+    year: date.getFullYear() > new Date().getFullYear() ? 'numeric' : undefined,
   })}`
 }
 </script>
