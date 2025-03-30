@@ -72,10 +72,23 @@ export class User {
   }
 
   static async updateUsedQuota(userId: string, key: UserQuotaKey, amount: number = 1) {
-    return useDatabase()
-      .update(userQuotas)
-      .set({ used: sql`${userQuotas.used} + ${amount}` })
-      .where(and(eq(userQuotas.userId, userId), eq(userQuotas.key, key)))
-      .returning()
+    await useDatabase().transaction(async (tx) => {
+      const quota = await tx.query.userQuotas.findFirst({
+        where: and(eq(userQuotas.userId, userId), eq(userQuotas.key, key)),
+      })
+      if (!quota) {
+        return tx.rollback()
+      }
+
+      // Check if incrementing would exceed the limit
+      if (quota.used + amount > quota.limit) {
+        return tx.rollback()
+      }
+
+      await tx
+        .update(userQuotas)
+        .set({ used: sql`${userQuotas.used} + ${amount}` })
+        .where(and(eq(userQuotas.userId, userId), eq(userQuotas.key, key)))
+    })
   }
 }

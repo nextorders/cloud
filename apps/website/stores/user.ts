@@ -37,7 +37,7 @@ export const useUserStore = defineStore('user', () => {
     avatarUrl.value = data.avatarUrl
     memberInSpaces.value = data.memberInSpaces
 
-    if (data.quotas) {
+    if (data.quotas && Array.isArray(data.quotas)) {
       quotas.value = data.quotas.map((quota) => {
         const quotaKey = quota.key as UserQuotaKey
         const { name, icon } = getQuotaInfo(quotaKey)
