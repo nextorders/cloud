@@ -39,11 +39,14 @@ export const useUserStore = defineStore('user', () => {
 
     if (data.quotas) {
       quotas.value = data.quotas.map((quota) => {
+        const quotaKey = quota.key as UserQuotaKey
+        const { name, icon } = getQuotaInfo(quotaKey) ?? { name: quota.key, icon: 'i-lucide-circle' }
+
         return {
           ...quota,
           key: quota.key as UserQuotaKey,
-          name: getQuotaInfo(quota.key as UserQuotaKey)?.name ?? '',
-          icon: getQuotaInfo(quota.key as UserQuotaKey)?.icon ?? '',
+          name,
+          icon,
         }
       })
     }

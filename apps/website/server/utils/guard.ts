@@ -16,6 +16,21 @@ export function accessAuthGuard(event: H3Event): Auth {
 
 export function quotaGuard(event: H3Event, key: UserQuotaKey, need: number = 1): void {
   const auth = accessAuthGuard(event)
+
+  if (need <= 0) {
+    throw createError({
+      statusMessage: 'Invalid quota need value',
+      statusCode: 400,
+    })
+  }
+
+  if (!auth.user.quotas || !Array.isArray(auth.user.quotas)) {
+    throw createError({
+      statusMessage: 'User quotas not available',
+      statusCode: 403,
+    })
+  }
+
   const quota = auth.user.quotas.find((q) => q.key === key)
   if (!quota) {
     throw createError({
