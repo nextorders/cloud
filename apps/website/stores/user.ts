@@ -44,7 +44,7 @@ export const useUserStore = defineStore('user', () => {
 
         return {
           ...quota,
-          key: quota.key as UserQuotaKey,
+          key: quotaKey,
           name,
           icon,
         }
