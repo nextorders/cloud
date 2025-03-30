@@ -40,7 +40,7 @@ export const useUserStore = defineStore('user', () => {
     if (data.quotas) {
       quotas.value = data.quotas.map((quota) => {
         const quotaKey = quota.key as UserQuotaKey
-        const { name, icon } = getQuotaInfo(quotaKey) ?? { name: quota.key, icon: 'i-lucide-circle' }
+        const { name, icon } = getQuotaInfo(quotaKey)
 
         return {
           ...quota,
@@ -65,11 +65,13 @@ export const useUserStore = defineStore('user', () => {
   }
 })
 
-function getQuotaInfo(key: UserQuotaKey): { name: string, icon: string } | undefined {
+function getQuotaInfo(key: UserQuotaKey): { name: string, icon: string } {
   if (key === 'owned_spaces') {
     return {
       name: 'Пространства',
       icon: 'i-lucide-hexagon',
     }
   }
+
+  return { name: key, icon: 'i-lucide-circle' }
 }

@@ -3,6 +3,8 @@ import { and, eq, sql } from 'drizzle-orm'
 import { useDatabase } from '../database'
 import { userQuotas, users } from '../tables'
 
+const DEFAULT_OWNED_SPACES_LIMIT = 1
+
 export class User {
   static async find(id: string) {
     return useDatabase().query.users.findFirst({
@@ -50,8 +52,7 @@ export class User {
       return
     }
 
-    // Create default quotas
-    await User.createQuota(user.id, 'owned_spaces', 1)
+    await User.createQuota(user.id, 'owned_spaces', DEFAULT_OWNED_SPACES_LIMIT)
 
     return user
   }
