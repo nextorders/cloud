@@ -1,11 +1,15 @@
-import type { UserDraft } from '../types'
+import type { UserDraft, UserQuotaKey } from '../types'
+import { and, eq, sql } from 'drizzle-orm'
 import { useDatabase } from '../database'
-import { users } from '../tables'
+import { userQuotas, users } from '../tables'
 
 export class User {
   static async find(id: string) {
     return useDatabase().query.users.findFirst({
       where: (users, { eq }) => eq(users.id, id),
+      with: {
+        quotas: true,
+      },
     })
   }
 
@@ -35,6 +39,7 @@ export class User {
           },
           orderBy: (spaceMembers, { asc }) => asc(spaceMembers.createdAt),
         },
+        quotas: true,
       },
     })
   }
@@ -42,5 +47,13 @@ export class User {
   static async create(data: UserDraft) {
     const [user] = await useDatabase().insert(users).values(data).returning()
     return user
+  }
+
+  static async updateUsedQuota(userId: string, key: UserQuotaKey, amount: number = 1) {
+    return useDatabase()
+      .update(userQuotas)
+      .set({ used: sql`${userQuotas.used} + ${amount}` })
+      .where(and(eq(userQuotas.userId, userId), eq(userQuotas.key, key)))
+      .returning()
   }
 }

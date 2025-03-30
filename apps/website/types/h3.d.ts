@@ -1,8 +1,10 @@
-import type { User } from '@nextorders/database'
+import type { User, UserQuota } from '@nextorders/database'
 
 declare module 'h3' {
   interface Auth {
-    user: User
+    user: User & {
+      quotas: UserQuota[]
+    }
   }
 
   interface H3EventContext {
