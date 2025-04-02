@@ -30,7 +30,7 @@ const items = ref([
     {
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      badge: '34',
+      badge: '35',
       to: 'https://github.com/nextorders/food',
       target: '_blank',
     },
