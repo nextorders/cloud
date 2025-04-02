@@ -3,14 +3,18 @@
 
   <CabinetContent>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <CabinetSpaceCard
+      <NuxtLink
         v-for="member in user.memberInSpaces"
         :key="member.space.id"
-        :name="member.space.name"
-        :tariff-id="member.space.tariffId"
-        :balance="member.space.balance"
-        :members="member.space.members"
-      />
+        :to="`/cabinet/space/${member.space.id}`"
+      >
+        <CabinetSpaceCard
+          :name="member.space.name"
+          :tariff-id="member.space.tariffId"
+          :balance="member.space.balance"
+          :members="member.space.members"
+        />
+      </NuxtLink>
       <CabinetCreateSpaceCard v-if="canCreateNewSpace" />
     </div>
 

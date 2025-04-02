@@ -17,6 +17,23 @@ export class Space {
     })
   }
 
+  static async findWithEntities(id: string) {
+    return useDatabase().query.spaces.findFirst({
+      where: (spaces, { eq }) => eq(spaces.id, id),
+      with: {
+        members: {
+          with: {
+            user: true,
+          },
+        },
+        balanceChanges: {
+          orderBy: (balanceChanges, { desc }) => desc(balanceChanges.createdAt),
+        },
+        payments: true,
+      },
+    })
+  }
+
   static async create(data: SpaceDraft) {
     const [space] = await useDatabase()
       .insert(spaces)

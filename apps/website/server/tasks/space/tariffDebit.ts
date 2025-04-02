@@ -8,6 +8,11 @@ export default defineTask({
     description: 'Withdraw from Space balance for next 24 hours',
   },
   async run() {
+    // Only on prod
+    if (import.meta.dev) {
+      return { result: true }
+    }
+
     try {
       const spaces = await repository.space.findWithExpiredPaidTo()
       const tariffs = await repository.tariff.list()

@@ -1,51 +1,49 @@
 <template>
-  <ULink to="/cabinet" class="relative w-full h-full">
-    <UCard
-      variant="outline"
-      :ui="{
-        header: 'border-0',
-        body: 'border-0',
-      }"
-      class="h-full flex flex-col justify-between hover:scale-95 duration-200"
-    >
-      <template #header>
-        <UAvatarGroup :max="5" size="md">
-          <UTooltip
-            v-for="member in members"
-            :key="member.id"
-            :text="`${member.user.name}, ${getFirstRoleInfo(member.roles)}`"
-          >
-            <UAvatar
-              :src="member.user.avatarUrl ?? undefined"
-              :alt="member.user.name"
-            />
-          </UTooltip>
-        </UAvatarGroup>
-      </template>
+  <UCard
+    variant="subtle"
+    :ui="{
+      header: 'border-0',
+      body: 'border-0',
+    }"
+    class="h-full flex flex-col justify-between hover:scale-95 active:scale-90 duration-200"
+  >
+    <template #header>
+      <UAvatarGroup :max="5" size="md">
+        <UTooltip
+          v-for="member in members"
+          :key="member.id"
+          :text="`${member.user.name}, ${getFirstRoleInfo(member.roles)}`"
+        >
+          <UAvatar
+            :src="member.user.avatarUrl ?? undefined"
+            :alt="member.user.name"
+          />
+        </UTooltip>
+      </UAvatarGroup>
+    </template>
 
-      <div>
-        <div class="text-sm text-(--ui-text-muted) flex flex-row items-center gap-1.5">
-          <p>Пространство</p>
-          <UIcon name="i-lucide-hexagon" class="size-4" />
-          <p>Тариф "{{ tariffName }}"</p>
-        </div>
-        <h3 class="text-2xl">
-          {{ name }}
-        </h3>
+    <div>
+      <div class="text-sm text-(--ui-text-muted) flex flex-row items-center gap-1.5">
+        <p>Пространство</p>
+        <UIcon name="i-lucide-hexagon" class="size-4" />
+        <p>Тариф "{{ tariffName }}"</p>
       </div>
+      <h3 class="text-2xl">
+        {{ name }}
+      </h3>
+    </div>
 
-      <template #footer>
-        <div class="flex flex-row gap-2 items-center">
-          <UBadge variant="soft" icon="i-lucide-wallet">
-            Баланс: {{ balance }} ₽
-          </UBadge>
-          <UBadge v-if="endDate" variant="soft">
-            {{ endDate }}
-          </UBadge>
-        </div>
-      </template>
-    </UCard>
-  </ULink>
+    <template #footer>
+      <div class="flex flex-row gap-2 items-center">
+        <UBadge variant="soft" icon="i-lucide-wallet">
+          Баланс: {{ balance }} ₽
+        </UBadge>
+        <UBadge v-if="endDate" variant="soft">
+          до {{ endDate }}
+        </UBadge>
+      </div>
+    </template>
+  </UCard>
 </template>
 
 <script setup lang="ts">
@@ -70,22 +68,5 @@ function getFirstRoleInfo(roles: string[]) {
     default:
       return 'участник'
   }
-}
-
-function getEndDate(balance: number, tariffId: string): string | null {
-  const dailyCost = getTariffDailyCost(tariffId)
-  const daysLeft = dailyCost > 0 ? Math.ceil(balance / dailyCost) : 1000
-  if (daysLeft >= 1000) {
-    return null
-  }
-
-  const date = new Date()
-  date.setTime(date.getTime() + daysLeft * 24 * 60 * 60 * 1000)
-
-  return `Хватит до ${date.toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: date.getFullYear() > new Date().getFullYear() ? 'numeric' : undefined,
-  })}`
 }
 </script>
