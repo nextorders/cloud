@@ -1,14 +1,5 @@
 <template>
-  <UContainer class="flex flex-col py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 text-center">
-    <div>
-      <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
-        Цены на услуги
-      </h1>
-      <div class="text-lg sm:text-xl/8 text-(--ui-text-muted) text-balance mt-6">
-        Доступно всем. Все максимально просто.
-      </div>
-    </div>
-  </UContainer>
+  <PageHeader title="Цены на услуги" description="Доступно всем. Все максимально просто." />
 
   <UContainer>
     <div
@@ -87,7 +78,7 @@
           to="https://t.me/hmbanan666"
           target="_blank"
           color="primary"
-          variant="solid"
+          variant="soft"
           size="lg"
           trailing-icon="i-simple-icons:telegram"
         >
@@ -96,7 +87,7 @@
       </div>
     </div>
 
-    <UAccordion :items="questionItems" />
+    <UAccordion :items="questionItems" :ui="{ trigger: 'text-lg' }" />
   </UContainer>
 </template>
 

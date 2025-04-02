@@ -1,5 +1,5 @@
 <template>
-  <USeparator icon="i-lucide-chef-hat" class="mt-8" />
+  <USeparator icon="i-lucide-chef-hat" class="mt-16" />
 
   <footer>
     <div class="py-8 lg:py-12 border-b border-[var(--ui-border)]">

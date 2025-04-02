@@ -8,11 +8,11 @@
         <p>Вся информация для работы</p>
       </div>
 
-      <UCard variant="soft" class="rounded-xl">
+      <UCard variant="subtle" class="rounded-xl">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <div>
-              <div class="text-base font-semibold">
+              <div class="text-sm font-semibold">
                 Веб-сайт
               </div>
               <p class="text-sm">
@@ -20,13 +20,17 @@
               </p>
             </div>
 
-            <UInput :value="websiteUrl" size="xl">
+            <UInput
+              :value="websiteUrl"
+              size="lg"
+              :ui="{ trailing: 'pr-1.5' }"
+            >
               <template #trailing>
                 <div class="flex gap-1">
                   <UTooltip text="Скопировать" :content="{ side: 'right' }">
                     <UButton
                       color="neutral"
-                      variant="soft"
+                      variant="outline"
                       size="sm"
                       :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
                       @click="copy(websiteUrl)"
@@ -35,7 +39,7 @@
                   <UTooltip text="Открыть" :content="{ side: 'right' }">
                     <UButton
                       color="neutral"
-                      variant="soft"
+                      variant="outline"
                       size="sm"
                       :to="websiteUrl"
                       target="_blank"
@@ -49,7 +53,7 @@
 
           <div class="flex flex-col gap-2">
             <div>
-              <div class="text-base font-semibold">
+              <div class="text-sm font-semibold">
                 Панель управления веб-сайтом
               </div>
               <p class="text-sm">
@@ -57,13 +61,17 @@
               </p>
             </div>
 
-            <UInput :value="commandCenterUrl" size="xl">
+            <UInput
+              :value="commandCenterUrl"
+              size="lg"
+              :ui="{ trailing: 'pr-1.5' }"
+            >
               <template #trailing>
                 <div class="flex gap-1">
                   <UTooltip text="Скопировать" :content="{ side: 'right' }">
                     <UButton
                       color="neutral"
-                      variant="soft"
+                      variant="outline"
                       size="sm"
                       :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
                       @click="copy(commandCenterUrl)"
@@ -72,7 +80,7 @@
                   <UTooltip text="Открыть" :content="{ side: 'right' }">
                     <UButton
                       color="neutral"
-                      variant="soft"
+                      variant="outline"
                       size="sm"
                       :to="commandCenterUrl"
                       target="_blank"

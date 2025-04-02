@@ -1,14 +1,7 @@
 <template>
-  <UContainer class="mt-6 max-w-3xl flex flex-col gap-6">
-    <div>
-      <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
-        Публичная оферта на оказание услуг сервиса
-      </h1>
-      <p class="mt-4">
-        в ред. от "22" марта 2025г.
-      </p>
-    </div>
+  <PageHeader title="Публичная оферта на оказание услуг сервиса" description="в ред. от 22 марта 2025г." />
 
+  <UContainer class="max-w-3xl flex flex-col gap-6">
     <div class="space-y-4">
       <h2 class="mb-4 text-2xl font-semibold">
         Термины

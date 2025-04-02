@@ -5,7 +5,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'cabinet',
-  middleware: ['01-auth'],
+  middleware: ['01-auth-only'],
 })
 
 useHead({
