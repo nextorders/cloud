@@ -5,7 +5,7 @@
     <UButton
       size="md"
       variant="soft"
-      label="Создать пространство"
+      label="Создать Пространство"
       @click="modalCreateSpace.open()"
     />
   </div>

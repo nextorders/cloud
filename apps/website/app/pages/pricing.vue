@@ -29,8 +29,8 @@
           'Поддержка через Telegram',
         ]"
         :button="{
-          label: 'Сделать предзаказ',
-          to: 'https://t.me/hmbanan666',
+          label: 'Создать Пространство',
+          to: '/cabinet',
         }"
         highlight
         scale
@@ -53,6 +53,7 @@
         :button="{
           label: 'В разработке / 3 квартал 2025 года',
           to: 'https://t.me/hmbanan666',
+          target: '_blank',
         }"
       />
 
@@ -70,6 +71,7 @@
         :button="{
           label: 'Написать',
           to: 'https://t.me/hmbanan666',
+          target: '_blank',
         }"
       />
     </div>
