@@ -42,7 +42,7 @@
         block
         :label="button.label"
         :to="button.to"
-        target="_blank"
+        :target="button.target ?? undefined"
       />
     </div>
   </div>
@@ -59,6 +59,7 @@ defineProps<{
   button: {
     label: string
     to?: string
+    target?: '_blank'
   }
   highlight?: boolean
   scale?: boolean

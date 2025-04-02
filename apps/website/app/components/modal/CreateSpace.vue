@@ -1,5 +1,5 @@
 <template>
-  <UModal title="Создать пространство">
+  <UModal title="Создать Пространство">
     <template #body>
       <FormCreateSpace @submitted="closeAll" @success="closeAll" />
     </template>
