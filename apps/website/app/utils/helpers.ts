@@ -32,8 +32,8 @@ export function getBalanceChangeTypeDescription(type: string): string {
   }
 }
 
-export function formatDateTime(date: Date | string): string {
-  return new Date(date).toLocaleDateString('ru-RU', {
+export function formatDateTime(date: Date | string, locale: string = 'ru-RU'): string {
+  return new Date(date).toLocaleDateString(locale, {
     day: 'numeric',
     month: 'numeric',
     year: 'numeric',
@@ -42,6 +42,6 @@ export function formatDateTime(date: Date | string): string {
   })
 }
 
-export function formatAmount(amount: number): string {
-  return new Intl.NumberFormat('ru').format(amount)
+export function formatAmount(amount: number, locale: string = 'ru'): string {
+  return new Intl.NumberFormat(locale).format(amount)
 }
