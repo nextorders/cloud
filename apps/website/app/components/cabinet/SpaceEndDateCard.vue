@@ -21,5 +21,7 @@
 <script setup lang="ts">
 const { tariffId, balance } = defineProps<{ tariffId: string, balance: number }>()
 
-const endDate = getEndDate(balance, tariffId)
+const tariffStore = useTariffStore()
+const tariff = tariffStore.findTariff(tariffId)
+const endDate = getEndDate(balance, tariff?.dailyCost ?? 0)
 </script>

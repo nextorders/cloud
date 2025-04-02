@@ -56,8 +56,10 @@ const { tariffId, balance } = defineProps<{
   members: (SpaceMember & { user: User })[]
 }>()
 
-const endDate = getEndDate(balance, tariffId)
-const tariff = getTariffData(tariffId)
+const tariffStore = useTariffStore()
+const tariff = tariffStore.findTariff(tariffId)
+
+const endDate = getEndDate(balance, tariff?.dailyCost ?? 0)
 
 function getFirstRoleInfo(roles: string[]) {
   switch (roles[0]) {

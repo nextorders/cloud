@@ -5,22 +5,7 @@ export function getTariffsForSelect(): { value: string, label: string, icon: str
   ]
 }
 
-export function getTariffData(id: string): { name: string, icon: string, dailyCost: number } | undefined {
-  switch (id) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return { name: 'Нулевой', icon: 'fluent-emoji-flat:chicken', dailyCost: 0 }
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return { name: 'Глазунья', icon: 'fluent-emoji-flat:cooking', dailyCost: 9 }
-    case 'uzd1qzders7p6j2idst1td81':
-      return { name: 'Фондю', icon: 'fluent-emoji-flat:fondue', dailyCost: 38 }
-    default:
-      return undefined
-  }
-}
-
-export function getEndDate(balance: number, tariffId: string): string | null {
-  const tariff = getTariffData(tariffId)
-  const dailyCost = tariff?.dailyCost ?? 0
+export function getEndDate(balance: number, dailyCost: number): string | null {
   const daysLeft = dailyCost > 0 ? Math.ceil(balance / dailyCost) : 1000
   if (daysLeft >= 1000) {
     return null

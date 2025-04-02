@@ -36,7 +36,10 @@ useHead({
 })
 
 const user = useUserStore()
+const tariff = useTariffStore()
+
 await Promise.all([
   user.update(),
+  tariff.update(),
 ])
 </script>

@@ -25,5 +25,6 @@
 <script setup lang="ts">
 const { tariffId } = defineProps<{ tariffId: string }>()
 
-const tariff = getTariffData(tariffId)
+const tariffStore = useTariffStore()
+const tariff = tariffStore.findTariff(tariffId)
 </script>

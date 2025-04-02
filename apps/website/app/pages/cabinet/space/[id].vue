@@ -32,7 +32,8 @@ if (error.value) {
   await navigateTo('/cabinet')
 }
 
-const tariff = getTariffData(space.value?.tariffId ?? '')
+const tariffStore = useTariffStore()
+const tariff = tariffStore.findTariff(space.value?.tariffId ?? '')
 
 const items = computed(() => [
   {
