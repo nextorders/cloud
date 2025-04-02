@@ -62,6 +62,7 @@ export const tariffs = pgTable('tariffs', {
   name: varchar('name').notNull(),
   description: text('description').notNull(),
   dailyCost: integer('daily_cost').notNull().default(0),
+  icon: varchar('icon').notNull(),
 })
 
 export const balanceChanges = pgTable('balance_changes', {

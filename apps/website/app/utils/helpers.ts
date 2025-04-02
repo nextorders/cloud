@@ -5,28 +5,43 @@ export function getTariffsForSelect(): { value: string, label: string, icon: str
   ]
 }
 
-export function getTariffName(id: string) {
-  switch (id) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return 'Нулевой'
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return 'Глазунья'
-    case 'uzd1qzders7p6j2idst1td81':
-      return 'Фондю'
+export function getEndDate(balance: number, dailyCost: number): string | null {
+  const daysLeft = dailyCost > 0 ? Math.ceil(balance / dailyCost) : 1000
+  if (daysLeft >= 1000) {
+    return null
+  }
+
+  const date = new Date()
+  date.setTime(date.getTime() + daysLeft * 24 * 60 * 60 * 1000)
+
+  return date.toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: date.getFullYear() > new Date().getFullYear() ? 'numeric' : undefined,
+  })
+}
+
+export function getBalanceChangeTypeDescription(type: string): string {
+  switch (type) {
+    case 'daily_tariff_debit':
+      return 'Ежедневное списание согласно тарифу'
+    case 'bonus':
+      return 'Приветственный бонус'
     default:
-      return ''
+      return type
   }
 }
 
-export function getTariffDailyCost(id: string) {
-  switch (id) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return 0
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return 9
-    case 'uzd1qzders7p6j2idst1td81':
-      return 38
-    default:
-      return 0
-  }
+export function formatDateTime(date: Date | string, locale: string = 'ru-RU'): string {
+  return new Date(date).toLocaleDateString(locale, {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  })
+}
+
+export function formatAmount(amount: number, locale: string = 'ru'): string {
+  return new Intl.NumberFormat(locale).format(amount)
 }

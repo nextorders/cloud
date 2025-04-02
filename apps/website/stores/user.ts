@@ -20,35 +20,41 @@ export const useUserStore = defineStore('user', () => {
   const quotas = ref<UserQuotaWithData[]>([])
 
   async function update() {
-    const data = await $fetch('/api/user', {
-      lazy: true,
-      server: true,
-      cache: 'no-cache',
-      getCachedData: undefined,
-    })
-    if (!data) {
-      return
-    }
-
-    id.value = data.id
-    updatedAt.value = data.updatedAt
-    email.value = data.email
-    name.value = data.name
-    avatarUrl.value = data.avatarUrl
-    memberInSpaces.value = data.memberInSpaces
-
-    if (data.quotas && Array.isArray(data.quotas)) {
-      quotas.value = data.quotas.map((quota) => {
-        const quotaKey = quota.key as UserQuotaKey
-        const { name, icon } = getQuotaInfo(quotaKey)
-
-        return {
-          ...quota,
-          key: quotaKey,
-          name,
-          icon,
-        }
+    try {
+      const data = await $fetch('/api/user', {
+        lazy: true,
+        server: true,
+        cache: 'no-cache',
+        getCachedData: undefined,
       })
+      if (!data) {
+        return
+      }
+
+      id.value = data.id
+      updatedAt.value = data.updatedAt
+      email.value = data.email
+      name.value = data.name
+      avatarUrl.value = data.avatarUrl
+      memberInSpaces.value = data.memberInSpaces
+
+      if (data.quotas && Array.isArray(data.quotas)) {
+        quotas.value = data.quotas.map((quota) => {
+          const quotaKey = quota.key as UserQuotaKey
+          const { name, icon } = getQuotaInfo(quotaKey)
+
+          return {
+            ...quota,
+            key: quotaKey,
+            name,
+            icon,
+          }
+        })
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        // Do nothing
+      }
     }
   }
 

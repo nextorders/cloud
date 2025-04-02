@@ -1,5 +1,3 @@
-import { repository } from '@nextorders/database'
-
 export default defineEventHandler(async (event) => {
   const { auth } = event.context
   if (!auth?.user.id) {
@@ -9,5 +7,5 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  return repository.user.findWithEntities(auth.user.id)
+  return { ok: true }
 })

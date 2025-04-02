@@ -397,13 +397,13 @@ export class KubernetesService {
           },
           resources: {
             requests: {
-              'cpu': '10m',
+              'cpu': '50m',
               'memory': '128Mi',
               'ephemeral-storage': '512Mi',
             },
             limits: {
-              'cpu': '100m',
-              'memory': '256Mi',
+              'cpu': '150m',
+              'memory': '512Mi',
               'ephemeral-storage': '1024Mi',
             },
           },

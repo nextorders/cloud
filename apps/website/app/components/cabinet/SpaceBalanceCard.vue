@@ -1,0 +1,37 @@
+<template>
+  <UCard variant="subtle">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-row gap-4 items-center">
+        <UIcon name="i-lucide-wallet" class="size-10 text-(--ui-text-dimmed)" />
+
+        <div>
+          <h2 class="text-2xl leading-tight">
+            {{ balance }} ₽
+          </h2>
+
+          <p class="text-sm text-(--ui-text-muted)">
+            Активный баланс
+          </p>
+        </div>
+      </div>
+
+      <UButton
+        color="neutral"
+        variant="solid"
+        block
+        @click="modalCreatePayment.open()"
+      >
+        Пополнить
+      </UButton>
+    </div>
+  </UCard>
+</template>
+
+<script setup lang="ts">
+import { ModalCreatePayment } from '#components'
+
+defineProps<{ balance: number }>()
+
+const overlay = useOverlay()
+const modalCreatePayment = overlay.create(ModalCreatePayment)
+</script>
