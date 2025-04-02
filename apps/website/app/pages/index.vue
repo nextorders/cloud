@@ -1,18 +1,17 @@
 <template>
-  <UContainer class="flex flex-col py-24 sm:py-32 lg:py-40 gap-16 sm:gap-y-24 text-center">
-    <div>
-      <div class="mb-4 justify-center font-semibold text-(--ui-primary) flex items-center gap-1.5">
+  <PageHeader
+    title="Готовый инструмент для увеличения продаж"
+    description="Современный и удобный способ для ваших клиентов заказать еду. Доставка и самовывоз."
+  >
+    <template #top>
+      <div class="mb-4 font-semibold text-(--ui-primary) flex items-center justify-center gap-1.5">
         <UBadge color="neutral" variant="soft">
           Ранний доступ
         </UBadge>
       </div>
-      <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
-        Готовый инструмент для увеличения продаж
-      </h1>
-      <div class="text-lg sm:text-xl/8 text-(--ui-text-muted) text-balance mt-6">
-        Современный и удобный способ для ваших клиентов заказать еду. Доставка и самовывоз.
-      </div>
+    </template>
 
+    <template #bottom>
       <div class="mt-10 flex flex-wrap gap-x-6 gap-y-3 justify-center">
         <UButton
           to="https://demo.nextorders.space"
@@ -34,17 +33,17 @@
           7 дней бесплатно
         </UButton>
       </div>
-    </div>
+    </template>
+  </PageHeader>
 
-    <div class="relative mx-auto">
-      <NuxtImg
-        :src="demoImage"
-        format="webp"
-        densities="x1 x2"
-        alt="Демо версия NextOrders: Food"
-        class="w-full h-auto rounded-xl"
-      />
-    </div>
+  <UContainer>
+    <NuxtImg
+      :src="demoImage"
+      format="webp"
+      densities="x1 x2"
+      alt="Демо версия NextOrders: Food"
+      class="w-full h-auto rounded-xl"
+    />
   </UContainer>
 
   <UContainer class="flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
@@ -58,16 +57,20 @@
     </div>
 
     <div class="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <UCard v-for="feature in features" :key="feature.title">
+      <UCard
+        v-for="feature in features"
+        :key="feature.title"
+        class="rounded-xl"
+      >
         <UIcon
           :name="feature.icon"
           color="neutral"
           class="size-6"
         />
 
-        <div class="text-base text-pretty font-semibold text-(--ui-text-highlighted)">
+        <h3 class="text-base text-pretty font-semibold text-(--ui-text-highlighted)">
           {{ feature.title }}
-        </div>
+        </h3>
         <div class="text-sm text-pretty text-(--ui-text-muted) mt-1">
           {{ feature.description }}
         </div>

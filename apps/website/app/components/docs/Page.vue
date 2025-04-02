@@ -1,11 +1,7 @@
 <template>
   <div class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-10">
     <aside class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5 lg:col-span-2">
-      <UNavigationMenu
-        orientation="vertical"
-        :items="items"
-        class="data-[orientation=vertical]:w-48"
-      />
+      <UNavigationMenu orientation="vertical" :items="items" />
     </aside>
 
     <div class="lg:col-span-8">
@@ -34,7 +30,7 @@ const items = ref([
     {
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      badge: '33',
+      badge: '35',
       to: 'https://github.com/nextorders/food',
       target: '_blank',
     },

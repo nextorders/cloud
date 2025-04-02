@@ -11,38 +11,13 @@
 
           <div class="flex flex-col gap-2">
             <UButton
-              to="/api/auth/yandex"
-              external
-              icon="i-simple-icons:yandexcloud"
+              v-for="provider in providers"
+              :key="provider.name"
+              :to="`/api/auth/${provider.name}`"
+              :icon="provider.icon"
+              :label="provider.label"
               size="xl"
-              label="Войти через Яндекс"
-              block
-            />
-
-            <UButton
-              to="/api/auth/vk"
               external
-              icon="i-simple-icons:vk"
-              size="xl"
-              label="Войти через ВКонтакте"
-              block
-            />
-
-            <UButton
-              to="/api/auth/github"
-              external
-              icon="i-simple-icons:github"
-              size="xl"
-              label="Войти через GitHub"
-              block
-            />
-
-            <UButton
-              to="/api/auth/twitch"
-              external
-              icon="i-simple-icons:twitch"
-              size="xl"
-              label="Войти через Twitch"
               block
             />
           </div>
@@ -57,14 +32,33 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'empty',
+  middleware: ['02-guest-only'],
 })
 
 useHead({
-  title: 'Войти в Кабинет',
+  title: 'Вход в Кабинет',
 })
 
-const { loggedIn } = useUserSession()
-if (loggedIn.value) {
-  await navigateTo('/cabinet')
-}
+const providers = ref([
+  {
+    name: 'yandex',
+    icon: 'i-simple-icons:yandexcloud',
+    label: 'Войти через Яндекс',
+  },
+  {
+    name: 'vk',
+    icon: 'i-simple-icons:vk',
+    label: 'Войти через ВКонтакте',
+  },
+  {
+    name: 'github',
+    icon: 'i-simple-icons:github',
+    label: 'Войти через GitHub',
+  },
+  {
+    name: 'twitch',
+    icon: 'i-simple-icons:twitch',
+    label: 'Войти через Twitch',
+  },
+])
 </script>

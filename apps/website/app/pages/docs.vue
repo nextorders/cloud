@@ -1,7 +1,7 @@
 <template>
-  <Page>
+  <DocsPage>
     <NuxtPage />
-  </Page>
+  </DocsPage>
 </template>
 
 <script setup lang="ts">
