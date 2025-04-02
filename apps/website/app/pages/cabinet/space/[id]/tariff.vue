@@ -1,7 +1,7 @@
 <template>
   <CabinetContent>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-      <CabinetSpaceTariffCard :tariff-id="space?.tariffId ?? ''" />
+    <div class="max-w-md">
+      <CabinetSpaceTariffCard v-if="space?.tariffId" :tariff-id="space.tariffId" />
     </div>
   </CabinetContent>
 </template>

@@ -26,7 +26,7 @@
       <div class="text-sm text-(--ui-text-muted) flex flex-row items-center gap-1.5">
         <p>Пространство</p>
         <UIcon name="i-lucide-hexagon" class="size-4" />
-        <p>Тариф "{{ tariffName }}"</p>
+        <p>Тариф "{{ tariff?.name }}"</p>
       </div>
       <h3 class="text-2xl">
         {{ name }}
@@ -57,7 +57,7 @@ const { tariffId, balance } = defineProps<{
 }>()
 
 const endDate = getEndDate(balance, tariffId)
-const tariffName = getTariffName(tariffId)
+const tariff = getTariffData(tariffId)
 
 function getFirstRoleInfo(roles: string[]) {
   switch (roles[0]) {

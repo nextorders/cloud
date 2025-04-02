@@ -18,34 +18,9 @@ export function getTariffData(id: string): { name: string, icon: string, dailyCo
   }
 }
 
-export function getTariffName(id: string) {
-  switch (id) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return 'Нулевой'
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return 'Глазунья'
-    case 'uzd1qzders7p6j2idst1td81':
-      return 'Фондю'
-    default:
-      return ''
-  }
-}
-
-export function getTariffDailyCost(id: string) {
-  switch (id) {
-    case 'j7gb38bk5p14jbaffbuzggyh':
-      return 0
-    case 's49wrykl4wxvmf693tn6lqxn':
-      return 9
-    case 'uzd1qzders7p6j2idst1td81':
-      return 38
-    default:
-      return 0
-  }
-}
-
 export function getEndDate(balance: number, tariffId: string): string | null {
-  const dailyCost = getTariffDailyCost(tariffId)
+  const tariff = getTariffData(tariffId)
+  const dailyCost = tariff?.dailyCost ?? 0
   const daysLeft = dailyCost > 0 ? Math.ceil(balance / dailyCost) : 1000
   if (daysLeft >= 1000) {
     return null
@@ -70,4 +45,18 @@ export function getBalanceChangeTypeDescription(type: string): string {
     default:
       return type
   }
+}
+
+export function formatDateTime(date: Date | string): string {
+  return new Date(date).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  })
+}
+
+export function formatAmount(amount: number): string {
+  return new Intl.NumberFormat('ru').format(amount)
 }

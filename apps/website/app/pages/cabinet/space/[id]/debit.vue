@@ -61,10 +61,10 @@
         {{ row.getValue('id') }}
       </template>
       <template #createdAt-cell="{ row }">
-        {{ new Date(row.getValue('createdAt')).toLocaleDateString(locale, { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }) }}
+        {{ formatDateTime(row.getValue('createdAt')) }}
       </template>
       <template #amount-cell="{ row }">
-        {{ new Intl.NumberFormat(locale).format(row.getValue('amount')) }}
+        {{ formatAmount(row.getValue('amount')) }}
       </template>
       <template #type-cell="{ row }">
         {{ getBalanceChangeTypeDescription(row.getValue('type')) }}
@@ -95,7 +95,7 @@ import type { TableColumn } from '@nuxt/ui'
 import { getPaginationRowModel } from '@tanstack/table-core'
 import { upperFirst } from 'scule'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const { params } = useRoute('cabinet-space-id-debit___en')
 
 const { data: space, error } = await useFetch(`/api/space/${params.id}`)

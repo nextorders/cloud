@@ -48,13 +48,13 @@ async function onSubmit(event: FormSubmitEvent<PaymentCreateSchema>) {
   emit('submitted')
 
   try {
-    await $fetch('/api/space', {
+    await $fetch('/api/payment', {
       method: 'POST',
       body: event.data,
     })
 
     await user.update()
-    actionToast.success('Пространство создано!')
+    actionToast.success('Платеж создан!')
     emit('success')
   } catch (error) {
     console.error(error)
