@@ -77,13 +77,12 @@
         <UButton
           to="https://t.me/hmbanan666"
           target="_blank"
-          color="primary"
-          variant="soft"
+          color="neutral"
+          variant="subtle"
           size="lg"
           trailing-icon="i-simple-icons:telegram"
-        >
-          Задайте вопрос в Telegram
-        </UButton>
+          label="Задать вопрос в Telegram"
+        />
       </div>
     </div>
 
