@@ -1,7 +1,7 @@
 <template>
   <PageHeader
     title="Готовый инструмент для увеличения продаж"
-    description="Современный и удобный способ для ваших клиентов заказать еду. Доставка и самовывоз."
+    description="Современный и удобный способ для клиентов заказать еду. Доставка и самовывоз."
   >
     <template #top>
       <div class="mb-4 font-semibold text-(--ui-primary) flex items-center justify-center gap-1.5">
@@ -21,7 +21,7 @@
           size="xl"
           trailing-icon="i-lucide-eye"
         >
-          Демо
+          Демо-версия
         </UButton>
 
         <UButton
@@ -37,13 +37,70 @@
   </PageHeader>
 
   <UContainer>
-    <NuxtImg
-      :src="demoImage"
-      format="webp"
-      densities="x1 x2"
-      alt="Демо версия NextOrders: Food"
-      class="w-full h-auto rounded-xl"
-    />
+    <figure>
+      <NuxtImg
+        :src="mainImage"
+        format="webp"
+        densities="x1 x2"
+        alt="Демо версия NextOrders: Food"
+        class="w-full h-auto rounded-xl"
+      />
+      <figcaption class="mt-2 text-center italic text-(--ui-text-muted)">
+        Здесь вы можете создать сайт для доставки еды
+      </figcaption>
+    </figure>
+  </UContainer>
+
+  <UContainer class="mt-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
+    <div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
+        Редактирование веб-сайта
+      </h2>
+      <p class="text-base sm:text-lg text-(--ui-text-muted) text-pretty mt-6">
+        Удобная панель управления позволит легко управлять меню, товарами и настройками сайта, пока клиенты продолжают заказывать еду.
+      </p>
+
+      <ul class="mt-8 grid gap-4">
+        <li
+          v-for="feature in commandCenterFeatures"
+          :key="feature.label"
+          class="relative flex items-start gap-2.5"
+        >
+          <div class="inline-flex items-center justify-center p-0.5">
+            <UIcon :name="feature.icon" class="size-6 text-(--ui-primary)" />
+          </div>
+          <div>{{ feature.label }}</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-6 items-center">
+      <NuxtImg
+        :src="commandCenterImage"
+        format="webp"
+        densities="x1 x2"
+        alt="Командный центр"
+        class="w-full h-auto rounded-xl"
+      />
+
+      <div class="flex flex-wrap flex-col md:flex-row gap-x-6 gap-y-3 justify-center">
+        <UButton
+          to="https://demo.nextorders.space/command-center"
+          target="_blank"
+          color="primary"
+          variant="solid"
+          size="xl"
+          trailing-icon="i-lucide-eye"
+          class="shrink-0 justify-center"
+        >
+          Демо-версия
+        </UButton>
+
+        <div class="max-w-52 text-center">
+          При входе укажите <b>demo</b> как логин и пароль
+        </div>
+      </div>
+    </div>
   </UContainer>
 
   <UContainer class="flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
@@ -85,13 +142,37 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Современный и удобный способ для ваших клиентов заказать еду. Доставка и самовывоз.',
+      content: 'Современный и удобный способ для клиентов заказать еду. Доставка и самовывоз.',
     },
   ],
 })
 
 const colorMode = useColorMode()
-const demoImage = computed(() => colorMode.value === 'dark' ? '/img/main-ru-light-min.png' : '/img/main-ru-dark-min.png')
+const mainImage = computed(() => colorMode.value === 'dark' ? '/img/main-ru-light.png' : '/img/main-ru-dark.png')
+const commandCenterImage = computed(() => colorMode.value === 'dark' ? '/img/command-center-ru-light.png' : '/img/command-center-ru-dark.png')
+
+const commandCenterFeatures = [
+  {
+    icon: 'i-lucide-settings-2',
+    label: 'Добавляйте, редактируйте и удаляйте позиции в один клик',
+  },
+  {
+    icon: 'i-lucide-image-up',
+    label: 'Загрузка и оптимизация фото блюд',
+  },
+  {
+    icon: 'i-lucide-calendar-clock',
+    label: 'Настройка графика работы',
+  },
+  {
+    icon: 'i-lucide-banknote-arrow-up',
+    label: 'Управление способами оплаты и ценовыми настройками',
+  },
+  {
+    icon: 'i-lucide-panels-top-left',
+    label: 'Создание страниц, информационных разделов и специальных предложений',
+  },
+]
 
 const features = [
   {

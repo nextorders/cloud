@@ -6,19 +6,27 @@
       <UContainer>
         <nav class="xl:grid xl:grid-cols-3 xl:gap-8">
           <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
-            <div>
+            <div v-for="column in columns" :key="column.label">
               <h3 class="text-sm font-semibold">
-                Навигация
+                {{ column.label }}
               </h3>
               <ul class="mt-6 space-y-4">
                 <li
-                  v-for="item in items"
+                  v-for="item in column.children"
                   :key="item.label"
                   class="relative"
                 >
-                  <ULink :to="item.to" class="text-sm">
+                  <ULink
+                    :to="item.to"
+                    :target="item.target"
+                    class="text-base"
+                  >
                     {{ item.label }}
                   </ULink>
+
+                  <p v-if="item?.description" class="text-xs text-(--ui-text-dimmed)">
+                    {{ item.description }}
+                  </p>
                 </li>
               </ul>
             </div>
@@ -41,18 +49,38 @@
 </template>
 
 <script setup lang="ts">
-const items = [
-  {
-    label: 'Цены',
-    to: '/pricing',
-  },
-  {
-    label: 'Документация',
-    to: '/docs',
-  },
-  {
-    label: 'Оферта',
-    to: '/offer',
-  },
-]
+const columns: { label: string, children: { label: string, to: string, target?: string, description?: string }[] }[] = [{
+  label: 'Навигация',
+  children: [
+    {
+      label: 'Цены',
+      to: '/pricing',
+    },
+    {
+      label: 'Документация',
+      to: '/docs',
+    },
+    {
+      label: 'Оферта',
+      to: '/offer',
+    },
+  ],
+},
+{
+  label: 'Демо-версии',
+  children: [
+    {
+      label: 'Веб-сайт',
+      to: 'https://demo.nextorders.space',
+      target: '_blank',
+      description: 'Продающий инструмент для клиентов',
+    },
+    {
+      label: 'Панель управления',
+      to: 'https://demo.nextorders.space/command-center',
+      target: '_blank',
+      description: 'При входе укажите demo как логин и пароль',
+    },
+  ],
+}]
 </script>
