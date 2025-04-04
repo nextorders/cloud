@@ -1,10 +1,36 @@
 import { createId } from '@paralleldrive/cuid2'
 
-export async function createYookassaPayment(paymentData: any) {
+interface YookassaPaymentData {
+  amount: {
+    value: number
+    currency: 'RUB'
+  }
+  capture: boolean
+  description: string
+  metadata: Record<string, string>
+  confirmation: {
+    type: 'redirect'
+    return_url: string
+  }
+}
+
+interface YookassaPayment {
+  id: string
+  status: 'pending' | 'waiting_for_capture' | 'succeeded' | 'canceled'
+  confirmation: {
+    confirmation_url: string
+  }
+}
+
+function getYookassaCredentials() {
+  const { yookassa } = useRuntimeConfig()
+  return btoa(`${yookassa.shopId}:${yookassa.apiKey}`)
+}
+
+export async function createYookassaPayment(paymentData: YookassaPaymentData): Promise<YookassaPayment | null> {
   try {
-    const { yookassa } = useRuntimeConfig()
-    const credentials = btoa(`${yookassa.shopId}:${yookassa.apiKey}`)
-    const res = await fetch(`https://api.yookassa.ru/v3/payments`, {
+    const credentials = getYookassaCredentials()
+    const data = await $fetch<YookassaPayment>(`https://api.yookassa.ru/v3/payments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -13,8 +39,11 @@ export async function createYookassaPayment(paymentData: any) {
       },
       body: JSON.stringify(paymentData),
     })
+    if (!data.id) {
+      return null
+    }
 
-    return res.json()
+    return data
   } catch (err) {
     console.error(err)
     return null
@@ -23,24 +52,21 @@ export async function createYookassaPayment(paymentData: any) {
 
 export async function checkYookassaPayment(id: string): Promise<'paid' | 'pending' | null> {
   try {
-    const { yookassa } = useRuntimeConfig()
-    const credentials = btoa(`${yookassa.shopId}:${yookassa.apiKey}`)
-    const res = await fetch(`https://api.yookassa.ru/v3/payments/${id}`, {
+    const credentials = getYookassaCredentials()
+    const data = await $fetch<YookassaPayment>(`https://api.yookassa.ru/v3/payments/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Basic ${credentials}`,
       },
     })
-
-    const paymentOnProvider = await res.json()
-    if (!paymentOnProvider?.id) {
+    if (!data?.id || !data?.status) {
       return null
     }
 
-    if (paymentOnProvider.status === 'succeeded') {
+    if (data.status === 'succeeded') {
       return 'paid'
     }
-    if (paymentOnProvider.status === 'pending') {
+    if (data.status === 'pending') {
       return 'pending'
     }
 

@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
       type: 'redirect',
       return_url: `https://nextorders.ru/cabinet/space/${space.id}/balance?payment=${paymentId}`,
     },
-  }
+  } as const
 
   const paymentOnProvider = await createYookassaPayment(paymentData)
   if (!paymentOnProvider?.id || !paymentOnProvider?.confirmation) {
