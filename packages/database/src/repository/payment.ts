@@ -28,7 +28,7 @@ export class Payment {
 
   static async setAsPaid(id: string) {
     const payment = await Payment.find(id)
-    if (!payment || payment.status !== 'paid') {
+    if (!payment || payment.status === 'paid') {
       return
     }
 
