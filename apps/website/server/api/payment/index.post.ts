@@ -1,5 +1,6 @@
 import { repository } from '@nextorders/database'
 import { createId } from '@paralleldrive/cuid2'
+import { createYookassaPayment } from '~~/server/services/payment'
 import { paymentCreateSchema } from '~~/shared/services/payment'
 
 export default defineEventHandler(async (event) => {
@@ -25,8 +26,7 @@ export default defineEventHandler(async (event) => {
   const paymentId = createId()
   const description = `Пополнение баланса ${space.id} пользователем ${user.id}`
 
-  // Create payment on Provider
-  const paymentBody = {
+  const paymentData = {
     amount: {
       value: data.amount,
       currency: 'RUB',
@@ -43,20 +43,7 @@ export default defineEventHandler(async (event) => {
     },
   }
 
-  const { yookassa } = useRuntimeConfig()
-
-  const credentials = btoa(`${yookassa.shopId}:${yookassa.apiKey}`)
-  const res = await fetch(`https://api.yookassa.ru/v3/payments`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Idempotence-Key': createId(),
-      'Authorization': `Basic ${credentials}`,
-    },
-    body: JSON.stringify(paymentBody),
-  })
-
-  const paymentOnProvider = await res.json()
+  const paymentOnProvider = await createYookassaPayment(paymentData)
   if (!paymentOnProvider?.id || !paymentOnProvider?.confirmation) {
     throw createError({
       status: 400,

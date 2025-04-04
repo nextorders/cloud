@@ -1,4 +1,5 @@
 import { repository } from '@nextorders/database'
+import { checkYookassaPayment } from '~~/server/services/payment'
 
 const logger = useLogger('payment:status')
 
@@ -17,7 +18,7 @@ export default defineTask({
       const payments = await repository.payment.findPending()
 
       for (const payment of payments) {
-        const status = await checkPayment(payment.externalId)
+        const status = await checkYookassaPayment(payment.externalId)
         if (status === 'paid' && payment.status !== 'paid') {
           await repository.payment.setAsPaid(payment.id)
 
@@ -31,33 +32,3 @@ export default defineTask({
     return { result: true }
   },
 })
-
-async function checkPayment(id: string): Promise<'paid' | 'pending' | null> {
-  try {
-    const { yookassa } = useRuntimeConfig()
-    const credentials = btoa(`${yookassa.shopId}:${yookassa.apiKey}`)
-    const res = await fetch(`https://api.yookassa.ru/v3/payments/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${credentials}`,
-      },
-    })
-
-    const paymentOnProvider = await res.json()
-    if (!paymentOnProvider?.id) {
-      return null
-    }
-
-    if (paymentOnProvider.status === 'succeeded') {
-      return 'paid'
-    }
-    if (paymentOnProvider.status === 'pending') {
-      return 'pending'
-    }
-
-    return null
-  } catch (err) {
-    console.error(err)
-    return null
-  }
-}

@@ -39,7 +39,7 @@ export class Payment {
 
     await Balance.change({
       type: 'replenishment',
-      spaceId: space?.id,
+      spaceId: space.id,
       amount: payment.amount,
       description: 'Пополнение баланса',
     })
