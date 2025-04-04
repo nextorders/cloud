@@ -4,7 +4,8 @@
 
     <UButton
       size="md"
-      variant="soft"
+      color="neutral"
+      variant="subtle"
       label="Создать Пространство"
       @click="modalCreateSpace.open()"
     />

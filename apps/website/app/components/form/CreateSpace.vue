@@ -69,7 +69,6 @@ const user = useUserStore()
 const state = ref<Partial<SpaceCreateSchema>>({
   name: undefined,
   tariffId: undefined,
-  ownerId: user.id,
 })
 
 const selectedTariffIcon = computed(() => getTariffsForSelect().find((t) => t.value === state.value.tariffId)?.icon)

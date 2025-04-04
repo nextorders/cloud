@@ -3,7 +3,6 @@ import { z } from 'zod'
 export const spaceCreateSchema = z.object({
   name: z.string().min(2).max(50),
   tariffId: z.string(),
-  ownerId: z.string(),
 })
 
 export type SpaceCreateSchema = z.output<typeof spaceCreateSchema>

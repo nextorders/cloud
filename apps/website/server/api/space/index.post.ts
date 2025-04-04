@@ -9,7 +9,22 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     const data = spaceCreateSchema.parse(body)
 
-    quotaGuard(event, 'owned_spaces', 1)
+    const { user } = await getUserSession(event)
+    if (!user?.id) {
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Unauthorized',
+      })
+    }
+    const userInDB = await repository.user.find(user.id)
+    if (!userInDB?.quotas) {
+      throw createError({
+        statusCode: 403,
+        statusMessage: 'User quotas not found',
+      })
+    }
+
+    quotaGuard(userInDB.quotas, 'owned_spaces', 1)
 
     const cluster = await repository.cluster.getReadyForUse()
     if (!cluster) {
@@ -29,6 +44,7 @@ export default defineEventHandler(async (event) => {
 
     const space = await repository.space.create({
       ...data,
+      ownerId: userInDB.id,
       clusterId: cluster.id,
       id: createId(),
     })
@@ -55,7 +71,7 @@ export default defineEventHandler(async (event) => {
     )
 
     await repository.bucket.setAsInUse(bucket.id)
-    await repository.user.updateUsedQuota(data.ownerId, 'owned_spaces', 1)
+    await repository.user.updateUsedQuota(userInDB.id, 'owned_spaces', 1)
 
     return {
       ok: true,

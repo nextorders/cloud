@@ -9,8 +9,8 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { auth } = event.context
-  if (!auth?.user.id) {
+  const { user } = await getUserSession(event)
+  if (!user?.id) {
     throw createError({
       statusCode: 401,
       statusMessage: 'Unauthorized',
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // Member?
-  const member = space.members.find((m) => m.userId === auth.user.id)
+  const member = space.members.find((m) => m.userId === user.id)
   if (!member?.id) {
     throw createError({
       statusCode: 403,

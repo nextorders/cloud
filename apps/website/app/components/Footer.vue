@@ -5,7 +5,7 @@
     <div class="py-8 lg:py-12 border-b border-[var(--ui-border)]">
       <UContainer>
         <nav class="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-8 xl:col-span-2">
+          <div class="flex flex-col lg:grid grid-flow-col auto-cols-fr gap-12 md:gap-8 xl:col-span-2">
             <div v-for="column in columns" :key="column.label">
               <h3 class="text-sm font-semibold">
                 {{ column.label }}
@@ -31,8 +31,6 @@
               </ul>
             </div>
           </div>
-
-          <div class="mt-10 xl:mt-0" />
         </nav>
       </UContainer>
     </div>
