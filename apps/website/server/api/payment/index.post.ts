@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
-  const { auth } = event.context
-  if (!auth?.user.id) {
+  const { user } = await getUserSession(event)
+  if (!user?.id) {
     throw createError({
       statusCode: 401,
       statusMessage: 'Unauthorized',

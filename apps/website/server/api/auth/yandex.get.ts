@@ -15,8 +15,14 @@ export default defineOAuthYandexEventHandler({
     const yandexUser = user as unknown as UserYandex
     const avatarUrl = `https://avatars.yandex.net/get-yapic/${yandexUser?.default_avatar_id}/islands-retina-middle`
 
-    // Get and Update data in DB
-    const userInDB = await repository.user.findByEmail(yandexUser.default_email) ?? await repository.user.create({ email: yandexUser.default_email, name: yandexUser?.display_name, avatarUrl })
+    async function createUser() {
+      const user = await repository.user.create({ email: yandexUser.default_email, name: yandexUser?.display_name, avatarUrl })
+      // Notify
+
+      return user
+    }
+
+    const userInDB = await repository.user.findByEmail(yandexUser.default_email) ?? await createUser()
     if (!userInDB) {
       logger.error('Yandex OAuth error: User not found')
       return sendRedirect(event, '/sign-in')
