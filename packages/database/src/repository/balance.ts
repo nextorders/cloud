@@ -1,10 +1,10 @@
-import type { BalanceChangeDraft } from '../types'
+import type { BalanceChangeDraft, BalanceChangeType } from '../types'
 import { eq, sql } from 'drizzle-orm'
 import { useDatabase } from '../database'
 import { balanceChanges, spaces } from '../tables'
 
 export class Balance {
-  static async change(data: BalanceChangeDraft) {
+  static async change(data: BalanceChangeDraft & { type: BalanceChangeType }) {
     return useDatabase().transaction(
       async (tx) => {
         // Transaction: make change on Space balance
@@ -22,7 +22,7 @@ export class Balance {
     )
   }
 
-  static getSignByType(type: string): 0 | 1 | -1 {
+  static getSignByType(type: BalanceChangeType): 0 | 1 | -1 {
     switch (type) {
       case 'bonus':
       case 'replenishment':

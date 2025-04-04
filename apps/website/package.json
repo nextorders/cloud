@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@kubernetes/client-node": "catalog:",
+    "@neoconfetti/vue": "catalog:",
     "@nextorders/database": "workspace:*",
     "@nuxt/ui": "catalog:",
     "@nuxtjs/i18n": "catalog:",

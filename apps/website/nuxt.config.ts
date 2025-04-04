@@ -79,6 +79,10 @@ export default defineNuxtConfig({
         clientSecret: '',
       },
     },
+    yookassa: {
+      shopId: '',
+      apiKey: '',
+    },
   },
   modules: [
     '@pinia/nuxt',
@@ -105,6 +109,7 @@ export default defineNuxtConfig({
     },
     scheduledTasks: {
       '0 * * * *': ['space:tariffDebit'],
+      '*/3 * * * *': ['payment:status'],
     },
   },
   experimental: {

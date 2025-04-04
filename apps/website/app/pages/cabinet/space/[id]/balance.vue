@@ -1,7 +1,9 @@
 <template>
+  <Confetti v-if="isSuccess" />
+
   <CabinetContent>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <CabinetSpaceBalanceCard :balance="space?.balance ?? 0" />
+      <CabinetSpaceBalanceCard :balance="space?.balance ?? 0" :space-id="space?.id ?? ''" />
       <CabinetSpaceEndDateCard :balance="space?.balance ?? 0" :tariff-id="space?.tariffId ?? ''" />
     </div>
 
@@ -108,13 +110,18 @@ import { getPaginationRowModel } from '@tanstack/table-core'
 import { upperFirst } from 'scule'
 
 const { t } = useI18n()
-const { params } = useRoute('cabinet-space-id-balance___ru')
+const { params, query } = useRoute('cabinet-space-id-balance___ru')
 
 const { data: space, error } = await useFetch(`/api/space/${params.id}`)
 if (error.value) {
   await navigateTo('/cabinet')
 }
 
+// Payment
+const paymentId = query?.payment?.toString()
+const isSuccess = computed(() => paymentId && space.value?.payments.some((p) => p.id === paymentId && p.status === 'paid'))
+
+// Table
 const filterValue = ref('')
 const data = computed<Payment[]>(() => space.value?.payments.filter((c) => c.description.toLowerCase().includes(filterValue.value.toLowerCase())) ?? [])
 

@@ -33,14 +33,14 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 import type { PaymentCreateSchema } from '~~/shared/services/payment'
 import { paymentCreateSchema } from '~~/shared/services/payment'
 
+const { spaceId } = defineProps<{ spaceId: string }>()
 const emit = defineEmits(['success', 'submitted'])
 
 const actionToast = useActionToast()
-const user = useUserStore()
 
 const state = ref<Partial<PaymentCreateSchema>>({
   amount: 1000,
-  userId: user.id,
+  spaceId,
 })
 
 async function onSubmit(event: FormSubmitEvent<PaymentCreateSchema>) {
@@ -48,14 +48,15 @@ async function onSubmit(event: FormSubmitEvent<PaymentCreateSchema>) {
   emit('submitted')
 
   try {
-    await $fetch('/api/payment', {
+    const data = await $fetch('/api/payment', {
       method: 'POST',
       body: event.data,
     })
 
-    await user.update()
     actionToast.success('Платеж создан!')
     emit('success')
+
+    await navigateTo(data.result, { external: true })
   } catch (error) {
     console.error(error)
     actionToast.error()

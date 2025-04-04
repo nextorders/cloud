@@ -30,6 +30,9 @@ catalogs:
     '@kubernetes/client-node':
       specifier: ^1.1.1
       version: 1.1.1
+    '@neoconfetti/vue':
+      specifier: ^2.2.1
+      version: 2.2.1
     '@nuxt/devtools':
       specifier: ^2.3.2
       version: 2.3.2
@@ -218,6 +221,9 @@ importers:
       '@kubernetes/client-node':
         specifier: 'catalog:'
         version: 1.1.1
+      '@neoconfetti/vue':
+        specifier: 'catalog:'
+        version: 2.2.1
       '@nextorders/database':
         specifier: workspace:*
         version: link:../../packages/database
@@ -1473,6 +1479,9 @@ packages:
 
   '@napi-rs/wasm-runtime@0.2.7':
     resolution: {integrity: sha512-5yximcFK5FNompXfJFoWanu5l8v1hNGqNHh9du1xETp9HWk/B/PzvchX55WYOPaIeNglG8++68AAiauBAtbnzw==}
+
+  '@neoconfetti/vue@2.2.1':
+    resolution: {integrity: sha512-GXe5XoHlMK8VIxmxKuAgF9QQwRoDLmtiwVhONA9rzF+zOLGfOVLxo4OEDZqU9F0gJkB7U23BLlGJ3ouOb+kguw==}
 
   '@netlify/functions@3.0.4':
     resolution: {integrity: sha512-Ox8+ABI+nsLK+c4/oC5dpquXuEIjzfTlJrdQKgQijCsDQoje7inXFAtKDLvvaGvuvE+PVpMLwQcIUL6P9Ob1hQ==}
@@ -8837,6 +8846,8 @@ snapshots:
       '@emnapi/runtime': 1.4.0
       '@tybys/wasm-util': 0.9.0
     optional: true
+
+  '@neoconfetti/vue@2.2.1': {}
 
   '@netlify/functions@3.0.4':
     dependencies:

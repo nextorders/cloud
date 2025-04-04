@@ -19,7 +19,7 @@
         color="neutral"
         variant="solid"
         block
-        @click="modalCreatePayment.open()"
+        @click="modalCreatePayment.open({ spaceId })"
       >
         Пополнить
       </UButton>
@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { ModalCreatePayment } from '#components'
 
-defineProps<{ balance: number }>()
+defineProps<{ balance: number, spaceId: string }>()
 
 const overlay = useOverlay()
 const modalCreatePayment = overlay.create(ModalCreatePayment)
