@@ -29,7 +29,9 @@ export class Space {
         balanceChanges: {
           orderBy: (balanceChanges, { desc }) => desc(balanceChanges.createdAt),
         },
-        payments: true,
+        payments: {
+          orderBy: (payments, { desc }) => desc(payments.createdAt),
+        },
       },
     })
   }

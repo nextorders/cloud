@@ -1,12 +1,18 @@
 <template>
   <UModal title="Создать платеж">
     <template #body>
-      <FormCreatePayment @submitted="closeAll" @success="closeAll" />
+      <FormCreatePayment
+        :space-id="spaceId"
+        @submitted="closeAll"
+        @success="closeAll"
+      />
     </template>
   </UModal>
 </template>
 
 <script setup lang="ts">
+defineProps<{ spaceId: string }>()
+
 const overlay = useOverlay()
 
 function closeAll() {
