@@ -4,6 +4,8 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <Metric />
   </UApp>
 </template>
 

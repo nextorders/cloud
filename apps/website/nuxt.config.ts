@@ -93,6 +93,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     'nuxt-auth-utils',
+    '@nuxt/scripts',
   ],
   routeRules: {
     '/sign-in': { robots: false },

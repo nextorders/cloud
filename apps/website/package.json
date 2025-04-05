@@ -33,8 +33,10 @@
     "@iconify-json/simple-icons": "catalog:",
     "@nuxt/devtools": "catalog:",
     "@nuxt/image": "catalog:",
+    "@nuxt/scripts": "catalog:",
     "@nuxtjs/seo": "catalog:",
     "@types/node": "catalog:",
+    "@unhead/vue": "catalog:",
     "nuxt": "catalog:",
     "nuxt-auth-utils": "catalog:"
   }
