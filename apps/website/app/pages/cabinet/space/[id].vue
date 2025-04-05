@@ -49,7 +49,7 @@ const items = computed(() => [
     badge: space.value?.balance ? `${space.value?.balance} ₽` : undefined,
   },
   {
-    label: 'Списания',
+    label: 'Изменения',
     to: `/cabinet/space/${params.id}/debit`,
     icon: 'i-lucide-list',
   },

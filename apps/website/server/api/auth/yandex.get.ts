@@ -1,5 +1,6 @@
 import type { UserYandex } from '#auth-utils'
 import { repository } from '@nextorders/database'
+import { notify } from '~~/server/services/telegram/bot'
 
 const logger = useLogger('yandex')
 
@@ -17,7 +18,7 @@ export default defineOAuthYandexEventHandler({
 
     async function createUser() {
       const user = await repository.user.create({ email: yandexUser.default_email, name: yandexUser?.display_name, avatarUrl })
-      // Notify
+      await notify(`New user via Yandex: ${user?.name} (${user?.email}, ${user?.id})`)
 
       return user
     }

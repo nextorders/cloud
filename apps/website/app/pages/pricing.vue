@@ -43,7 +43,7 @@
         ]"
         :button="{
           label: 'В разработке / 3 квартал 2025 года',
-          to: 'https://t.me/hmbanan666',
+          to: 'https://t.me/nextordersup',
           target: '_blank',
         }"
       />
@@ -61,7 +61,7 @@
         ]"
         :button="{
           label: 'Написать',
-          to: 'https://t.me/hmbanan666',
+          to: 'https://t.me/nextordersup',
           target: '_blank',
         }"
       />
@@ -75,7 +75,7 @@
       </h2>
       <div class="mt-6 flex flex-row justify-center">
         <UButton
-          to="https://t.me/hmbanan666"
+          to="https://t.me/nextordersup"
           target="_blank"
           color="neutral"
           variant="subtle"

@@ -1,5 +1,6 @@
 import type { UserVK } from '#auth-utils'
 import { repository } from '@nextorders/database'
+import { notify } from '~~/server/services/telegram/bot'
 
 const logger = useLogger('vk')
 
@@ -18,8 +19,14 @@ export default defineOAuthVKEventHandler({
     const { user: vkUser } = user as unknown as UserVK
     const name = `${vkUser?.first_name} ${vkUser?.last_name}`
 
-    // Get and Update data in DB
-    const userInDB = await repository.user.findByEmail(vkUser.email) ?? await repository.user.create({ email: vkUser.email, name, avatarUrl: vkUser?.avatar })
+    async function createUser() {
+      const user = await repository.user.create({ email: vkUser.email, name, avatarUrl: vkUser?.avatar })
+      await notify(`New user via VK: ${user?.name} (${user?.email}, ${user?.id})`)
+
+      return user
+    }
+
+    const userInDB = await repository.user.findByEmail(vkUser.email) ?? await createUser()
     if (!userInDB) {
       logger.error('VK OAuth error: User not found')
       return sendRedirect(event, '/sign-in')

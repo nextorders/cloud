@@ -27,6 +27,19 @@ export function getBalanceChangeTypeDescription(type: string): string {
       return 'Ежедневное списание согласно тарифу'
     case 'bonus':
       return 'Приветственный бонус'
+    case 'replenishment':
+      return 'Пополнение баланса'
+    default:
+      return type
+  }
+}
+
+export function getPaymentStatusTypeDescription(type: string): string {
+  switch (type) {
+    case 'paid':
+      return 'Оплачено'
+    case 'pending':
+      return 'Ожидает оплаты'
     default:
       return type
   }

@@ -22,6 +22,7 @@
     "@pinia/nuxt": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/nuxt": "catalog:",
+    "grammy": "catalog:",
     "nuxt-zod-i18n": "catalog:",
     "pinia": "catalog:",
     "zod": "catalog:"

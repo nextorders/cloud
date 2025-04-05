@@ -1,5 +1,6 @@
 import type { UserTwitch } from '#auth-utils'
 import { repository } from '@nextorders/database'
+import { notify } from '~~/server/services/telegram/bot'
 
 const logger = useLogger('twitch')
 
@@ -17,8 +18,14 @@ export default defineOAuthTwitchEventHandler({
 
     const twitchUser = user as unknown as UserTwitch
 
-    // Get and Update data in DB
-    const userInDB = await repository.user.findByEmail(twitchUser.email) ?? await repository.user.create({ email: twitchUser.email, name: twitchUser?.login, avatarUrl: twitchUser?.profile_image_url })
+    async function createUser() {
+      const user = await repository.user.create({ email: twitchUser.email, name: twitchUser?.login, avatarUrl: twitchUser?.profile_image_url })
+      await notify(`New user via Twitch: ${user?.name} (${user?.email}, ${user?.id})`)
+
+      return user
+    }
+
+    const userInDB = await repository.user.findByEmail(twitchUser.email) ?? await createUser()
     if (!userInDB) {
       logger.error('Twitch OAuth error: User not found')
       return sendRedirect(event, '/sign-in')
