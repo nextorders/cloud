@@ -84,8 +84,17 @@ export default defineNuxtConfig({
       apiKey: '',
     },
   },
-  modules: ['@pinia/nuxt', '@nuxtjs/seo', '@nuxt/ui', // must be before i18n
-    'nuxt-zod-i18n', '@nuxtjs/i18n', '@nuxt/image', '@vueuse/nuxt', 'nuxt-auth-utils', '@nuxt/scripts'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/seo',
+    '@nuxt/ui',
+    'nuxt-zod-i18n', // must be before i18n
+    '@nuxtjs/i18n',
+    '@nuxt/image',
+    '@vueuse/nuxt',
+    'nuxt-auth-utils',
+    '@nuxt/scripts',
+  ],
   routeRules: {
     '/sign-in': { robots: false },
     '/cabinet/**': { robots: false },
