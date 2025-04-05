@@ -20,7 +20,12 @@ export default defineOAuthTwitchEventHandler({
 
     async function createUser() {
       const user = await repository.user.create({ email: twitchUser.email, name: twitchUser?.login, avatarUrl: twitchUser?.profile_image_url })
-      await notify(`New user via Twitch: ${user?.name} (${user?.email}, ${user?.id})`)
+
+      try {
+        await notify(`New user via Twitch: ${user?.name} (${user?.email}, ${user?.id})`)
+      } catch (error) {
+        logger.error('Failed to send Telegram notification', error)
+      }
 
       return user
     }

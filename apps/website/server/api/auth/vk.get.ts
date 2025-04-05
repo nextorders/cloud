@@ -21,7 +21,12 @@ export default defineOAuthVKEventHandler({
 
     async function createUser() {
       const user = await repository.user.create({ email: vkUser.email, name, avatarUrl: vkUser?.avatar })
-      await notify(`New user via VK: ${user?.name} (${user?.email}, ${user?.id})`)
+
+      try {
+        await notify(`New user via VK: ${user?.name} (${user?.email}, ${user?.id})`)
+      } catch (error) {
+        logger.error('Failed to send Telegram notification', error)
+      }
 
       return user
     }

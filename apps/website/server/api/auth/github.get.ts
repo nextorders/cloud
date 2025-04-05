@@ -20,7 +20,12 @@ export default defineOAuthGitHubEventHandler({
 
     async function createUser() {
       const user = await repository.user.create({ email: githubUser.email, name: githubUser?.name ?? 'Аноним', avatarUrl: githubUser?.avatar_url })
-      await notify(`New user via GitHub: ${user?.name} (${user?.email}, ${user?.id})`)
+
+      try {
+        await notify(`New user via GitHub: ${user?.name} (${user?.email}, ${user?.id})`)
+      } catch (error) {
+        logger.error('Failed to send Telegram notification', error)
+      }
 
       return user
     }

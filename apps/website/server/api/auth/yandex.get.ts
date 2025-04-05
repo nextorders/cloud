@@ -18,7 +18,12 @@ export default defineOAuthYandexEventHandler({
 
     async function createUser() {
       const user = await repository.user.create({ email: yandexUser.default_email, name: yandexUser?.display_name, avatarUrl })
-      await notify(`New user via Yandex: ${user?.name} (${user?.email}, ${user?.id})`)
+
+      try {
+        await notify(`New user via Yandex: ${user?.name} (${user?.email}, ${user?.id})`)
+      } catch (error) {
+        logger.error('Failed to send Telegram notification', error)
+      }
 
       return user
     }
