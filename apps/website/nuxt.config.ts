@@ -83,6 +83,10 @@ export default defineNuxtConfig({
       shopId: '',
       apiKey: '',
     },
+    telegram: {
+      botToken: '',
+      supportId: '',
+    },
   },
   modules: [
     '@pinia/nuxt',

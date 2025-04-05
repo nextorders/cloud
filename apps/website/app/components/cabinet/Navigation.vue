@@ -41,7 +41,7 @@ const linkItems = ref([
   {
     label: 'Поддержка',
     icon: 'i-lucide-circle-help',
-    to: 'https://t.me/hmbanan666',
+    to: 'https://t.me/nextordersup',
     target: '_blank',
   },
 ])

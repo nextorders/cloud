@@ -75,7 +75,7 @@
         {{ formatDateTime(row.getValue('createdAt')) }}
       </template>
       <template #status-cell="{ row }">
-        {{ row.getValue('status') }}
+        {{ getPaymentStatusTypeDescription(row.getValue('status')) }}
       </template>
       <template #amount-cell="{ row }">
         {{ formatAmount(row.getValue('amount')) }}

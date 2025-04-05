@@ -1,5 +1,6 @@
 import type { UserGitHub } from '#auth-utils'
 import { repository } from '@nextorders/database'
+import { notify } from '~~/server/services/telegram/bot'
 
 const logger = useLogger('github')
 
@@ -17,8 +18,19 @@ export default defineOAuthGitHubEventHandler({
 
     const githubUser = user as unknown as UserGitHub
 
-    // Get and Update data in DB
-    const userInDB = await repository.user.findByEmail(githubUser.email) ?? await repository.user.create({ email: githubUser.email, name: githubUser?.name ?? 'Аноним', avatarUrl: githubUser?.avatar_url })
+    async function createUser() {
+      const user = await repository.user.create({ email: githubUser.email, name: githubUser?.name ?? 'Аноним', avatarUrl: githubUser?.avatar_url })
+
+      try {
+        await notify(`New user via GitHub: ${user?.name} (${user?.email}, ${user?.id})`)
+      } catch (error) {
+        logger.error('Failed to send Telegram notification', error)
+      }
+
+      return user
+    }
+
+    const userInDB = await repository.user.findByEmail(githubUser.email) ?? await createUser()
     if (!userInDB) {
       logger.error('GitHub OAuth error: User not found')
       return sendRedirect(event, '/sign-in')

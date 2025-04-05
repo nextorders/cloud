@@ -1,6 +1,7 @@
 import { repository } from '@nextorders/database'
 import { createId } from '@paralleldrive/cuid2'
 import { KubernetesService } from '~~/server/services/kubernetes'
+import { notify } from '~~/server/services/telegram/bot'
 import { quotaGuard } from '~~/server/utils/guard'
 import { spaceCreateSchema } from '~~/shared/services/space'
 
@@ -72,6 +73,8 @@ export default defineEventHandler(async (event) => {
 
     await repository.bucket.setAsInUse(bucket.id)
     await repository.user.updateUsedQuota(userInDB.id, 'owned_spaces', 1)
+
+    await notify(`New space: ${space.name} (${space.id})`)
 
     return {
       ok: true,

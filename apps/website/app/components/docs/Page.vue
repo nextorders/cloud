@@ -37,7 +37,7 @@ const items = ref([
     {
       label: 'Поддержка',
       icon: 'i-simple-icons-telegram',
-      to: 'https://t.me/hmbanan666',
+      to: 'https://t.me/nextordersup',
       target: '_blank',
     },
   ],
