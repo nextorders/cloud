@@ -114,7 +114,7 @@ export default defineNuxtConfig({
     },
     scheduledTasks: {
       '0 * * * *': ['space:tariffDebit'],
-      '*/3 * * * *': ['payment:status'],
+      '*/10 * * * * *': ['payment:status'],
     },
   },
   experimental: {

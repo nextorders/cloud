@@ -28,7 +28,7 @@
         <UIcon name="i-lucide-hexagon" class="size-4" />
         <p>Тариф "{{ tariff?.name }}"</p>
       </div>
-      <h3 class="text-2xl">
+      <h3 class="text-2xl font-semibold">
         {{ name }}
       </h3>
     </div>

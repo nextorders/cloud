@@ -9,7 +9,7 @@
         />
 
         <div>
-          <h2 class="text-2xl leading-tight">
+          <h2 class="text-2xl font-semibold">
             {{ tariff?.name }}
           </h2>
 

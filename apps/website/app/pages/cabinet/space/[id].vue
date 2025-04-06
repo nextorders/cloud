@@ -32,12 +32,9 @@ if (error.value) {
   await navigateTo('/cabinet')
 }
 
-const tariffStore = useTariffStore()
-const tariff = tariffStore.findTariff(space.value?.tariffId ?? '')
-
 const items = computed(() => [
   {
-    label: 'Данные',
+    label: 'Сервисы',
     to: `/cabinet/space/${params.id}`,
     icon: 'i-lucide-hexagon',
     exact: true,
@@ -56,7 +53,7 @@ const items = computed(() => [
   {
     label: 'Тариф',
     to: `/cabinet/space/${params.id}/tariff`,
-    icon: tariff?.icon,
+    icon: 'i-lucide-package',
   },
 ])
 </script>
