@@ -102,6 +102,20 @@ export default defineEventHandler(async (event) => {
       status: 'active',
       serviceId: webAppService.id,
     })
+    await repository.service.createOption({
+      key: 'main_website_url',
+      value: null,
+      type: 'link',
+      status: 'can_be_composed',
+      serviceId: webAppService.id,
+    })
+    await repository.service.createOption({
+      key: 'main_command_center_url',
+      value: null,
+      type: 'link',
+      status: 'can_be_composed',
+      serviceId: webAppService.id,
+    })
 
     await repository.bucket.setAsInUse(bucket.id, webAppService.id)
 
