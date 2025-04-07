@@ -1,11 +1,11 @@
 <template>
-  <UCard variant="subtle">
+  <UCard variant="outline">
     <div class="flex flex-col gap-4">
       <div class="flex flex-row gap-4 items-center">
         <UIcon name="i-lucide-wallet" class="size-10 text-(--ui-text-dimmed)" />
 
         <div>
-          <h2 class="text-2xl leading-tight">
+          <h2 class="text-2xl font-semibold">
             {{ balance }} ₽
           </h2>
 

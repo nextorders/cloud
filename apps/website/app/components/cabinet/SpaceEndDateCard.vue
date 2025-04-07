@@ -5,7 +5,7 @@
         <UIcon name="i-lucide-calendar-clock" class="size-10 text-(--ui-text-dimmed)" />
 
         <div>
-          <h2 class="text-2xl leading-tight">
+          <h2 class="text-2xl font-semibold">
             {{ endDate }}
           </h2>
 
