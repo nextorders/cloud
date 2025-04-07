@@ -1,4 +1,12 @@
 import type { ServiceOptionKey } from '@nextorders/database'
+import { z } from 'zod'
+
+export const serviceOptionCreateSchema = z.object({
+  key: z.string(),
+  value: z.string(),
+})
+
+export type ServiceOptionCreateSchema = z.output<typeof serviceOptionCreateSchema>
 
 export function getServiceOptionData(key: ServiceOptionKey) {
   switch (key) {

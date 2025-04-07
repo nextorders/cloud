@@ -43,5 +43,9 @@ export function useBot(): Bot {
 }
 
 export async function notify(message: string) {
-  return useBot().api.sendMessage(telegram.supportId, message)
+  try {
+    return useBot().api.sendMessage(telegram.supportId, message)
+  } catch (error) {
+    logger.error('Failed to send Telegram notification', error)
+  }
 }

@@ -27,10 +27,8 @@ definePageMeta({
 
 const { params } = useRoute('cabinet-space-id___en')
 
-const { data: space, error } = await useFetch(`/api/space/${params.id}`)
-if (error.value) {
-  await navigateTo('/cabinet')
-}
+const space = useSpaceStore()
+space.update(params.id)
 
 const items = computed(() => [
   {
@@ -43,7 +41,7 @@ const items = computed(() => [
     label: 'Баланс',
     to: `/cabinet/space/${params.id}/balance`,
     icon: 'i-lucide-wallet',
-    badge: space.value?.balance ? `${space.value?.balance} ₽` : undefined,
+    badge: `${space.balance} ₽`,
   },
   {
     label: 'Изменения',

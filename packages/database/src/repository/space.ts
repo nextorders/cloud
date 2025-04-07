@@ -39,6 +39,11 @@ export class Space {
             },
           },
         },
+        cluster: {
+          columns: {
+            balancerIp: true,
+          },
+        },
       },
     })
   }
