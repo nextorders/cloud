@@ -9,10 +9,10 @@ export class Bucket {
     })
   }
 
-  static async setAsInUse(id: string) {
+  static async setAsInUse(id: string, serviceId: string) {
     await useDatabase()
       .update(buckets)
-      .set({ status: 'in_use' })
+      .set({ status: 'in_use', serviceId })
       .where(eq(buckets.id, id))
   }
 }

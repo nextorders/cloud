@@ -1,5 +1,6 @@
 import { repository } from '@nextorders/database'
 import { checkYookassaPayment } from '~~/server/services/payment'
+import { notify } from '~~/server/services/telegram/bot'
 
 const logger = useLogger('payment:status')
 
@@ -22,6 +23,7 @@ export default defineTask({
         if (status === 'paid' && payment.status !== 'paid') {
           await repository.payment.setAsPaid(payment.id)
 
+          await notify(`Payment: changed status ${payment.id} to ${status} (amount ${payment.amount})`)
           logger.log(`Payment ${payment.id} changed to ${status}`)
         }
       }

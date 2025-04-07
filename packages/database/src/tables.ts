@@ -121,6 +121,35 @@ export const buckets = pgTable('buckets', {
   publicUrl: varchar('public_url').notNull(),
   sizeGb: integer('size_gb').notNull(),
   status: varchar('status').notNull().default('ready'),
+  serviceId: cuid2('service_id').references(() => services.id),
+})
+
+export const services = pgTable('services', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  name: varchar('name').notNull(),
+  image: varchar('image').notNull(),
+  version: varchar('version').notNull(),
+  type: varchar('type').notNull(),
+  spaceId: cuid2('space_id').notNull().references(() => spaces.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
+export const serviceOptions = pgTable('service_options', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  key: varchar('key').notNull(),
+  value: varchar('value').notNull(),
+  status: varchar('status').notNull().default('on_moderation'),
+  type: varchar('type').notNull(),
+  serviceId: cuid2('service_id').notNull().references(() => services.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
 })
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -153,6 +182,7 @@ export const spacesRelations = relations(spaces, ({ one, many }) => ({
     fields: [spaces.clusterId],
     references: [clusters.id],
   }),
+  services: many(services),
 }))
 
 export const spaceMembersRelations = relations(spaceMembers, ({ one }) => ({
@@ -190,4 +220,27 @@ export const paymentsRelations = relations(payments, ({ one }) => ({
 
 export const clustersRelations = relations(clusters, ({ many }) => ({
   spaces: many(spaces),
+}))
+
+export const bucketsRelations = relations(buckets, ({ one }) => ({
+  service: one(services, {
+    fields: [buckets.serviceId],
+    references: [services.id],
+  }),
+}))
+
+export const servicesRelations = relations(services, ({ one, many }) => ({
+  space: one(spaces, {
+    fields: [services.spaceId],
+    references: [spaces.id],
+  }),
+  buckets: many(buckets),
+  options: many(serviceOptions),
+}))
+
+export const serviceOptionsRelations = relations(serviceOptions, ({ one }) => ({
+  service: one(services, {
+    fields: [serviceOptions.serviceId],
+    references: [services.id],
+  }),
 }))

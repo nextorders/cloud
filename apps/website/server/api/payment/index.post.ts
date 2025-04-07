@@ -1,6 +1,7 @@
 import { repository } from '@nextorders/database'
 import { createId } from '@paralleldrive/cuid2'
 import { createYookassaPayment } from '~~/server/services/payment'
+import { notify } from '~~/server/services/telegram/bot'
 import { paymentCreateSchema } from '~~/shared/services/payment'
 
 export default defineEventHandler(async (event) => {
@@ -63,6 +64,8 @@ export default defineEventHandler(async (event) => {
     spaceId: space.id,
     userId: user.id,
   })
+
+  await notify(`New payment: ${paymentId}, space "${space.name}" with amount ${data.amount} (${space.id})`)
 
   return {
     ok: true,
