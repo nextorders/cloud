@@ -27,6 +27,8 @@ export default defineEventHandler(async (event) => {
 
     quotaGuard(userInDB.quotas, 'owned_spaces', 1)
 
+    await repository.user.updateUsedQuota(userInDB.id, 'owned_spaces', 1)
+
     const cluster = await repository.cluster.getReadyForUse()
     if (!cluster) {
       throw createError({
@@ -71,8 +73,37 @@ export default defineEventHandler(async (event) => {
       },
     )
 
-    await repository.bucket.setAsInUse(bucket.id)
-    await repository.user.updateUsedQuota(userInDB.id, 'owned_spaces', 1)
+    const webAppService = await repository.service.create({
+      name: 'NextOrders: Food',
+      spaceId: space.id,
+      type: 'public',
+      image: 'ghcr.io/nextorders/food/web-app',
+      version: 'nightly',
+    })
+    if (!webAppService) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Failed to create web app service',
+      })
+    }
+
+    // Base options
+    await repository.service.createOption({
+      key: 'primary_website_url',
+      value: `https://${space.id}.c1.nextorders.ru`,
+      type: 'link',
+      status: 'active',
+      serviceId: webAppService.id,
+    })
+    await repository.service.createOption({
+      key: 'primary_command_center_url',
+      value: `https://${space.id}.c1.nextorders.ru/command-center`,
+      type: 'link',
+      status: 'active',
+      serviceId: webAppService.id,
+    })
+
+    await repository.bucket.setAsInUse(bucket.id, webAppService.id)
 
     await notify(`New space: ${space.name} (${space.id})`)
 

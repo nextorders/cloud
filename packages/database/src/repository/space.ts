@@ -32,6 +32,13 @@ export class Space {
         payments: {
           orderBy: (payments, { desc }) => desc(payments.createdAt),
         },
+        services: {
+          with: {
+            options: {
+              orderBy: (options, { asc }) => asc(options.createdAt),
+            },
+          },
+        },
       },
     })
   }

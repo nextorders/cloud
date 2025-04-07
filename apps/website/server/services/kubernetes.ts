@@ -357,7 +357,6 @@ export class KubernetesService {
         name: 'web-app',
         stringData: {
           NUXT_REDIS_URL: `redis://db.${space.id}.svc.cluster.local:6379`,
-          NUXT_CHANNEL_ID: 'web-app',
           NUXT_SESSION_PASSWORD: crypto.randomUUID(),
           NUXT_PUBLIC_MEDIA_URL: bucket.publicUrl,
           NUXT_S3_BUCKET: bucket.name,

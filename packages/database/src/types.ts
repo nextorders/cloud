@@ -31,3 +31,17 @@ export type ClusterDraft = InferInsertModel<typeof tables.clusters>
 
 export type Bucket = InferSelectModel<typeof tables.buckets>
 export type BucketDraft = InferInsertModel<typeof tables.buckets>
+
+export type Service = InferSelectModel<typeof tables.services>
+export type ServiceDraft = InferInsertModel<typeof tables.services>
+export type ServiceType = 'public' | 'private'
+
+export type ServiceOption = InferSelectModel<typeof tables.serviceOptions>
+export type ServiceOptionDraft = InferInsertModel<typeof tables.serviceOptions>
+export type ServiceOptionStatus = 'on_moderation' | 'active'
+export type ServiceOptionType = 'string' | 'link' | 'secret'
+export type ServiceOptionKey =
+  'primary_website_url' |
+  'primary_command_center_url' |
+  'main_website_url' |
+  'main_command_center_url'
