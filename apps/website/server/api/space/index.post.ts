@@ -10,13 +10,8 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     const data = spaceCreateSchema.parse(body)
 
-    const { user } = await getUserSession(event)
-    if (!user?.id) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-      })
-    }
+    const { user } = await requireUserSession(event)
+
     const userInDB = await repository.user.find(user.id)
     if (!userInDB?.quotas) {
       throw createError({
@@ -100,6 +95,20 @@ export default defineEventHandler(async (event) => {
       value: `https://${space.id}.c1.nextorders.ru/command-center`,
       type: 'link',
       status: 'active',
+      serviceId: webAppService.id,
+    })
+    await repository.service.createOption({
+      key: 'main_website_url',
+      value: null,
+      type: 'link',
+      status: 'can_be_composed',
+      serviceId: webAppService.id,
+    })
+    await repository.service.createOption({
+      key: 'main_command_center_url',
+      value: null,
+      type: 'link',
+      status: 'can_be_composed',
       serviceId: webAppService.id,
     })
 

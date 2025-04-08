@@ -8,13 +8,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const data = paymentCreateSchema.parse(body)
 
-  const { user } = await getUserSession(event)
-  if (!user?.id) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Unauthorized',
-    })
-  }
+  const { user } = await requireUserSession(event)
 
   const space = await repository.space.find(data.spaceId)
   if (!space?.id) {

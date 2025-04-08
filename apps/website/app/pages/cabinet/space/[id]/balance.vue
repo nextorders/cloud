@@ -3,8 +3,8 @@
 
   <CabinetContent>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <CabinetSpaceBalanceCard :balance="space?.balance ?? 0" :space-id="space?.id ?? ''" />
-      <CabinetSpaceEndDateCard :balance="space?.balance ?? 0" :tariff-id="space?.tariffId ?? ''" />
+      <CabinetSpaceBalanceCard :balance="space.balance" :space-id="space.id" />
+      <CabinetSpaceEndDateCard :balance="space.balance" :tariff-id="space.tariffId ?? ''" />
     </div>
 
     <h2 class="mt-8 text-xl md:text-2xl font-semibold">
@@ -110,20 +110,17 @@ import { getPaginationRowModel } from '@tanstack/table-core'
 import { upperFirst } from 'scule'
 
 const { t } = useI18n()
-const { params, query } = useRoute('cabinet-space-id-balance___ru')
+const { query } = useRoute('cabinet-space-id-balance___ru')
 
-const { data: space, error } = await useFetch(`/api/space/${params.id}`)
-if (error.value) {
-  await navigateTo('/cabinet')
-}
+const space = useSpaceStore()
 
 // Payment
 const paymentId = query?.payment?.toString()
-const isSuccess = computed(() => paymentId && space.value?.payments.some((p) => p.id === paymentId && p.status === 'paid'))
+const isSuccess = computed(() => paymentId && space.payments.some((p) => p.id === paymentId && p.status === 'paid'))
 
 // Table
 const filterValue = ref('')
-const data = computed<Payment[]>(() => space.value?.payments.filter((c) => c.description.toLowerCase().includes(filterValue.value.toLowerCase())) ?? [])
+const data = computed<Payment[]>(() => space.payments.filter((c) => c.description.toLowerCase().includes(filterValue.value.toLowerCase())) ?? [])
 
 const columnVisibility = ref({
   id: false,

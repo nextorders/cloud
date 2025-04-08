@@ -102,6 +102,7 @@ export const clusters = pgTable('clusters', {
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   name: varchar('name').notNull(),
+  balancerIp: varchar('balancer_ip').notNull(),
   server: varchar('server').notNull(),
   certificateAuthorityData: text('certificate_authority_data').notNull(),
   clientCertificateData: text('client_certificate_data'),
@@ -143,7 +144,7 @@ export const serviceOptions = pgTable('service_options', {
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   key: varchar('key').notNull(),
-  value: varchar('value').notNull(),
+  value: varchar('value'),
   status: varchar('status').notNull().default('on_moderation'),
   type: varchar('type').notNull(),
   serviceId: cuid2('service_id').notNull().references(() => services.id, {

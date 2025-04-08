@@ -13,22 +13,11 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  validate: (route) => {
-    const params = route.params as { id: string }
-    const id = params.id
-    if (typeof id !== 'string') {
-      return false
-    }
-    const { error } = useFetch(`/api/space/${id}`)
-    return !error.value
-  },
-})
-
 const { params } = useRoute('cabinet-space-id___en')
 
-const { data: space, error } = await useFetch(`/api/space/${params.id}`)
-if (error.value) {
+const space = useSpaceStore()
+const res = await space.update(params.id)
+if (!res) {
   await navigateTo('/cabinet')
 }
 
@@ -43,7 +32,7 @@ const items = computed(() => [
     label: 'Баланс',
     to: `/cabinet/space/${params.id}/balance`,
     icon: 'i-lucide-wallet',
-    badge: space.value?.balance ? `${space.value?.balance} ₽` : undefined,
+    badge: `${space.balance} ₽`,
   },
   {
     label: 'Изменения',

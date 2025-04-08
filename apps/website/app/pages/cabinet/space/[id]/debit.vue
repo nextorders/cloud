@@ -95,16 +95,12 @@ import type { TableColumn } from '@nuxt/ui'
 import { getPaginationRowModel } from '@tanstack/table-core'
 import { upperFirst } from 'scule'
 
-const { t } = useI18n()
-const { params } = useRoute('cabinet-space-id-debit___en')
+const space = useSpaceStore()
 
-const { data: space, error } = await useFetch(`/api/space/${params.id}`)
-if (error.value) {
-  await navigateTo('/cabinet')
-}
+const { t } = useI18n()
 
 const filterValue = ref('')
-const data = computed<BalanceChange[]>(() => space.value?.balanceChanges.filter((c) => c.type.toLowerCase().includes(filterValue.value.toLowerCase())) ?? [])
+const data = computed<BalanceChange[]>(() => space.balanceChanges.filter((c) => c.type.toLowerCase().includes(filterValue.value.toLowerCase())) ?? [])
 
 const columnVisibility = ref({
   id: false,
