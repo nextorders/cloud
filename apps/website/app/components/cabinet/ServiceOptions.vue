@@ -82,7 +82,7 @@
 
 <script setup lang="ts">
 import type { ServiceOptionKey } from '@nextorders/database'
-import { ModalCreateMainWebsiteUrl } from '#components'
+import { ModalCreateCheckoutReceiverEmail, ModalCreateCheckoutReceiverTelegram, ModalCreateMainWebsiteUrl } from '#components'
 import { getServiceOptionData } from '#shared/services/service'
 
 const { serviceId } = defineProps<{ serviceId: string }>()
@@ -93,13 +93,31 @@ const options = computed(() => space.services.find((service) => service.id === s
 const optionsWithValue = computed(() => options.value?.filter((option) => option.value))
 const optionsWithoutValue = computed(() => options.value?.filter((option) => !option.value))
 
-const buttons = computed<{ label: string, icon: string, onClick: () => void }[]>(() =>
-  optionsWithoutValue.value
-    .map((option) => getServiceOptionDataForButton(option.key as ServiceOptionKey, option.serviceId)),
-)
+type ServiceOptionButton = {
+  label: string
+  icon: string
+  onClick: () => void
+}
+
+const buttons = computed<ServiceOptionButton[]>(() => {
+  const res: ServiceOptionButton[] = []
+
+  for (const option of optionsWithoutValue.value) {
+    const data = getServiceOptionDataForButton(option.key as ServiceOptionKey, serviceId)
+    if (!data) {
+      continue
+    }
+
+    res.push(data)
+  }
+
+  return res
+})
 
 const overlay = useOverlay()
 const modalCreateMainWebsiteUrl = overlay.create(ModalCreateMainWebsiteUrl)
+const modalCreateCheckoutReceiverEmail = overlay.create(ModalCreateCheckoutReceiverEmail)
+const modalCreateCheckoutReceiverTelegram = overlay.create(ModalCreateCheckoutReceiverTelegram)
 
 const toast = useToast()
 
@@ -111,21 +129,34 @@ function copy(value: string) {
   })
 }
 
-function getServiceOptionDataForButton(key: ServiceOptionKey, serviceId: string) {
-  if (key === 'main_website_url') {
-    return {
-      label: 'Добавить свой домен',
-      icon: 'i-lucide-globe',
-      onClick: () => {
-        modalCreateMainWebsiteUrl.open({ serviceId })
-      },
-    }
-  }
-
-  return {
-    label: '',
-    icon: '',
-    onClick: () => {},
+function getServiceOptionDataForButton(key: ServiceOptionKey, serviceId: string): ServiceOptionButton | null {
+  switch (key) {
+    case 'main_website_url':
+      return {
+        label: 'Добавить свой домен',
+        icon: 'i-lucide-globe',
+        onClick: () => {
+          modalCreateMainWebsiteUrl.open({ serviceId })
+        },
+      }
+    case 'checkout_receiver_email':
+      return {
+        label: 'Добавить Email получателя заявок',
+        icon: 'i-lucide-mail',
+        onClick: () => {
+          modalCreateCheckoutReceiverEmail.open({ serviceId })
+        },
+      }
+    case 'checkout_receiver_telegram':
+      return {
+        label: 'Добавить Telegram получателя заявок',
+        icon: 'i-simple-icons:telegram',
+        onClick: () => {
+          modalCreateCheckoutReceiverTelegram.open({ serviceId })
+        },
+      }
+    default:
+      return null
   }
 }
 </script>

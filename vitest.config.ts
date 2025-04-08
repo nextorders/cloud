@@ -7,10 +7,10 @@ export default defineConfig({
         extends: true,
         test: {
           include: [
-            'packages/*/tests/unit/**/*.{test,spec}.ts',
-            'packages/*/tests/**/*.unit.{test,spec}.ts',
-            'apps/*/tests/unit/**/*.{test,spec}.ts',
-            'apps/*/tests/**/*.unit.{test,spec}.ts',
+            'packages/**/tests/unit/**/*.{test,spec}.ts',
+            'packages/**/tests/**/*.unit.{test,spec}.ts',
+            'apps/**/tests/unit/**/*.{test,spec}.ts',
+            'apps/**/tests/**/*.unit.{test,spec}.ts',
           ],
           name: 'unit',
           environment: 'node',
@@ -20,10 +20,10 @@ export default defineConfig({
         extends: true,
         test: {
           include: [
-            'packages/*/tests/browser/**/*.{test,spec}.ts',
-            'packages/*/tests/**/*.browser.{test,spec}.ts',
-            'apps/*/tests/browser/**/*.{test,spec}.ts',
-            'apps/*/tests/**/*.browser.{test,spec}.ts',
+            'packages/**/tests/browser/**/*.{test,spec}.ts',
+            'packages/**/tests/**/*.browser.{test,spec}.ts',
+            'apps/**/tests/browser/**/*.{test,spec}.ts',
+            'apps/**/tests/**/*.browser.{test,spec}.ts',
           ],
           name: 'browser',
           browser: {

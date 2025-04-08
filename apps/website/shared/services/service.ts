@@ -30,6 +30,16 @@ export function getServiceOptionData(key: ServiceOptionKey) {
         title: 'Панель управления веб-сайтом',
         description: 'Основная ссылка. Откройте и продолжите работу как администратор.',
       }
+    case 'checkout_receiver_email':
+      return {
+        title: 'Email получателя заявок',
+        description: 'Почта, на которую будут приходить заявки от клиентов.',
+      }
+    case 'checkout_receiver_telegram':
+      return {
+        title: 'Telegram чат получателя заявок',
+        description: 'Чат, в который будут приходить заявки от клиентов.',
+      }
     default:
       return null
   }
