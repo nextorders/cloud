@@ -12,7 +12,7 @@ export const useSpaceStore = defineStore('space', () => {
   const payments = ref<Payment[]>([])
   const cluster = ref<Pick<Cluster, 'balancerIp'> | null>(null)
 
-  async function update(spaceId?: string) {
+  async function update(spaceId?: string): Promise<boolean> {
     try {
       const data = await $fetch(`/api/space/${spaceId ?? id.value}`, {
         lazy: true,
@@ -21,7 +21,7 @@ export const useSpaceStore = defineStore('space', () => {
         getCachedData: undefined,
       })
       if (!data) {
-        return
+        return false
       }
 
       id.value = data.id
@@ -32,10 +32,13 @@ export const useSpaceStore = defineStore('space', () => {
       balanceChanges.value = data.balanceChanges
       payments.value = data.payments
       cluster.value = data.cluster
+
+      return true
     } catch (error) {
       if (error instanceof Error) {
         // Do nothing
       }
+      return false
     }
   }
 

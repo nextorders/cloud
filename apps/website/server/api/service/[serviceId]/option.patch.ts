@@ -7,20 +7,14 @@ export default defineEventHandler(async (event) => {
   if (!serviceId) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Space id is required',
+      statusMessage: 'Service id is required',
     })
   }
 
   const body = await readBody(event)
   const data = serviceOptionCreateSchema.parse(body)
 
-  const { user } = await getUserSession(event)
-  if (!user?.id) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Unauthorized',
-    })
-  }
+  const { user } = await requireUserSession(event)
 
   const service = await repository.service.find(serviceId)
   if (!service?.id) {

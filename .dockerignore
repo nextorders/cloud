@@ -2,6 +2,7 @@ Dockerfile
 .nuxt
 .output
 .dockerignore
+.cert
 node_modules
 npm-debug.log
 README.md

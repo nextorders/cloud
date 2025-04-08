@@ -13,22 +13,13 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  validate: (route) => {
-    const params = route.params as { id: string }
-    const id = params.id
-    if (typeof id !== 'string') {
-      return false
-    }
-    const { error } = useFetch(`/api/space/${id}`)
-    return !error.value
-  },
-})
-
 const { params } = useRoute('cabinet-space-id___en')
 
 const space = useSpaceStore()
-space.update(params.id)
+const res = await space.update(params.id)
+if (!res) {
+  await navigateTo('/cabinet')
+}
 
 const items = computed(() => [
   {

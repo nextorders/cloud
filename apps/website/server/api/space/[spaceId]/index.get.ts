@@ -1,23 +1,17 @@
 import { repository } from '@nextorders/database'
 
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  if (!id) {
+  const spaceId = getRouterParam(event, 'spaceId')
+  if (!spaceId) {
     throw createError({
       statusCode: 400,
       statusMessage: 'Space id is required',
     })
   }
 
-  const { user } = await getUserSession(event)
-  if (!user?.id) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Unauthorized',
-    })
-  }
+  const { user } = await requireUserSession(event)
 
-  const space = await repository.space.findWithEntities(id)
+  const space = await repository.space.findWithEntities(spaceId)
   if (!space?.id) {
     throw createError({
       statusCode: 404,

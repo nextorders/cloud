@@ -10,13 +10,8 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     const data = spaceCreateSchema.parse(body)
 
-    const { user } = await getUserSession(event)
-    if (!user?.id) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-      })
-    }
+    const { user } = await requireUserSession(event)
+
     const userInDB = await repository.user.find(user.id)
     if (!userInDB?.quotas) {
       throw createError({

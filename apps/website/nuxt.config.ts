@@ -2,6 +2,14 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  devServer: {
+    port: 3501,
+    host: 'app.local',
+    https: {
+      key: '../../.cert/localhost-key.pem',
+      cert: '../../.cert/localhost.pem',
+    },
+  },
   site: {
     url: 'https://nextorders.ru',
     name: 'NextOrders',
@@ -89,14 +97,14 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    '@pinia/nuxt',
+    'nuxt-auth-utils',
     '@nuxtjs/seo',
     '@nuxt/ui',
     'nuxt-zod-i18n', // must be before i18n
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@vueuse/nuxt',
-    'nuxt-auth-utils',
+    '@pinia/nuxt',
     '@nuxt/scripts',
   ],
   routeRules: {
