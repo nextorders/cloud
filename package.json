@@ -65,7 +65,8 @@
     "vue-tsc": "catalog:"
   },
   "resolutions": {
-    "vue-tsc": "2.2.2"
+    "unimport": "4.1.1",
+    "vue-tsc": "2.2.0"
   },
   "lint-staged": {
     "*.ts": "pnpm run lint"

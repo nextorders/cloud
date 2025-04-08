@@ -112,6 +112,7 @@ export default defineNuxtConfig({
     '/cabinet/**': { robots: false },
     '/_nuxt/**': { robots: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
+    '/api/**': { cors: true },
   },
   pinia: {
     storesDirs: ['./stores/**'],
