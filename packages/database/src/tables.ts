@@ -153,6 +153,16 @@ export const serviceOptions = pgTable('service_options', {
   }),
 })
 
+export const emails = pgTable('emails', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  to: varchar('to').notNull(),
+  token: varchar('token').notNull(),
+  status: varchar('status').notNull().default('active'),
+  serviceId: cuid2('service_id').notNull().references(() => services.id),
+})
+
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
   memberInSpaces: many(spaceMembers),

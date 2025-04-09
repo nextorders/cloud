@@ -47,3 +47,7 @@ export type ServiceOptionKey =
   'main_command_center_url' |
   'checkout_receiver_email' |
   'checkout_receiver_telegram'
+
+export type Email = InferSelectModel<typeof tables.emails>
+export type EmailDraft = InferInsertModel<typeof tables.emails>
+export type EmailStatus = 'active' | 'inactive'
