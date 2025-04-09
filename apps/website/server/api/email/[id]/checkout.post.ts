@@ -35,10 +35,11 @@ export default defineEventHandler(async (event) => {
     }
 
     const body = await readBody(event)
+    const checkout = body.checkout
 
     const subject = 'Новая заявка!'
-    const html = await render(NewCheckout, body, { pretty: true })
-    const text = await render(NewCheckout, body, { plainText: true })
+    const html = await render(NewCheckout, checkout, { pretty: true })
+    const text = await render(NewCheckout, checkout, { plainText: true })
 
     const transporter = getEmailTransporter()
 
