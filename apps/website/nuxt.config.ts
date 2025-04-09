@@ -1,3 +1,5 @@
+import vue from '@vitejs/plugin-vue'
+
 export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
@@ -95,6 +97,15 @@ export default defineNuxtConfig({
       botToken: '',
       supportId: '',
     },
+    email: {
+      from: '',
+      host: '',
+      port: '',
+      auth: {
+        user: '',
+        pass: '',
+      },
+    },
   },
   modules: [
     'nuxt-auth-utils',
@@ -124,6 +135,10 @@ export default defineNuxtConfig({
     scheduledTasks: {
       '0 * * * *': ['space:tariffDebit'],
       '*/10 * * * * *': ['payment:status'],
+    },
+    rollupConfig: {
+      // @ts-expect-error too deep
+      plugins: [vue()],
     },
   },
   experimental: {

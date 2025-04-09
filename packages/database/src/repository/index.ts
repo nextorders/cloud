@@ -2,6 +2,7 @@ import { useDatabase } from '../database'
 import { Balance } from './balance'
 import { Bucket } from './bucket'
 import { Cluster } from './cluster'
+import { Email } from './email'
 import { Payment } from './payment'
 import { Service } from './service'
 import { Space } from './space'
@@ -12,6 +13,7 @@ class Repository {
   readonly balance = Balance
   readonly bucket = Bucket
   readonly cluster = Cluster
+  readonly email = Email
   readonly payment = Payment
   readonly service = Service
   readonly space = Space

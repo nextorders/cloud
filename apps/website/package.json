@@ -20,9 +20,13 @@
     "@nuxt/ui": "catalog:",
     "@nuxtjs/i18n": "catalog:",
     "@pinia/nuxt": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue-email/components": "catalog:",
+    "@vue-email/render": "catalog:",
     "@vueuse/core": "catalog:",
     "@vueuse/nuxt": "catalog:",
     "grammy": "catalog:",
+    "nodemailer": "catalog:",
     "nuxt-zod-i18n": "catalog:",
     "pinia": "catalog:",
     "zod": "catalog:"
@@ -37,6 +41,7 @@
     "@nuxt/scripts": "catalog:",
     "@nuxtjs/seo": "catalog:",
     "@types/node": "catalog:",
+    "@types/nodemailer": "catalog:",
     "@unhead/vue": "catalog:",
     "nuxt": "catalog:",
     "nuxt-auth-utils": "catalog:"
