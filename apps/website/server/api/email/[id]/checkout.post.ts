@@ -1,12 +1,12 @@
 import { repository } from '@nextorders/database'
 import { render } from '@vue-email/render'
-import { createTransport } from 'nodemailer'
 import NewCheckout from '~~/server/services/email/NewCheckout.vue'
+import { getEmailTransporter } from '~~/server/services/email/transport'
 
 export default defineEventHandler(async (event) => {
   try {
     const logger = useLogger('email')
-    const { email } = useRuntimeConfig(event)
+    const { email } = useRuntimeConfig()
 
     const id = getRouterParam(event, 'id')
     if (!id) {
@@ -40,15 +40,7 @@ export default defineEventHandler(async (event) => {
     const html = await render(NewCheckout, body, { pretty: true })
     const text = await render(NewCheckout, body, { plainText: true })
 
-    const transporter = createTransport({
-      host: email.host,
-      port: Number(email.port),
-      secure: Number(email.port) === 465,
-      tls: {
-        rejectUnauthorized: false,
-      },
-      auth: { user: email.auth.user, pass: email.auth.pass },
-    })
+    const transporter = getEmailTransporter()
 
     const info = await transporter.sendMail({
       from: email.from,
