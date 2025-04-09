@@ -1,5 +1,10 @@
 <template>
+  <!DOCTYPE html>
   <Html lang="en">
+    <Head>
+      <title>Новая заявка!</title>
+    </Head>
+
     <Section>
       <Heading as="h1">
         Новая заявка! #{{ id }}
@@ -52,7 +57,7 @@
 
 <script setup lang="ts">
 import type { CheckoutForReceiver } from '~~/types/receiver'
-import { Heading, Hr, Html, Row, Section, Text } from '@vue-email/components'
+import { Head, Heading, Hr, Html, Row, Section, Text } from '@vue-email/components'
 
 const { deliveryMethod, time, timeType } = defineProps<CheckoutForReceiver>()
 
