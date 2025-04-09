@@ -3,12 +3,12 @@ import { createTransport } from 'nodemailer'
 
 let transporter: Transporter | null = null
 
-const { email } = useRuntimeConfig()
-
 export function getEmailTransporter() {
   if (transporter) {
     return transporter
   }
+
+  const { email } = useRuntimeConfig()
 
   transporter = createTransport({
     host: email.host,
