@@ -1,5 +1,4 @@
 import { repository } from '@nextorders/database'
-import { createId } from '@paralleldrive/cuid2'
 
 export async function createEmailReceiver(data: { email: string, userId: string, serviceId: string, emailOptionId: string, websiteUrl: string, apiToken: string }) {
   const emailInDB = await repository.email.findByEmail(data.email, data.userId)
@@ -11,7 +10,7 @@ export async function createEmailReceiver(data: { email: string, userId: string,
   }
 
   const emailId = emailInDB?.id
-  const token = `${createId()}${createId()}`
+  const token = getToken()
 
   const emailReceiver = await repository.email.createReceiver({
     emailId,
