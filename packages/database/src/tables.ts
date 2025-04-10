@@ -133,6 +133,7 @@ export const services = pgTable('services', {
   image: varchar('image').notNull(),
   version: varchar('version').notNull(),
   type: varchar('type').notNull(),
+  apiToken: varchar('api_token'),
   spaceId: cuid2('space_id').notNull().references(() => spaces.id, {
     onDelete: 'cascade',
     onUpdate: 'cascade',

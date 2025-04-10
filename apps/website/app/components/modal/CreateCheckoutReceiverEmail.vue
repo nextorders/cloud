@@ -1,5 +1,5 @@
 <template>
-  <UModal title="Добавить Email">
+  <UModal title="Создать Email получателя заявок">
     <template #body>
       <div class="space-y-4">
         <div class="flex flex-col gap-2">
