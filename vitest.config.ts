@@ -39,7 +39,7 @@ export default defineConfig({
     ],
     coverage: {
       exclude: [
-        '**/{nitro,release,nuxt,app}.config.*',
+        '**/{nitro,release,nuxt,app,drizzle}.config.*',
         '**/{vue-i18n}.options.*',
         ...coverageConfigDefaults.exclude,
       ],
