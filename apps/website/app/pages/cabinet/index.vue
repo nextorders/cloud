@@ -18,13 +18,13 @@
       <CabinetCreateSpaceCard v-if="canCreateNewSpace" />
     </div>
 
-    <UContainer class="mt-32 max-w-xl text-center">
+    <UContainer class="mt-32 md:mt-48 max-w-3xl">
       <UIcon name="i-lucide-book-marked" class="-mb-4 size-10 text-(--ui-text-dimmed)" />
       <ProseH3>Немного теории</ProseH3>
 
       <ProseP>
-        Пространство – это изолированная среда, в которой разворачивается все
-        связанное программное обеспечение. Затраты пространства привязаны к выбранному тарифу.
+        Пространство – это изолированная среда, в которой разворачиваются все
+        связанные сервисы. Затраты Пространства привязаны к выбранному тарифу.
       </ProseP>
     </UContainer>
   </CabinetContent>
