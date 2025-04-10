@@ -53,10 +53,13 @@ export default defineEventHandler(async (event) => {
       })
     }
 
+    const externalApiToken = getToken()
+
     const k8s = new KubernetesService(cluster)
     await k8s.createFullSpaceForTariffGlaze(
       {
         id: space.id,
+        externalApiToken,
       },
       {
         publicUrl: bucket.publicUrl,
@@ -74,6 +77,7 @@ export default defineEventHandler(async (event) => {
       type: 'public',
       image: 'ghcr.io/nextorders/food/web-app',
       version: 'nightly',
+      apiToken: externalApiToken,
     })
     if (!webAppService) {
       throw createError({
