@@ -10,6 +10,15 @@ export class Service {
     })
   }
 
+  static async findWithOptions(id: string) {
+    return useDatabase().query.services.findFirst({
+      where: (services, { eq }) => eq(services.id, id),
+      with: {
+        options: true,
+      },
+    })
+  }
+
   static async create(data: ServiceDraft & { type: ServiceType }) {
     const [service] = await useDatabase().insert(services).values(data).returning()
     return service
@@ -30,5 +39,12 @@ export class Service {
       .returning()
 
     return option
+  }
+
+  static async setOptionAsActive(id: string) {
+    await useDatabase()
+      .update(serviceOptions)
+      .set({ status: 'active', updatedAt: sql`now()` })
+      .where(eq(serviceOptions.id, id))
   }
 }

@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const emailInDB = await repository.email.findByEmail(data.email)
+  const emailInDB = await repository.email.findByEmail(data.email, userInDB.id)
   if (emailInDB?.id) {
     throw createError({
       statusCode: 400,

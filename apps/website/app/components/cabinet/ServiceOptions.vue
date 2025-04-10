@@ -141,7 +141,7 @@ function getServiceOptionDataForButton(key: ServiceOptionKey, serviceId: string)
       }
     case 'checkout_receiver_email':
       return {
-        label: 'Добавить Email получателя заявок',
+        label: 'Создать Email получателя заявок',
         icon: 'i-lucide-mail',
         onClick: () => {
           modalCreateCheckoutReceiverEmail.open({ serviceId })
@@ -149,7 +149,7 @@ function getServiceOptionDataForButton(key: ServiceOptionKey, serviceId: string)
       }
     case 'checkout_receiver_telegram':
       return {
-        label: 'Добавить Telegram получателя заявок',
+        label: 'Создать Telegram получателя заявок',
         icon: 'i-simple-icons:telegram',
         onClick: () => {
           modalCreateCheckoutReceiverTelegram.open({ serviceId })

@@ -1,4 +1,5 @@
 import { repository } from '@nextorders/database'
+import { createEmailReceiver } from '~~/server/services/email/receiver'
 import { notify } from '~~/server/services/telegram/bot'
 import { serviceOptionCreateSchema } from '~~/shared/services/service'
 
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   const { user } = await requireUserSession(event)
 
-  const service = await repository.service.find(serviceId)
+  const service = await repository.service.findWithOptions(serviceId)
   if (!service?.id) {
     throw createError({
       statusCode: 404,
@@ -41,7 +42,20 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  await repository.service.composeOption(serviceId, data)
+  const option = await repository.service.composeOption(serviceId, data)
+
+  // If Email
+  if (data.key === 'checkout_receiver_email') {
+    const websiteUrl = service.options.find((o) => o.key === 'primary_website_url')?.value ?? ''
+    await createEmailReceiver({
+      email: data.value,
+      userId: user.id,
+      serviceId,
+      emailOptionId: option?.id ?? '',
+      websiteUrl,
+      apiToken: service.apiToken ?? '',
+    })
+  }
 
   await notify(`Update service option: ${service.id} - ${data.key} - ${data.value}`)
 
