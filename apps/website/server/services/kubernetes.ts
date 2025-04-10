@@ -274,7 +274,7 @@ export class KubernetesService {
     return this.networkClient.deleteNamespacedIngress(request)
   }
 
-  async createFullSpaceForTariffGlaze(space: { id: string }, bucket: { publicUrl: string, name: string, region: string, endpoint: string, accessKeyId: string, secretAccessKey: string }) {
+  async createFullSpaceForTariffGlaze(space: { id: string, externalApiToken: string }, bucket: { publicUrl: string, name: string, region: string, endpoint: string, accessKeyId: string, secretAccessKey: string }) {
     try {
       // Create namespace for all future resources
       const namespace = await this.createNamespace(space.id)
@@ -357,6 +357,7 @@ export class KubernetesService {
         name: 'web-app',
         stringData: {
           NUXT_REDIS_URL: `redis://db.${space.id}.svc.cluster.local:6379`,
+          NUXT_EXTERNAL_API_TOKEN: space.externalApiToken,
           NUXT_SESSION_PASSWORD: crypto.randomUUID(),
           NUXT_PUBLIC_MEDIA_URL: bucket.publicUrl,
           NUXT_S3_BUCKET: bucket.name,
