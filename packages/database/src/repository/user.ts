@@ -4,6 +4,7 @@ import { useDatabase } from '../database'
 import { userQuotas, users } from '../tables'
 
 const DEFAULT_OWNED_SPACES_LIMIT = 1
+const DEFAULT_OWNED_EMAILS_LIMIT = 3
 
 export class User {
   static async find(id: string) {
@@ -42,6 +43,7 @@ export class User {
           orderBy: (spaceMembers, { asc }) => asc(spaceMembers.createdAt),
         },
         quotas: true,
+        emails: true,
       },
     })
   }
@@ -53,6 +55,7 @@ export class User {
     }
 
     await User.createQuota(user.id, 'owned_spaces', DEFAULT_OWNED_SPACES_LIMIT)
+    await User.createQuota(user.id, 'owned_emails', DEFAULT_OWNED_EMAILS_LIMIT)
 
     return user
   }

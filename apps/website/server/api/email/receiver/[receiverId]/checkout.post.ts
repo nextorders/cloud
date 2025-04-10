@@ -8,26 +8,26 @@ export default defineEventHandler(async (event) => {
     const logger = useLogger('email')
     const { email } = useRuntimeConfig()
 
-    const id = getRouterParam(event, 'id')
-    if (!id) {
+    const receiverId = getRouterParam(event, 'receiverId')
+    if (!receiverId) {
       throw createError({
         statusCode: 400,
         statusMessage: 'Id is required',
       })
     }
 
-    const emailInDB = await repository.email.find(id)
-    if (!emailInDB) {
+    const receiver = await repository.email.findReceiver(receiverId)
+    if (!receiver) {
       throw createError({
         statusCode: 404,
         statusMessage: 'Email not found',
       })
     }
 
-    const bearer = getHeader(event, 'Authorization')
-    const key = bearer?.replace('Bearer ', '')
+    const bearerToken = getHeader(event, 'Authorization')
+    const key = bearerToken?.startsWith('Bearer ') ? bearerToken.substring(7) : bearerToken
 
-    if (!emailInDB.token || !key || emailInDB.token !== key) {
+    if (!receiver.token || !key || receiver.token !== key) {
       throw createError({
         statusCode: 401,
         statusMessage: 'Invalid token',
@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
 
     const info = await transporter.sendMail({
       from: email.from,
-      to: emailInDB.to,
+      to: receiver.email.value,
       subject,
       text,
       html,

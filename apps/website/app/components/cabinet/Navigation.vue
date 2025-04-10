@@ -26,6 +26,11 @@ const menuItems = ref([
     exact: true,
   },
   {
+    label: 'Email',
+    to: '/cabinet/email',
+    icon: 'i-lucide-mail',
+  },
+  {
     label: 'Квоты',
     to: '/cabinet/quotas',
     icon: 'i-lucide-maximize',

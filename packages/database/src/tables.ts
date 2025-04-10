@@ -157,9 +157,24 @@ export const emails = pgTable('emails', {
   id: cuid2('id').defaultRandom().primaryKey(),
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  to: varchar('to').notNull(),
+  value: varchar('value').notNull(),
+  status: varchar('status').notNull().default('inactive'),
+  userId: cuid2('user_id').notNull().references(() => users.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
+export const emailReceivers = pgTable('email_receivers', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   token: varchar('token').notNull(),
   status: varchar('status').notNull().default('active'),
+  emailId: cuid2('email_id').notNull().references(() => emails.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
   serviceId: cuid2('service_id').notNull().references(() => services.id),
 })
 
@@ -168,6 +183,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   memberInSpaces: many(spaceMembers),
   payments: many(payments),
   quotas: many(userQuotas),
+  emails: many(emails),
 }))
 
 export const userQuotasRelations = relations(userQuotas, ({ one }) => ({
@@ -247,11 +263,31 @@ export const servicesRelations = relations(services, ({ one, many }) => ({
   }),
   buckets: many(buckets),
   options: many(serviceOptions),
+  emailReceivers: many(emailReceivers),
 }))
 
 export const serviceOptionsRelations = relations(serviceOptions, ({ one }) => ({
   service: one(services, {
     fields: [serviceOptions.serviceId],
+    references: [services.id],
+  }),
+}))
+
+export const emailsRelations = relations(emails, ({ one, many }) => ({
+  user: one(users, {
+    fields: [emails.userId],
+    references: [users.id],
+  }),
+  receivers: many(emailReceivers),
+}))
+
+export const emailReceiversRelations = relations(emailReceivers, ({ one }) => ({
+  email: one(emails, {
+    fields: [emailReceivers.emailId],
+    references: [emails.id],
+  }),
+  service: one(services, {
+    fields: [emailReceivers.serviceId],
     references: [services.id],
   }),
 }))

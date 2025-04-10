@@ -3,11 +3,11 @@
     <div class="flex flex-col gap-4 justify-between">
       <UIcon :name="icon" class="size-8 text-(--ui-text-dimmed)" />
 
-      <div>
-        <div class="text-sm text-(--ui-text-muted) flex flex-row items-center gap-1.5">
-          <p>{{ name }}</p>
+      <div class="flex flex-col gap-1">
+        <div class="text-sm text-(--ui-text-muted)">
+          {{ name }}
         </div>
-        <h3 class="text-2xl">
+        <h3 class="text-xl font-semibold line-clamp-1">
           {{ used }} из {{ limit }}
         </h3>
       </div>
