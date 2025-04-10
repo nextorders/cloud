@@ -1,4 +1,4 @@
-import type { Space, SpaceMember, User, UserQuota, UserQuotaKey } from '@nextorders/database'
+import type { Email, EmailStatus, Space, SpaceMember, User, UserQuota, UserQuotaKey } from '@nextorders/database'
 
 type SpaceMemberWithData = SpaceMember & { space: SpaceWithMembers, user: User }
 type SpaceWithMembers = Space & { members: SpaceMemberWithUser[] }
@@ -18,6 +18,7 @@ export const useUserStore = defineStore('user', () => {
   const avatarUrl = ref<string | null>(null)
   const memberInSpaces = ref<SpaceMemberWithData[]>([])
   const quotas = ref<UserQuotaWithData[]>([])
+  const emails = ref<(Email & { status: EmailStatus })[]>([])
 
   async function update() {
     try {
@@ -37,6 +38,7 @@ export const useUserStore = defineStore('user', () => {
       name.value = data.name
       avatarUrl.value = data.avatarUrl
       memberInSpaces.value = data.memberInSpaces
+      emails.value = data.emails as (Email & { status: EmailStatus })[]
 
       if (data.quotas && Array.isArray(data.quotas)) {
         quotas.value = data.quotas.map((quota) => {
@@ -66,18 +68,25 @@ export const useUserStore = defineStore('user', () => {
     avatarUrl,
     memberInSpaces,
     quotas,
+    emails,
 
     update,
   }
 })
 
 function getQuotaInfo(key: UserQuotaKey): { name: string, icon: string } {
-  if (key === 'owned_spaces') {
-    return {
-      name: 'Пространства',
-      icon: 'i-lucide-hexagon',
-    }
+  switch (key) {
+    case 'owned_spaces':
+      return {
+        name: 'Пространства',
+        icon: 'i-lucide-hexagon',
+      }
+    case 'owned_emails':
+      return {
+        name: 'Email адреса',
+        icon: 'i-lucide-mail',
+      }
+    default:
+      return { name: key, icon: 'i-lucide-circle' }
   }
-
-  return { name: key, icon: 'i-lucide-circle' }
 }

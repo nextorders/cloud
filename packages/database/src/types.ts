@@ -8,7 +8,7 @@ export type UserDraft = InferInsertModel<typeof tables.users>
 
 export type UserQuota = InferSelectModel<typeof tables.userQuotas>
 export type UserQuotaDraft = InferInsertModel<typeof tables.userQuotas>
-export type UserQuotaKey = 'owned_spaces'
+export type UserQuotaKey = 'owned_spaces' | 'owned_emails'
 
 export type Space = InferSelectModel<typeof tables.spaces>
 export type SpaceDraft = InferInsertModel<typeof tables.spaces>
@@ -51,3 +51,7 @@ export type ServiceOptionKey =
 export type Email = InferSelectModel<typeof tables.emails>
 export type EmailDraft = InferInsertModel<typeof tables.emails>
 export type EmailStatus = 'active' | 'inactive'
+
+export type EmailReceiver = InferSelectModel<typeof tables.emailReceivers>
+export type EmailReceiverDraft = InferInsertModel<typeof tables.emailReceivers>
+export type EmailReceiverStatus = 'active' | 'inactive'
