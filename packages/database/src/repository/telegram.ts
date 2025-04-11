@@ -3,6 +3,12 @@ import { useDatabase } from '../database'
 import { telegramBindings, telegramReceivers } from '../tables'
 
 export class Telegram {
+  static async findBinding(id: string) {
+    return useDatabase().query.telegramBindings.findFirst({
+      where: (telegramBindings, { eq }) => eq(telegramBindings.id, id),
+    })
+  }
+
   static async list() {
     return useDatabase().query.telegramBots.findMany()
   }

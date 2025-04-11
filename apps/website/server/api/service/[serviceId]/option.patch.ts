@@ -1,6 +1,7 @@
 import { repository } from '@nextorders/database'
 import { createEmailReceiver } from '~~/server/services/email/receiver'
 import { notify } from '~~/server/services/telegram/bot'
+import { createTelegramReceiver } from '~~/server/services/telegram/receiver'
 import { serviceOptionCreateSchema } from '~~/shared/services/service'
 
 export default defineEventHandler(async (event) => {
@@ -43,15 +44,26 @@ export default defineEventHandler(async (event) => {
   }
 
   const option = await repository.service.composeOption(serviceId, data)
+  const websiteUrl = service.options.find((o) => o.key === 'primary_website_url')?.value ?? ''
 
   // If Email
   if (data.key === 'checkout_receiver_email') {
-    const websiteUrl = service.options.find((o) => o.key === 'primary_website_url')?.value ?? ''
     await createEmailReceiver({
       email: data.value,
       userId: user.id,
       serviceId,
       emailOptionId: option?.id ?? '',
+      websiteUrl,
+      apiToken: service.apiToken ?? '',
+    })
+  }
+
+  // If Telegram
+  if (data.key === 'checkout_receiver_telegram') {
+    await createTelegramReceiver({
+      bindingId: data.value,
+      serviceId,
+      optionId: option?.id ?? '',
       websiteUrl,
       apiToken: service.apiToken ?? '',
     })
