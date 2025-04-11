@@ -95,6 +95,7 @@ export default defineNuxtConfig({
     },
     telegram: {
       botToken: '',
+      orderBotToken: '',
       supportId: '',
     },
     email: {

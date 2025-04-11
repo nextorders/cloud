@@ -1,4 +1,5 @@
 import { useCreateBot } from '../services/telegram/bot'
+import { useCreateOrderBot } from '../services/telegram/orderBot'
 
 /**
  * Start Telegram bots (using long polling)
@@ -12,12 +13,12 @@ export default defineNitroPlugin(() => {
   const logger = useLogger('plugin-start-telegram')
   const { telegram } = useRuntimeConfig()
 
-  if (!telegram.botToken) {
-    // No config provided
-    return
+  if (telegram.botToken) {
+    useCreateBot()
   }
-
-  useCreateBot()
+  if (telegram.orderBotToken) {
+    useCreateOrderBot()
+  }
 
   logger.success('Telegram bots started')
 })
