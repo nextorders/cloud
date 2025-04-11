@@ -193,7 +193,23 @@ export const telegramBindings = pgTable('telegram_bindings', {
   createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   chatId: varchar('chat_id').notNull(),
-  botId: varchar('bot_id').notNull().references(() => telegramBots.id),
+  botId: varchar('bot_id').notNull().references(() => telegramBots.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+})
+
+export const telegramReceivers = pgTable('telegram_receivers', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  token: varchar('token').notNull(),
+  status: varchar('status').notNull().default('active'),
+  botId: varchar('bot_id').notNull().references(() => telegramBots.id, {
+    onDelete: 'cascade',
+    onUpdate: 'cascade',
+  }),
+  serviceId: cuid2('service_id').notNull().references(() => services.id),
 })
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -282,6 +298,7 @@ export const servicesRelations = relations(services, ({ one, many }) => ({
   buckets: many(buckets),
   options: many(serviceOptions),
   emailReceivers: many(emailReceivers),
+  telegramReceivers: many(telegramReceivers),
 }))
 
 export const serviceOptionsRelations = relations(serviceOptions, ({ one }) => ({
@@ -306,6 +323,22 @@ export const emailReceiversRelations = relations(emailReceivers, ({ one }) => ({
   }),
   service: one(services, {
     fields: [emailReceivers.serviceId],
+    references: [services.id],
+  }),
+}))
+
+export const telegramBotsRelations = relations(telegramBots, ({ many }) => ({
+  receivers: many(telegramReceivers),
+  bindings: many(telegramBindings),
+}))
+
+export const telegramReceiversRelations = relations(telegramReceivers, ({ one }) => ({
+  bot: one(telegramBots, {
+    fields: [telegramReceivers.botId],
+    references: [telegramBots.id],
+  }),
+  service: one(services, {
+    fields: [telegramReceivers.serviceId],
     references: [services.id],
   }),
 }))

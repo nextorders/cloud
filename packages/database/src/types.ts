@@ -61,3 +61,7 @@ export type TelegramBotDraft = InferInsertModel<typeof tables.telegramBots>
 
 export type TelegramBinding = InferSelectModel<typeof tables.telegramBindings>
 export type TelegramBindingDraft = InferInsertModel<typeof tables.telegramBindings>
+
+export type TelegramReceiver = InferSelectModel<typeof tables.telegramReceivers>
+export type TelegramReceiverDraft = InferInsertModel<typeof tables.telegramReceivers>
+export type TelegramReceiverStatus = 'active' | 'inactive'
