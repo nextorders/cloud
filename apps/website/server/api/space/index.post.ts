@@ -122,6 +122,13 @@ export default defineEventHandler(async (event) => {
       status: 'can_be_composed',
       serviceId: webAppService.id,
     })
+    await repository.service.createOption({
+      key: 'checkout_receiver_telegram',
+      value: null,
+      type: 'string',
+      status: 'can_be_composed',
+      serviceId: webAppService.id,
+    })
 
     await repository.bucket.setAsInUse(bucket.id, webAppService.id)
 
