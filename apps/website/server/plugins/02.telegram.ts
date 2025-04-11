@@ -13,13 +13,12 @@ export default defineNitroPlugin(() => {
   const logger = useLogger('plugin-start-telegram')
   const { telegram } = useRuntimeConfig()
 
-  if (!telegram.botToken || !telegram.orderBotToken) {
-    // No config provided
-    return
+  if (telegram.botToken) {
+    useCreateBot()
   }
-
-  useCreateBot()
-  useCreateOrderBot()
+  if (telegram.orderBotToken) {
+    useCreateOrderBot()
+  }
 
   logger.success('Telegram bots started')
 })
