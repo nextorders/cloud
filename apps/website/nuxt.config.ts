@@ -95,7 +95,6 @@ export default defineNuxtConfig({
     },
     telegram: {
       botToken: '',
-      orderBotToken: '',
       supportId: '',
     },
     email: {
@@ -136,6 +135,7 @@ export default defineNuxtConfig({
     scheduledTasks: {
       '0 * * * *': ['space:tariffDebit'],
       '*/10 * * * * *': ['payment:status'],
+      '*/5 * * * *': ['telegram:bots'],
     },
     rollupConfig: {
       // @ts-expect-error too deep

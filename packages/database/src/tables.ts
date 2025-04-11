@@ -179,6 +179,23 @@ export const emailReceivers = pgTable('email_receivers', {
   serviceId: cuid2('service_id').notNull().references(() => services.id),
 })
 
+export const telegramBots = pgTable('telegram_bots', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  name: varchar('name').notNull(),
+  username: varchar('username').notNull(),
+  token: varchar('token').notNull(),
+})
+
+export const telegramBindings = pgTable('telegram_bindings', {
+  id: cuid2('id').defaultRandom().primaryKey(),
+  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
+  chatId: varchar('chat_id').notNull(),
+  botId: varchar('bot_id').notNull().references(() => telegramBots.id),
+})
+
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
   memberInSpaces: many(spaceMembers),
