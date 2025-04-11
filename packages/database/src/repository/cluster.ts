@@ -8,7 +8,6 @@ export class Cluster {
   }
 
   static async getReadyForUse() {
-    const clusterId = 'dou7ckbvx4rtnpg9ynwd7n00' // ru-1
-    return Cluster.find(clusterId)
+    return useDatabase().query.clusters.findFirst()
   }
 }
