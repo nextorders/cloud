@@ -2,7 +2,7 @@ packages:
   - apps/*
   - packages/*
 catalog:
-  '@antfu/eslint-config': ^4.11.0
+  '@antfu/eslint-config': ^4.12.0
   '@commitlint/cli': ^19.8.0
   '@commitlint/config-conventional': ^19.8.0
   '@date-fns/tz': ^1.2.0
@@ -12,7 +12,7 @@ catalog:
   '@iconify-json/fluent-emoji-flat': ^1.2.3
   '@iconify-json/lucide': ^1.2.35
   '@iconify-json/simple-icons': ^1.2.31
-  '@kubernetes/client-node': ^1.1.1
+  '@kubernetes/client-node': ^1.1.2
   '@neoconfetti/vue': ^2.2.1
   '@nuxt/content': ^3.4.0
   '@nuxt/devtools': ^2.3.2
@@ -22,7 +22,7 @@ catalog:
   '@nuxtjs/i18n': ^9.5.3
   '@nuxtjs/seo': ^3.0.2
   '@paralleldrive/cuid2': ^2.2.2
-  '@pinia/nuxt': ^0.10.1
+  '@pinia/nuxt': ^0.11.0
   '@semantic-release/exec': ^7.0.3
   '@semantic-release/git': ^10.0.1
   '@types/node': ^22.14.0
@@ -37,7 +37,7 @@ catalog:
   '@vueuse/core': ^13.1.0
   '@vueuse/nuxt': ^13.1.0
   aws4fetch: ^1.0.20
-  dotenv: ^16.4.7
+  dotenv: ^16.5.0
   dotenv-cli: ^8.0.0
   drizzle-cuid2: ^2.0.0
   drizzle-kit: ^0.30.6
@@ -45,7 +45,7 @@ catalog:
   eslint: ^9.24.0
   grammy: ^1.35.1
   husky: ^9.1.7
-  ioredis: ^5.6.0
+  ioredis: ^5.6.1
   libphonenumber-js: ^1.12.6
   lint-staged: ^15.5.0
   nodemailer: ^6.10.0
@@ -54,13 +54,13 @@ catalog:
   nuxt-tiptap-editor: ^2.1.4
   nuxt-zod-i18n: ^1.11.5
   pg: ^8.14.1
-  pinia: ^3.0.1
+  pinia: ^3.0.2
   playwright: ^1.51.1
   semantic-release: ^24.2.3
   semantic-release-monorepo: ^8.0.2
   typescript: ^5.8.3
   unbuild: ^3.5.0
-  vite: ^6.2.5
+  vite: ^6.2.6
   vite-tsconfig-paths: ^5.1.4
   vitest: ^3.1.1
   vitest-browser-vue: ^0.2.0

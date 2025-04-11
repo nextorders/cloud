@@ -3,10 +3,14 @@ import { Bot } from 'grammy'
 
 const logger = useLogger('user-telegram-bot')
 
-export const userBots: Bot[] = []
+const userBots: Bot[] = []
+
+export function useUserBot(token: string): Bot | undefined {
+  return userBots.find((bot) => bot.token === token)
+}
 
 export function useCreateUserBot(id: string, token: string): boolean {
-  if (userBots.some((bot) => bot.token === token)) {
+  if (useUserBot(token)) {
     return false
   }
 
