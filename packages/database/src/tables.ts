@@ -205,10 +205,7 @@ export const telegramReceivers = pgTable('telegram_receivers', {
   updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
   token: varchar('token').notNull(),
   status: varchar('status').notNull().default('active'),
-  botId: varchar('bot_id').notNull().references(() => telegramBots.id, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-  }),
+  bindingId: varchar('binding_id').notNull().references(() => telegramBindings.id),
   serviceId: cuid2('service_id').notNull().references(() => services.id),
 })
 
@@ -328,14 +325,21 @@ export const emailReceiversRelations = relations(emailReceivers, ({ one }) => ({
 }))
 
 export const telegramBotsRelations = relations(telegramBots, ({ many }) => ({
-  receivers: many(telegramReceivers),
   bindings: many(telegramBindings),
 }))
 
-export const telegramReceiversRelations = relations(telegramReceivers, ({ one }) => ({
+export const telegramBindingsRelations = relations(telegramBindings, ({ one, many }) => ({
   bot: one(telegramBots, {
-    fields: [telegramReceivers.botId],
+    fields: [telegramBindings.botId],
     references: [telegramBots.id],
+  }),
+  receivers: many(telegramReceivers),
+}))
+
+export const telegramReceiversRelations = relations(telegramReceivers, ({ one }) => ({
+  binding: one(telegramBindings, {
+    fields: [telegramReceivers.bindingId],
+    references: [telegramBindings.id],
   }),
   service: one(services, {
     fields: [telegramReceivers.serviceId],

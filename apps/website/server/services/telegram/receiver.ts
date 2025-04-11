@@ -12,7 +12,7 @@ export async function createTelegramReceiver(data: { bindingId: string, serviceI
   const token = getToken()
 
   const receiver = await repository.telegram.createReceiver({
-    botId: binding.botId,
+    bindingId: binding.id,
     token,
     serviceId: data.serviceId,
   })
