@@ -5,9 +5,9 @@ const logger = useLogger('user-telegram-bot')
 
 export const userBots: Bot[] = []
 
-export function useCreateUserBot(id: string, token: string): number | undefined {
+export function useCreateUserBot(id: string, token: string): boolean {
   if (userBots.some((bot) => bot.token === token)) {
-    return
+    return false
   }
 
   const bot = new Bot(token)
@@ -37,5 +37,5 @@ export function useCreateUserBot(id: string, token: string): number | undefined 
 
   userBots.push(bot)
 
-  return bot.botInfo.id
+  return true
 }

@@ -18,10 +18,10 @@ export default defineTask({
       const telegramBots = await repository.telegram.list()
 
       for (const bot of telegramBots) {
-        const telegramId = useCreateUserBot(bot.id, bot.token)
+        const ok = useCreateUserBot(bot.id, bot.token)
 
-        if (telegramId) {
-          logger.log(`Bot with telegramId ${telegramId} now is ON`)
+        if (ok) {
+          logger.log(`Bot ${bot.id} now is ON`)
         }
       }
     } catch (error) {
