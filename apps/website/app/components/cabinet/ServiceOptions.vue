@@ -1,7 +1,7 @@
 <template>
   <UCard variant="subtle" class="rounded-xl">
     <div class="flex flex-col gap-6">
-      <div v-if="buttons.length" class="flex flex-row gap-2.5">
+      <div v-if="buttons.length" class="flex flex-row flex-wrap gap-2.5">
         <UButton
           v-for="button in buttons"
           :key="button.label"

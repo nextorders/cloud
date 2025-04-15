@@ -73,8 +73,8 @@ function formatItems(items: CheckoutForReceiver['items']): string {
   let text = '🛒 Заказанные товары: \n\n'
 
   for (const item of items) {
-    text += `${item.name}, кол-во ${item.quantity}, на сумму ${item.totalPrice} \n`
-    text += `${item.variant} \n\n`
+    text += `${item.name} [${item.variant}] \n`
+    text += `${item.quantity} шт. на сумму ${item.totalPrice} \n\n`
   }
 
   return text
