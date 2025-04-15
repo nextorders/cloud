@@ -9,6 +9,19 @@ export class Telegram {
     })
   }
 
+  static async findReceiver(id: string) {
+    return useDatabase().query.telegramReceivers.findFirst({
+      where: (telegramReceivers, { eq }) => eq(telegramReceivers.id, id),
+      with: {
+        binding: {
+          with: {
+            bot: true,
+          },
+        },
+      },
+    })
+  }
+
   static async list() {
     return useDatabase().query.telegramBots.findMany()
   }
