@@ -43,23 +43,27 @@ export function formatCheckout(checkout: CheckoutForReceiver): string {
 }
 
 function formatAddress(address: CheckoutForReceiver['address']): string {
-  let text = `📍 Адрес: ${address?.street}`
+  if (!address) {
+    return '📍 Адрес: Не указан \n'
+  }
+
+  let text = `📍 Адрес: ${address.street}`
   if (address?.flat) {
-    text += `, кв./офис ${address?.flat}`
+    text += `, кв./офис ${address.flat}`
   }
   if (address?.entrance) {
-    text += `, подъезд ${address?.entrance}`
+    text += `, подъезд ${address.entrance}`
   }
   if (address?.floor) {
-    text += `, этаж ${address?.floor}`
+    text += `, этаж ${address.floor}`
   }
   if (address?.doorphone) {
-    text += `, домофон ${address?.doorphone}`
+    text += `, домофон ${address.doorphone}`
   }
   text += `\n`
 
   if (address?.addressNote) {
-    text += `Комментарий для курьера: ${address?.addressNote} \n`
+    text += `Комментарий для курьера: ${address.addressNote} \n`
   }
 
   return text
@@ -68,10 +72,10 @@ function formatAddress(address: CheckoutForReceiver['address']): string {
 function formatItems(items: CheckoutForReceiver['items']): string {
   let text = '🛒 Заказанные товары: \n\n'
 
-  items.forEach((item) => {
+  for (const item of items) {
     text += `${item.name}, кол-во ${item.quantity}, на сумму ${item.totalPrice} \n`
     text += `${item.variant} \n\n`
-  })
+  }
 
   return text
 }
