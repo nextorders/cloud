@@ -47,7 +47,7 @@ catalog:
   husky: ^9.1.7
   ioredis: ^5.6.1
   libphonenumber-js: ^1.12.6
-  lint-staged: ^15.5.0
+  lint-staged: ^16.1.6
   nodemailer: ^6.10.0
   nuxt: ^3.16.2
   nuxt-auth-utils: ^0.5.19
