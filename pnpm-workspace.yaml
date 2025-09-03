@@ -37,7 +37,7 @@ catalog:
   '@vueuse/core': ^13.1.0
   '@vueuse/nuxt': ^13.1.0
   aws4fetch: ^1.0.20
-  dotenv: ^16.5.0
+  dotenv: ^17.2.2
   dotenv-cli: ^8.0.0
   drizzle-cuid2: ^2.0.0
   drizzle-kit: ^0.30.6
