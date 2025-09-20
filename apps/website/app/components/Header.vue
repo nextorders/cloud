@@ -26,34 +26,6 @@
           <ColorModeToggle />
           <GithubButton />
         </div>
-
-        <USkeleton
-          v-if="!ready"
-          class="size-9 rounded-full"
-        />
-        <template v-else>
-          <UButton
-            v-if="!loggedIn"
-            to="/sign-in"
-            size="lg"
-          >
-            Войти
-          </UButton>
-          <UDropdownMenu
-            v-else
-            :items="userMenuItems"
-            :ui="{
-              content: 'w-56',
-            }"
-          >
-            <UAvatar
-              :src="user?.avatarUrl ?? undefined"
-              :alt="user?.name"
-              size="lg"
-              class="cursor-pointer hover:scale-95 duration-200"
-            />
-          </UDropdownMenu>
-        </template>
       </div>
     </UContainer>
   </header>
@@ -81,41 +53,5 @@
 </template>
 
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui'
-
 const { isMobileMenuOpened, mainNavigationItems } = useApp()
-const { user, loggedIn, ready, clear: signOut } = useUserSession()
-
-const userMenuItems = computed<DropdownMenuItem[][]>(() => [
-  [
-    {
-      label: user.value?.name,
-      avatar: {
-        src: user.value?.avatarUrl ?? undefined,
-      },
-      type: 'label' as const,
-    },
-    {
-      label: user.value?.email,
-      icon: 'i-lucide-mail',
-      type: 'link' as const,
-    },
-    {
-      label: 'Кабинет',
-      icon: 'i-lucide-briefcase-business',
-      to: '/cabinet',
-      type: 'link' as const,
-    },
-  ],
-  [
-    {
-      label: 'Выйти',
-      icon: 'i-lucide-log-out',
-      onSelect: async () => {
-        await signOut()
-        await navigateTo('/')
-      },
-    },
-  ],
-])
 </script>
