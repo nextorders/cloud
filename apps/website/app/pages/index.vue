@@ -6,7 +6,7 @@
     <template #top>
       <div class="mb-4 font-semibold text-(--ui-primary) flex items-center justify-center gap-1.5">
         <UBadge color="neutral" variant="soft">
-          Ранний доступ
+          Открытый код
         </UBadge>
       </div>
     </template>
@@ -25,12 +25,13 @@
         </UButton>
 
         <UButton
-          to="/pricing"
+          to="https://github.com/nextorders/food"
           color="neutral"
           variant="outline"
           size="xl"
+          trailing-icon="i-simple-icons:github"
         >
-          7 дней бесплатно
+          GitHub
         </UButton>
       </div>
     </template>
@@ -46,7 +47,7 @@
         class="w-full h-auto rounded-xl"
       />
       <figcaption class="mt-2 text-center italic text-(--ui-text-muted)">
-        Здесь вы можете создать сайт для доставки еды
+        Так выглядит веб-сайт: каталог, удобная корзина
       </figcaption>
     </figure>
   </UContainer>
@@ -109,7 +110,7 @@
         Преимущества и возможности
       </h2>
       <div class="text-base sm:text-lg text-(--ui-text-muted) text-center text-balance mt-6">
-        Откройте для себя новый уровень организации доставки еды с нашей облачной платформой.
+        Откройте для себя новый уровень организации доставки еды.
       </div>
     </div>
 

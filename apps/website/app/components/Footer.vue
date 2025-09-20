@@ -51,10 +51,6 @@ const columns: { label: string, children: { label: string, to: string, target?: 
   label: 'Навигация',
   children: [
     {
-      label: 'Цены',
-      to: '/pricing',
-    },
-    {
       label: 'Документация',
       to: '/docs',
     },
