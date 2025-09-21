@@ -18,7 +18,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: PNPM
         uses: pnpm/action-setup@v4
@@ -26,9 +26,9 @@ jobs:
           run_install: false
 
       - name: Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 22.19.0
           cache: 'pnpm'
 
       - name: Install dependencies

@@ -1,9 +1,4 @@
-import vue from '@vitejs/plugin-vue'
-
 export default defineNuxtConfig({
-  future: {
-    compatibilityVersion: 4,
-  },
   devServer: {
     port: 3501,
     host: 'app.local',
@@ -20,9 +15,6 @@ export default defineNuxtConfig({
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'ru',
-    experimental: {
-      autoImportTranslationFunctions: true,
-    },
     detectBrowserLanguage: {
       useCookie: true,
       alwaysRedirect: true,
@@ -31,9 +23,6 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US', name: 'English', file: 'en-US.json' },
       { code: 'ru', language: 'ru-RU', name: 'Русский', file: 'ru-RU.json' },
     ],
-    bundle: {
-      optimizeTranslationDirective: false,
-    },
   },
   zodI18n: {
     localeCodesMapping: {
@@ -97,15 +86,6 @@ export default defineNuxtConfig({
       botToken: '',
       supportId: '',
     },
-    email: {
-      from: '',
-      host: '',
-      port: '',
-      auth: {
-        user: '',
-        pass: '',
-      },
-    },
   },
   modules: [
     'nuxt-auth-utils',
@@ -119,31 +99,22 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
   ],
   routeRules: {
-    '/sign-in': { robots: false },
-    '/cabinet/**': { robots: false },
-    '/_nuxt/**': { robots: false },
     '/docs': { redirect: '/docs/getting-started', prerender: false },
     '/api/**': { cors: true },
   },
   pinia: {
-    storesDirs: ['./stores/**'],
+    storesDirs: ['./app/stores/**'],
   },
   nitro: {
     experimental: {
       tasks: true,
     },
     scheduledTasks: {
-      '0 * * * *': ['space:tariffDebit'],
       '*/10 * * * * *': ['payment:status'],
-      '*/5 * * * *': ['telegram:bots'],
-    },
-    rollupConfig: {
-      // @ts-expect-error too deep
-      plugins: [vue()],
     },
   },
   experimental: {
     typedPages: true,
   },
-  compatibilityDate: '2024-08-18',
+  compatibilityDate: '2025-08-18',
 })
