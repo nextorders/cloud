@@ -1,4 +1,3 @@
-import type { CheckoutForReceiver } from '~~/types/receiver'
 import { repository } from '@nextorders/database'
 import { formatCheckout } from '~~/server/services/telegram/checkout'
 import { useUserBot } from '~~/server/services/telegram/userBot'

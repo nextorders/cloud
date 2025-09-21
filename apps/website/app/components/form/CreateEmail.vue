@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
+import type { EmailCreateSchema } from '#shared/services/email'
 import type { FormSubmitEvent } from '@nuxt/ui'
-import type { EmailCreateSchema } from '~~/shared/services/email'
-import { emailCreateSchema } from '~~/shared/services/email'
+import { emailCreateSchema } from '#shared/services/email'
 
 const emit = defineEmits(['success', 'submitted'])
 

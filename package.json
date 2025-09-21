@@ -2,31 +2,18 @@
   "name": "nextorders",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.8.0",
-  "description": "Food delivery software as a service.",
-  "author": "Nick Kosarev <hmbanan666@hotmail.com>",
+  "packageManager": "pnpm@10.17.0",
   "license": "MIT",
-  "homepage": "https://nextorders.ru",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextorders/cloud.git"
   },
-  "bugs": {
-    "url": "https://github.com/nextorders/cloud/issues"
-  },
-  "keywords": [
-    "ecommerce",
-    "ecommerce-platform",
-    "multilingual",
-    "shop",
-    "website"
-  ],
   "engines": {
     "node": ">=22.14.0",
-    "pnpm": ">=10.8.0"
+    "pnpm": ">=10.17.0"
   },
   "scripts": {
-    "release": "pnpm -r --filter \"./apps/**\" --workspace-concurrency=1 exec -- npx --no-install semantic-release -e semantic-release-monorepo",
+    "release": "changelogen-monorepo --release --push",
     "build": "pnpm -r run build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -44,17 +31,13 @@
     "@antfu/eslint-config": "catalog:",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
-    "@semantic-release/exec": "catalog:",
-    "@semantic-release/git": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-v8": "catalog:",
-    "dotenv-cli": "catalog:",
+    "changelogen-monorepo": "catalog:",
     "eslint": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
     "playwright": "catalog:",
-    "semantic-release": "catalog:",
-    "semantic-release-monorepo": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-tsconfig-paths": "catalog:",
@@ -63,11 +46,10 @@
     "vue-tsc": "catalog:"
   },
   "resolutions": {
-    "unimport": "4.1.1",
-    "vue-tsc": "2.2.0"
+    "unimport": "4.1.1"
   },
   "lint-staged": {
-    "*.ts": "pnpm run lint"
+    "*.ts": "eslint ."
   },
   "commitlint": {
     "extends": [

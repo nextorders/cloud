@@ -44,7 +44,7 @@
         format="webp"
         densities="x1 x2"
         alt="Демо версия NextOrders: Food"
-        class="w-full h-auto rounded-xl"
+        class="w-full h-auto rounded-lg"
       />
       <figcaption class="mt-2 text-center italic text-(--ui-text-muted)">
         Так выглядит веб-сайт: каталог, удобная корзина
@@ -81,7 +81,7 @@
         format="webp"
         densities="x1 x2"
         alt="Командный центр"
-        class="w-full h-auto rounded-xl"
+        class="w-full h-auto rounded-lg"
       />
 
       <div class="flex flex-wrap flex-col md:flex-row gap-x-6 gap-y-3 justify-center">
@@ -118,7 +118,7 @@
       <UCard
         v-for="feature in features"
         :key="feature.title"
-        class="rounded-xl"
+        class="rounded-lg"
       >
         <UIcon
           :name="feature.icon"

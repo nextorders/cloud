@@ -1,5 +1,3 @@
-import type { CheckoutForReceiver } from '~~/types/receiver'
-
 export function formatCheckout(checkout: CheckoutForReceiver): string {
   // 1. Client info
   let text = `Новая заявка! #${checkout.id} \n\n`

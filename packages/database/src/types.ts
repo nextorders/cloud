@@ -40,13 +40,13 @@ export type ServiceOption = InferSelectModel<typeof tables.serviceOptions>
 export type ServiceOptionDraft = InferInsertModel<typeof tables.serviceOptions>
 export type ServiceOptionStatus = 'on_moderation' | 'active' | 'can_be_composed'
 export type ServiceOptionType = 'string' | 'link' | 'secret'
-export type ServiceOptionKey =
-  'primary_website_url' |
-  'primary_command_center_url' |
-  'main_website_url' |
-  'main_command_center_url' |
-  'checkout_receiver_email' |
-  'checkout_receiver_telegram'
+export type ServiceOptionKey
+  = 'primary_website_url'
+    | 'primary_command_center_url'
+    | 'main_website_url'
+    | 'main_command_center_url'
+    | 'checkout_receiver_email'
+    | 'checkout_receiver_telegram'
 
 export type Email = InferSelectModel<typeof tables.emails>
 export type EmailDraft = InferInsertModel<typeof tables.emails>
