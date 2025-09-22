@@ -4,6 +4,14 @@ function _useApp() {
   const isMobileMenuOpened = ref(false)
 
   const mainNavigationItems = computed(() => [{
+    label: 'Города',
+    to: '/geo/kaliningrad',
+    active: route.path.startsWith('/geo'),
+  }, {
+    label: 'Компании',
+    to: '/org/papasha-beppe',
+    active: route.path.startsWith('/org'),
+  }, {
     label: 'Документация',
     to: '/docs/getting-started',
     active: route.path.startsWith('/docs'),

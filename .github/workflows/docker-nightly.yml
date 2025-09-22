@@ -57,7 +57,7 @@ jobs:
         app: ${{ fromJson(needs.determine-changes.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set APP in env
         run: |
