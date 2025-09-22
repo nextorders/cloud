@@ -1,6 +1,6 @@
-import type { Options } from '@dicebear/core'
-import { openPeeps } from '@dicebear/collection'
+import type { Options } from '~/utils/avatar'
 import { createAvatar } from '@dicebear/core'
+import * as openPeeps from '@dicebear/open-peeps'
 
 export default defineCachedEventHandler(async (event) => {
   try {
@@ -11,12 +11,11 @@ export default defineCachedEventHandler(async (event) => {
 
     const gender = query.gender?.toString() ?? ''
     const clothing = query.clothing?.toString() ?? ''
-    const sizeNumber = query.size ? Number(query.size) : 150
     const emotionNumber = query.emotion ? Number(query.emotion) : null
 
     const options: Partial<Options> = {
       seed,
-      size: sizeNumber,
+      size: 256,
       scale: 80,
       translateX: -5,
       accessoriesProbability: 20,
