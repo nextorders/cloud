@@ -65,3 +65,15 @@ export type TelegramBindingDraft = InferInsertModel<typeof tables.telegramBindin
 export type TelegramReceiver = InferSelectModel<typeof tables.telegramReceivers>
 export type TelegramReceiverDraft = InferInsertModel<typeof tables.telegramReceivers>
 export type TelegramReceiverStatus = 'active' | 'inactive'
+
+export type City = InferSelectModel<typeof tables.cities>
+export type CityDraft = InferInsertModel<typeof tables.cities>
+
+export type Company = InferSelectModel<typeof tables.companies>
+export type CompanyDraft = InferInsertModel<typeof tables.companies>
+
+export type CompanyUnit = InferSelectModel<typeof tables.companyUnits>
+export type CompanyUnitDraft = InferInsertModel<typeof tables.companyUnits>
+
+export type Point = InferSelectModel<typeof tables.points>
+export type PointDraft = InferInsertModel<typeof tables.points>

@@ -20,16 +20,8 @@ export default defineNuxtConfig({
       alwaysRedirect: true,
     },
     locales: [
-      { code: 'en', language: 'en-US', name: 'English', file: 'en-US.json' },
       { code: 'ru', language: 'ru-RU', name: 'Русский', file: 'ru-RU.json' },
     ],
-  },
-  zodI18n: {
-    localeCodesMapping: {
-      'en-GB': 'en',
-      'en-US': 'en',
-      'ru-RU': 'ru',
-    },
   },
   ui: {
     colorMode: true,

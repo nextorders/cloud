@@ -36,9 +36,17 @@ useHead({
 
 const user = useUserStore()
 const tariff = useTariffStore()
+const city = useCityStore()
 
 await Promise.all([
   user.update(),
-  tariff.update(),
 ])
+
+onMounted(async () => {
+  await Promise.all([
+    user.update(),
+    tariff.update(),
+    city.update(),
+  ])
+})
 </script>
