@@ -42,6 +42,7 @@ catalog:
   ioredis: ^5.7.0
   libphonenumber-js: ^1.12.17
   lint-staged: ^16.1.6
+  nitropack: ^2.12.6
   nuxt: ^4.1.2
   nuxt-auth-utils: ^0.5.25
   nuxt-tiptap-editor: ^2.3.1

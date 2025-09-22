@@ -1,0 +1,23 @@
+{
+  "name": "@nextorders/avatar",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev --port 3501",
+    "preview": "PORT=3501 node .output/server/index.mjs",
+    "clean": "rm -rf .output",
+    "clean:modules": "rm -rf .nuxt .output node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dicebear/collection": "catalog:",
+    "@dicebear/core": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "nitropack": "catalog:"
+  }
+}

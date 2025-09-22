@@ -31,7 +31,7 @@ jobs:
       - name: Set package in env
         id: set-package
         run: |
-          APPS=("website")
+          APPS=("website" "avatar")
           MATCH="${{ steps.regex-match.outputs.match }}"
 
           if [ -z "$MATCH" ]; then
