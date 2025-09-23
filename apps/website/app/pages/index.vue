@@ -1,7 +1,7 @@
 <template>
   <PageHeader
-    title="Готовый инструмент для увеличения продаж"
-    description="Современный и удобный способ для клиентов заказать еду. Доставка и самовывоз."
+    :title="title"
+    :description="description"
   >
     <template #top>
       <div class="mb-4 font-semibold text-(--ui-primary) flex items-center justify-center gap-1.5">
@@ -20,9 +20,9 @@
           variant="solid"
           size="xl"
           trailing-icon="i-lucide-eye"
-        >
-          Демо-версия
-        </UButton>
+          label="Демо-версия"
+          class="motion-scale-in"
+        />
 
         <UButton
           to="https://github.com/nextorders/food"
@@ -30,9 +30,9 @@
           variant="outline"
           size="xl"
           trailing-icon="i-simple-icons:github"
-        >
-          GitHub
-        </UButton>
+          label="GitHub"
+          class="motion-scale-in"
+        />
       </div>
     </template>
   </PageHeader>
@@ -44,7 +44,7 @@
         format="webp"
         densities="x1 x2"
         alt="Демо версия NextOrders: Food"
-        class="w-full h-auto rounded-lg"
+        class="w-full h-auto rounded-lg motion-preset-slide-up"
       />
       <figcaption class="mt-2 text-center italic text-(--ui-text-muted)">
         Так выглядит веб-сайт: каталог, удобная корзина
@@ -81,7 +81,7 @@
         format="webp"
         densities="x1 x2"
         alt="Командный центр"
-        class="w-full h-auto rounded-lg"
+        class="w-full h-auto rounded-lg motion-preset-slide-left"
       />
 
       <div class="flex flex-wrap flex-col md:flex-row gap-x-6 gap-y-3 justify-center">
@@ -118,7 +118,7 @@
       <UCard
         v-for="feature in features"
         :key="feature.title"
-        class="rounded-lg"
+        class="rounded-lg motion-preset-slide-up"
       >
         <UIcon
           :name="feature.icon"
@@ -138,16 +138,6 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: 'Готовый инструмент для увеличения продаж',
-  meta: [
-    {
-      name: 'description',
-      content: 'Современный и удобный способ для клиентов заказать еду. Доставка и самовывоз.',
-    },
-  ],
-})
-
 const colorMode = useColorMode()
 const mainImage = computed(() => colorMode.value === 'dark' ? '/img/main-ru-light.png' : '/img/main-ru-dark.png')
 const commandCenterImage = computed(() => colorMode.value === 'dark' ? '/img/command-center-ru-light.png' : '/img/command-center-ru-dark.png')
@@ -217,4 +207,17 @@ const features = [
     description: 'Можно получать клиентские заявки удобным способом: на Email, в Telegram*, в систему учета*.',
   },
 ]
+
+const title = 'Готовый инструмент для увеличения продаж'
+const description = 'Современный и удобный способ для клиентов заказать еду. Доставка и самовывоз.'
+
+useHead({
+  title,
+  meta: [
+    {
+      name: 'description',
+      content: description,
+    },
+  ],
+})
 </script>

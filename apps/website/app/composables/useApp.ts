@@ -4,6 +4,10 @@ function _useApp() {
   const isMobileMenuOpened = ref(false)
 
   const mainNavigationItems = computed(() => [{
+    label: 'Аватары',
+    to: '/avatar',
+    active: route.path.startsWith('/avatar'),
+  }, {
     label: 'Города',
     to: '/geo/kaliningrad',
     active: route.path.startsWith('/geo'),

@@ -39,6 +39,7 @@
     "@types/node": "catalog:",
     "@unhead/vue": "catalog:",
     "nuxt": "catalog:",
-    "nuxt-auth-utils": "catalog:"
+    "nuxt-auth-utils": "catalog:",
+    "tailwindcss-motion": "catalog:"
   }
 }
