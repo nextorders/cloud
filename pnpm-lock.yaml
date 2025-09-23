@@ -132,6 +132,9 @@ catalogs:
     playwright:
       specifier: ^1.55.0
       version: 1.55.0
+    tailwindcss-motion:
+      specifier: ^1.1.1
+      version: 1.1.1
     typescript:
       specifier: ^5.9.2
       version: 5.9.2
@@ -304,6 +307,9 @@ importers:
       nuxt-auth-utils:
         specifier: 'catalog:'
         version: 0.5.25(magicast@0.3.5)
+      tailwindcss-motion:
+        specifier: 'catalog:'
+        version: 1.1.1(tailwindcss@4.1.13)
 
   packages/database:
     dependencies:
@@ -6351,6 +6357,11 @@ packages:
     peerDependenciesMeta:
       tailwind-merge:
         optional: true
+
+  tailwindcss-motion@1.1.1:
+    resolution: {integrity: sha512-CeeQAc5o31BuEPMyWdq/786X7QWNeifa+8khfu74Fs8lGkgEwjNYv6dGv+lRFS8FWXV5dp7F3AU9JjBXjiaQfw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@4.1.13:
     resolution: {integrity: sha512-i+zidfmTqtwquj4hMEwdjshYYgMbOrPzb9a0M3ZgNa0JMoZeFC6bxZvO8yr8ozS6ix2SDz0+mvryPeBs2TFE+w==}
@@ -13990,6 +14001,10 @@ snapshots:
       tailwindcss: 4.1.13
     optionalDependencies:
       tailwind-merge: 3.3.1
+
+  tailwindcss-motion@1.1.1(tailwindcss@4.1.13):
+    dependencies:
+      tailwindcss: 4.1.13
 
   tailwindcss@4.1.13: {}
 

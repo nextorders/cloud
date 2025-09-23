@@ -51,6 +51,10 @@ const columns: { label: string, children: { label: string, to: string, target?: 
   label: 'Навигация',
   children: [
     {
+      label: 'Аватары',
+      to: '/avatar',
+    },
+    {
       label: 'Документация',
       to: '/docs',
     },
