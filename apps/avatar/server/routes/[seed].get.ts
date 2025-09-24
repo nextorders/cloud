@@ -1,6 +1,5 @@
-import type { Options } from '~/utils/avatar'
-import { createAvatar } from '@dicebear/core'
-import * as openPeeps from '@dicebear/open-peeps'
+import type { AvatarOptions } from '@nextorders/avatar'
+import { createAvatar } from '@nextorders/avatar'
 
 export default defineCachedEventHandler(async (event) => {
   try {
@@ -9,27 +8,18 @@ export default defineCachedEventHandler(async (event) => {
 
     setHeader(event, 'Content-Type', 'image/svg+xml')
 
-    const gender = query.gender?.toString() ?? ''
-    const clothing = query.clothing?.toString() ?? ''
-    const emotionNumber = query.emotion ? Number(query.emotion) : null
+    const gender = query.gender?.toString() as AvatarOptions['gender']
+    const clothing = query.clothing?.toString() as AvatarOptions['clothing']
+    const emotion = query.emotion ? Number(query.emotion) as AvatarOptions['emotion'] : undefined
 
-    const options: Partial<Options> = {
+    const options = {
       seed,
-      size: 256,
-      scale: 80,
-      translateX: -5,
-      accessoriesProbability: 20,
-      maskProbability: 0,
-      face: getPossibleFaces(emotionNumber),
-      accessories: getPossibleAccessories(),
-      skinColor: getPossibleSkinColors(),
-      clothingColor: chooseClothingColor(clothing),
-      ...choosePartsByGender(gender),
-    }
+      gender,
+      emotion,
+      clothing,
+    } satisfies AvatarOptions
 
-    const svg = createAvatar(openPeeps, options).toString()
-
-    return addBackground(svg)
+    return createAvatar(options)
   } catch (error) {
     throw errorResolver(error)
   }
