@@ -1,6 +1,6 @@
 <template>
   <UApp :locale="locales[locale]" :tooltip="{ delayDuration: 0 }">
-    <NuxtLoadingIndicator :color="false" class="bg-(--ui-primary) h-[2px]" />
+    <NuxtLoadingIndicator :color="false" class="bg-primary h-0.5" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -34,17 +34,11 @@ useHead({
   },
 })
 
-const user = useUserStore()
 const tariff = useTariffStore()
 const city = useCityStore()
 
-await Promise.all([
-  user.update(),
-])
-
 onMounted(async () => {
   await Promise.all([
-    user.update(),
     tariff.update(),
     city.update(),
   ])
