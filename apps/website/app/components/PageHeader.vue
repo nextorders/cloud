@@ -5,7 +5,7 @@
     </template>
 
     <div>
-      <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-highlighted">
+      <h1 class="text-5xl sm:text-7xl text-pretty tracking-tight font-bold text-highlighted wrap-break-word">
         {{ title }}
       </h1>
       <p class="text-lg sm:text-xl/8 text-text-muted text-balance mt-6">

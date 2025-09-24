@@ -1,7 +1,9 @@
 <template>
-  <noscript>
-    <img src="https://mc.yandex.ru/watch/100803157" style="position:absolute; left:-9999px;" alt="" />
-  </noscript>
+  <ClientOnly>
+    <noscript>
+      <img src="https://mc.yandex.ru/watch/100803157" style="position:absolute; left:-9999px;" alt="" />
+    </noscript>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

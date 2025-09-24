@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-(--ui-bg) border-b border-(--ui-border) sticky h-16 top-0 z-50">
+  <header class="bg-default border-b border-default sticky h-16 top-0 z-50">
     <UContainer class="flex items-center justify-between gap-3 h-full">
       <div class="lg:flex-1 flex items-center gap-1.5">
         <UButton
