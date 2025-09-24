@@ -31,8 +31,8 @@ catalogs:
       specifier: ^2.2.1
       version: 2.2.1
     '@nextorders/avatar':
-      specifier: ^1.0.0
-      version: 1.0.0
+      specifier: ^1.0.1
+      version: 1.0.1
     '@nuxt/devtools':
       specifier: ^2.6.5
       version: 2.6.5
@@ -214,7 +214,7 @@ importers:
     dependencies:
       '@nextorders/avatar':
         specifier: 'catalog:'
-        version: 1.0.0
+        version: 1.0.1
       zod:
         specifier: 'catalog:'
         version: 3.25.76
@@ -1381,8 +1381,8 @@ packages:
   '@neoconfetti/vue@2.2.1':
     resolution: {integrity: sha512-GXe5XoHlMK8VIxmxKuAgF9QQwRoDLmtiwVhONA9rzF+zOLGfOVLxo4OEDZqU9F0gJkB7U23BLlGJ3ouOb+kguw==}
 
-  '@nextorders/avatar@1.0.0':
-    resolution: {integrity: sha512-ur4Nh4ByA7qcWEGRoULUasmrflDb5jIV2WaZhHkoQ0DlG0ZzUcZLXxSSy6i+G3NJdrO9DOS2SfNqhgqvfpQk/w==}
+  '@nextorders/avatar@1.0.1':
+    resolution: {integrity: sha512-93HuljML1xFZgjPqPNyJKDCQ6N6xIZYzuIr4zCrRdyLLRS8qm5lYI8yJWv8HDeThROEfh+7JWYruizy08NN18g==}
 
   '@noble/hashes@1.7.1':
     resolution: {integrity: sha512-B8XBPsn4vT/KJAGqDzbwztd+6Yte3P4V7iafm24bxgDe/mlRuK6xmWPuCNrKt2vDafZ8MfJLlchDG/vYafQEjQ==}
@@ -8165,7 +8165,7 @@ snapshots:
 
   '@neoconfetti/vue@2.2.1': {}
 
-  '@nextorders/avatar@1.0.0': {}
+  '@nextorders/avatar@1.0.1': {}
 
   '@noble/hashes@1.7.1': {}
 
