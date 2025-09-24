@@ -13,8 +13,7 @@
     "typecheck": "nitro prepare && tsc --noEmit"
   },
   "dependencies": {
-    "@dicebear/core": "catalog:",
-    "@dicebear/open-peeps": "catalog:",
+    "@nextorders/avatar": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
