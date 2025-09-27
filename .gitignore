@@ -48,12 +48,10 @@ yarn-error.log
 testem.log
 /typings
 
-.nx/cache
-.nx/workspace-data
-
 # Nuxt dev/build outputs
 .data
 .nuxt
 .nitro
 .cache
 .storage
+.eslintcache
