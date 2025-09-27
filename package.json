@@ -2,7 +2,7 @@
   "name": "nextorders",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   },
   "engines": {
     "node": ">=22.14.0",
-    "pnpm": ">=10.17.0"
+    "pnpm": ">=10.17.1"
   },
   "scripts": {
     "release": "changelogen-monorepo --release --push",
@@ -28,22 +28,22 @@
     "prepare:cert": "mkdir -p .cert && mkcert -key-file ./.cert/localhost-key.pem -cert-file ./.cert/localhost.pem 'app.local'"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "@commitlint/cli": "catalog:",
-    "@commitlint/config-conventional": "catalog:",
-    "@vitest/browser": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "changelogen-monorepo": "catalog:",
-    "eslint": "catalog:",
-    "husky": "catalog:",
-    "lint-staged": "catalog:",
-    "playwright": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vite-tsconfig-paths": "catalog:",
-    "vitest": "catalog:",
-    "vitest-browser-vue": "catalog:",
-    "vue-tsc": "catalog:"
+    "@antfu/eslint-config": "catalog:dev",
+    "@commitlint/cli": "catalog:dev",
+    "@commitlint/config-conventional": "catalog:dev",
+    "@vitest/browser": "catalog:test",
+    "@vitest/coverage-v8": "catalog:test",
+    "changelogen-monorepo": "catalog:dev",
+    "eslint": "catalog:dev",
+    "husky": "catalog:dev",
+    "lint-staged": "catalog:dev",
+    "playwright": "catalog:test",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev",
+    "vite-tsconfig-paths": "catalog:dev",
+    "vitest": "catalog:test",
+    "vitest-browser-vue": "catalog:test",
+    "vue-tsc": "catalog:dev"
   },
   "resolutions": {
     "unimport": "4.1.1"
