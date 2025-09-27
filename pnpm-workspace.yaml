@@ -17,7 +17,7 @@ catalogs:
     '@nuxt/scripts': ^0.12.1
     '@nuxtjs/i18n': ^10.1.0
     '@nuxtjs/seo': ^3.2.2
-    changelogen-monorepo: ^0.5.0
+    bumpp: ^10.2.3
     dotenv: ^17.2.2
     drizzle-kit: ^0.31.5
     eslint: ^9.36.0
@@ -46,7 +46,6 @@ catalogs:
     grammy: ^1.38.2
     ioredis: ^5.8.0
     libphonenumber-js: ^1.12.23
-    nuxt-tiptap-editor: ^2.3.1
     nuxt-zod-i18n: ^1.12.1
     pg: ^8.16.3
     pinia: ^3.0.3

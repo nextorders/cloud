@@ -1,5 +1,5 @@
 {
-  "name": "nextorders",
+  "name": "@nextorders/cloud-monorepo",
   "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@10.17.1",
@@ -13,8 +13,8 @@
     "pnpm": ">=10.17.1"
   },
   "scripts": {
-    "release": "changelogen-monorepo --release --push",
     "build": "pnpm -r run build",
+    "release": "bumpp --recursive",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "clean": "pnpm -r run clean",
@@ -33,7 +33,7 @@
     "@commitlint/config-conventional": "catalog:dev",
     "@vitest/browser": "catalog:test",
     "@vitest/coverage-v8": "catalog:test",
-    "changelogen-monorepo": "catalog:dev",
+    "bumpp": "catalog:dev",
     "eslint": "catalog:dev",
     "husky": "catalog:dev",
     "lint-staged": "catalog:dev",
@@ -49,7 +49,9 @@
     "unimport": "4.1.1"
   },
   "lint-staged": {
-    "*.ts": "eslint ."
+    "*.{js,ts,tsx,vue,md,json}": [
+      "eslint --cache --fix"
+    ]
   },
   "commitlint": {
     "extends": [
