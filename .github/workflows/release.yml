@@ -1,25 +1,22 @@
-name: Trigger Release
+name: Release
 
 permissions:
-  contents: write
   id-token: write
-  issues: write
-  packages: write
-  pull-requests: write
+  contents: write
 
 on:
-  workflow_dispatch:
-
-env:
-  HUSKY: 0
+  push:
+    tags:
+      - v*
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -31,10 +28,7 @@ jobs:
           node-version: lts/*
           cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Release
+      - run: npx changelogithub
+        continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm run release
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
