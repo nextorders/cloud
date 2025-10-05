@@ -7,7 +7,7 @@
     <NuxtImg
       alt=""
       src="/img/package.gif"
-      class="size-10 rounded-xl"
+      class="size-10 rounded-sm"
     />
 
     <p class="text-2xl tracking-tight font-serif font-black">

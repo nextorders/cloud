@@ -2,7 +2,7 @@
   <div v-if="avatarState?.seed" class="px-6 py-4 w-fit h-auto rounded-lg border border-default motion-preset-slide-left">
     <div class="flex flex-row items-center gap-4">
       <img
-        :src="avatarState?.href"
+        :src="getHref(avatarState)"
         alt=""
         class="size-18 rounded-full"
       >
@@ -20,11 +20,11 @@
 </template>
 
 <script setup lang="ts">
-const { generateAvatar } = useAvatar()
+const { generateAvatar, getHref } = useAvatar()
 
-const avatarState = ref<AvatarOptions>()
+const avatarState = ref<AvatarState>()
 
-const rating = computed(() => avatarState.value?.emotion ? Math.round(avatarState.value?.emotion / 2) : 1)
+const rating = computed(() => avatarState.value?.emotion ? Math.round(+avatarState.value?.emotion / 2) : 1)
 
 onMounted(() => {
   avatarState.value = generateAvatar()
