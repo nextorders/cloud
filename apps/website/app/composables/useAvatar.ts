@@ -1,14 +1,10 @@
 import { getRandInteger } from '#shared/utils/random'
 
-type State = {
+export type AvatarState = {
   seed: string
-  emotion: number
+  emotion: string
   gender: string
   clothing: string
-}
-
-export type AvatarOptions = State & {
-  href: string
 }
 
 export function useAvatar() {
@@ -16,24 +12,24 @@ export function useAvatar() {
 
   const availableGenders = ['male', 'female']
   const availableClothing = ['teal', 'amber', 'green', 'blue', 'pink', 'violet']
+  const availableEmotions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 
   function getRandomClothing() {
     return availableClothing[getRandInteger(0, availableClothing.length - 1)] ?? 'amber'
   }
 
-  function generateAvatar(): AvatarOptions {
-    const avatar = {} as AvatarOptions
+  function generateAvatar(): AvatarState {
+    const avatar = {} as AvatarState
 
     avatar.seed = generateSeed()
-    avatar.emotion = getRandInteger(1, 10)
+    avatar.emotion = getRandInteger(1, 10).toString()
     avatar.gender = getRandInteger(0, 1) === 0 ? 'male' : 'female'
     avatar.clothing = getRandomClothing()
-    avatar.href = getHref(avatar)
 
     return avatar
   }
 
-  function getHref(options: AvatarOptions): string {
+  function getHref(options: AvatarState): string {
     const url = new URL(`/${options.seed}`, hostUrl)
 
     url.searchParams.set('emotion', options.emotion.toString())
@@ -43,13 +39,14 @@ export function useAvatar() {
     return url.href
   }
 
-  function generateSeed() {
+  function generateSeed(): string {
     return getRandInteger(100000, 1000000).toString()
   }
 
   return {
     availableGenders,
     availableClothing,
+    availableEmotions,
     generateAvatar,
     generateSeed,
     getHref,

@@ -2,7 +2,7 @@
   <div class="grid grid-cols-3 gap-6 min-h-32">
     <div v-for="avatar in avatarsState" :key="avatar.seed">
       <img
-        :src="avatar.href"
+        :src="getHref(avatar)"
         alt=""
         class="h-18 md:h-32 aspect-square rounded-2xl motion-preset-slide-down motion-preset-pop"
       >
@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-const { generateAvatar } = useAvatar()
+const { generateAvatar, getHref } = useAvatar()
 
-const avatarsState = ref<AvatarOptions[]>([])
+const avatarsState = ref<AvatarState[]>([])
 
 onMounted(() => {
   setInterval(() => {

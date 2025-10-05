@@ -83,7 +83,6 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxtjs/seo',
     '@nuxt/ui',
-    'nuxt-zod-i18n', // must be before i18n
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@vueuse/nuxt',

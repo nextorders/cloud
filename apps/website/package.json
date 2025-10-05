@@ -21,7 +21,6 @@
     "@vueuse/core": "catalog:integrations",
     "@vueuse/nuxt": "catalog:integrations",
     "grammy": "catalog:integrations",
-    "nuxt-zod-i18n": "catalog:integrations",
     "pinia": "catalog:integrations",
     "zod": "catalog:integrations"
   },
