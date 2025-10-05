@@ -1,22 +1,22 @@
 <template>
-  <PageHeader
+  <UPageHero
+    orientation="vertical"
     :title="title"
     :description="description"
+    :ui="{
+      wrapper: 'lg:px-8',
+    }"
   >
-    <template #top>
-      <div class="mb-4 font-semibold text-primary flex items-center justify-center gap-1.5">
-        <UBadge color="neutral" variant="soft">
-          Открытый код
-        </UBadge>
-      </div>
+    <template #headline>
+      <UBadge color="neutral" variant="soft">
+        Открытый код
+      </UBadge>
     </template>
 
-    <template #bottom>
-      <div class="mt-10 mx-auto">
-        <AvatarRandomBlock />
-      </div>
-    </template>
-  </PageHeader>
+    <div class="mx-auto">
+      <AvatarRandomBlock />
+    </div>
+  </UPageHero>
 
   <UContainer>
     <div class="bg-elevated py-16 sm:py-24 lg:py-32 rounded-2xl">
