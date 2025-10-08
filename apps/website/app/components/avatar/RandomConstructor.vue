@@ -1,35 +1,53 @@
 <template>
   <UContainer>
-    <div class="bg-elevated py-16 sm:py-24 lg:py-32 rounded-2xl">
-      <div class="mx-auto max-w-sm flex flex-col flex-wrap gap-x-6 gap-y-6 justify-center">
-        <div class="mx-auto size-2/3">
+    <div class="relative bg-elevated py-16 sm:py-24 rounded-2xl">
+      <h2 class="pb-6 md:pb-12 text-center text-3xl sm:text-4xl lg:text-5xl text-pretty text-primary font-bold">
+        Онлайн генератор аватара
+      </h2>
+
+      <div class="px-4 mx-auto max-w-sm flex flex-col flex-wrap gap-x-6 gap-y-6 justify-center">
+        <div class="relative w-full mx-auto group/avatar">
           <img
             v-if="avatarHref"
             :src="avatarHref"
             alt=""
-            class="aspect-square rounded-2xl motion-preset-slide-down"
+            class="w-full aspect-square rounded-xl motion-preset-slide-down"
           >
+
+          <div class="opacity-0 group-hover/avatar:opacity-100 bg-primary/50 rounded-xl duration-200 absolute inset-0 p-4 flex flex-col gap-2 justify-end">
+            <div class="p-4 bg-default rounded-xl flex flex-col gap-2 justify-end">
+              <UButton
+                color="neutral"
+                variant="solid"
+                size="xl"
+                icon="i-lucide-copy"
+                label="Скопировать URL"
+                class="w-full justify-center"
+                @click="copyAvatarUrl()"
+              />
+
+              <UButton
+                color="neutral"
+                variant="subtle"
+                size="lg"
+                icon="i-lucide-external-link"
+                label="Открыть"
+                class="w-full justify-center"
+                @click="openAvatar()"
+              />
+            </div>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div class="grid grid-cols-1 gap-2">
           <UButton
             color="primary"
-            variant="soft"
-            size="lg"
-            icon="i-lucide-dices"
-            class="justify-center"
-            label="Рандом"
-            @click="handleFullReset()"
-          />
-
-          <UButton
-            color="neutral"
             variant="solid"
-            size="lg"
-            icon="i-lucide-copy"
-            label="Скопировать"
-            class="justify-center"
-            @click="copyAvatarUrl()"
+            size="xl"
+            icon="i-lucide-dices"
+            class="w-full justify-center"
+            label="Полный рандом"
+            @click="handleFullReset()"
           />
         </div>
 
@@ -135,6 +153,10 @@ function copyAvatarUrl() {
     duration: 2000,
     color: 'success',
   })
+}
+
+function openAvatar() {
+  window.open(avatarHref.value, '_blank')
 }
 
 function handleFullReset() {

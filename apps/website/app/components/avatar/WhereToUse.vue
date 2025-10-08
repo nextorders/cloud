@@ -7,7 +7,7 @@
   >
     <div class="flex flex-col gap-6">
       <AvatarUsageExample class="motion-preset-oscillate-sm motion-duration-3000" />
-      <AvatarUsageExample class="self-end md:mr-[15%] motion-preset-wobble motion-duration-2000" />
+      <AvatarUsageExample class="self-end mr-[5%] md:mr-[15%] motion-preset-wobble-sm motion-duration-2000" />
       <AvatarUsageExample class="self-start md:ml-[15%] motion-preset-wiggle motion-preset-seesaw motion-duration-1000" />
     </div>
   </UPageSection>

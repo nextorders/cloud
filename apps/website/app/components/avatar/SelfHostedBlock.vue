@@ -3,7 +3,7 @@
     orientation="horizontal"
     reverse
     title="Нужно разместить у себя?"
-    description="Без проблем, так как это open source проект. Библиотеку можно установить в свой проект из NPM."
+    description="Без проблем, так как это open source проект. Библиотеку можно установить в свой продукт из NPM."
     :links="[
       {
         label: 'Код на GitHub',
@@ -11,6 +11,7 @@
         target: '_blank',
         icon: 'simple-icons:github',
         size: 'xl',
+        class: 'w-full md:w-fit justify-center',
       },
     ]"
   >
