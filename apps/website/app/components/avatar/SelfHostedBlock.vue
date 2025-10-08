@@ -16,7 +16,7 @@
     ]"
   >
     <div class="w-full h-full">
-      <div class="p-4 h-full bg-elevated rounded-lg flex items-center justify-center">
+      <div class="p-4 h-full min-h-48 bg-elevated rounded-lg flex items-center justify-center">
         <p class="text-xl font-semibold">
           npm i @nextorders/avatar
         </p>
