@@ -4,7 +4,7 @@
       <img
         :src="getHref(avatar)"
         alt=""
-        class="h-18 md:h-32 aspect-square rounded-2xl motion-preset-slide-down motion-preset-pop"
+        class="h-22 md:h-32 aspect-square rounded-full md:rounded-2xl motion-preset-slide-down motion-preset-pop"
       >
     </div>
   </div>

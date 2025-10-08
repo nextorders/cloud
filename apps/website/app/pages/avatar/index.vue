@@ -5,6 +5,8 @@
     :description="description"
     :ui="{
       wrapper: 'lg:px-8',
+      title: 'wrap-break-word',
+      description: 'mx-auto max-w-4xl',
     }"
   >
     <template #headline>
@@ -19,13 +21,14 @@
   </UPageHero>
 
   <AvatarRandomConstructor />
+  <AvatarFeatures />
   <AvatarWhereToUse />
   <AvatarSelfHostedBlock />
 </template>
 
 <script setup lang="ts">
 const title = 'Персонализированные аватары в один клик'
-const description = 'Удобный сервис для генерации персонализированных SVG-аватаров по уникальному URL. Больше не нужно хранить изображения в базе данных — просто используйте ссылку для отображения аватара в вашем приложении или на сайте.'
+const description = 'Забудьте о хранении тысяч аватаров на сервере. Генератор SVG-изображений сделает свою работу! Вам остается лишь вставить итоговый URL в приложение. Настройте внешность, эмоции и стиль через параметры запроса.'
 
 useHead({
   title,
