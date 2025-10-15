@@ -46,7 +46,7 @@
     "vue-tsc": "catalog:dev"
   },
   "resolutions": {
-    "unimport": "4.1.1"
+    "unimport": "5.5.0"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md,json}": [
