@@ -1,11 +1,11 @@
 <template>
   <CabinetActiveCard>
     <div class="flex flex-col gap-4 justify-between">
-      <UIcon name="i-lucide-mail" class="size-8 text-(--ui-text-dimmed)" />
+      <UIcon name="i-lucide-mail" class="size-8 text-dimmed" />
 
       <div class="flex flex-col gap-1">
-        <div class="text-sm text-(--ui-text-muted)">
-          <p v-if="status === 'inactive'" class="text-(--ui-error)">
+        <div class="text-sm text-muted">
+          <p v-if="status === 'inactive'" class="text-error">
             Необходимо подтвердить
           </p>
           <p v-else>

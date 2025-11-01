@@ -23,10 +23,6 @@
           :company-unit="unit"
         />
       </div>
-
-      <!-- <aside class="hidden overflow-y-auto lg:block lg:max-h-[calc(100vh-var(--ui-header-height))] lg:sticky lg:top-(--ui-header-height) py-8 lg:ps-4 lg:-ms-4 lg:pe-6.5 lg:col-span-2">
-        <UNavigationMenu orientation="vertical" :items="navigationItems" />
-      </aside> -->
     </div>
   </UContainer>
 </template>

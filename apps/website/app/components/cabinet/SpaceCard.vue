@@ -23,7 +23,7 @@
     </template>
 
     <div>
-      <div class="text-sm text-(--ui-text-muted) flex flex-row items-center gap-1.5">
+      <div class="text-sm text-muted flex flex-row items-center gap-1.5">
         <p>Пространство</p>
         <UIcon name="i-lucide-hexagon" class="size-4" />
         <p>Тариф "{{ tariff?.name }}"</p>

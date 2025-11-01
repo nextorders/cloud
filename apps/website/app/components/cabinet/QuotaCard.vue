@@ -1,10 +1,10 @@
 <template>
   <UCard variant="subtle">
     <div class="flex flex-col gap-4 justify-between">
-      <UIcon :name="icon" class="size-8 text-(--ui-text-dimmed)" />
+      <UIcon :name="icon" class="size-8 text-dimmed" />
 
       <div class="flex flex-col gap-1">
-        <div class="text-sm text-(--ui-text-muted)">
+        <div class="text-sm text-muted">
           {{ name }}
         </div>
         <h3 class="text-xl font-semibold line-clamp-1">

@@ -8,7 +8,7 @@
   >
     <UButton
       :avatar="{ src: user?.avatarUrl ?? undefined }"
-      :ui="{ trailingIcon: 'text-(--ui-text-dimmed)' }"
+      :ui="{ trailingIcon: 'text-dimmed' }"
       :label="user?.name"
       block
       color="neutral"
