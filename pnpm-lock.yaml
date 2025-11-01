@@ -138,8 +138,8 @@ catalogs:
       specifier: ^3.2.4
       version: 3.2.4
     vitest-browser-vue:
-      specifier: ^1.1.0
-      version: 1.1.0
+      specifier: ^2.0.1
+      version: 2.0.1
   types:
     '@types/node':
       specifier: ^24.6.2
@@ -199,7 +199,7 @@ importers:
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.6.2)(@vitest/browser@3.2.4)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.1)
       vitest-browser-vue:
         specifier: catalog:test
-        version: 1.1.0(@vitest/browser@3.2.4)(vitest@3.2.4)(vue@3.5.21(typescript@5.9.3))
+        version: 2.0.1(vitest@3.2.4)(vue@3.5.21(typescript@5.9.3))
       vue-tsc:
         specifier: catalog:dev
         version: 3.1.0(typescript@5.9.3)
@@ -5135,6 +5135,7 @@ packages:
 
   motion-v@1.7.2:
     resolution: {integrity: sha512-h2qfae2LUMLw5KIjQF5cT+r0MrLwP4AFDMOisyp25x/oDI3PHgjLHJrhHx77q8iBNegk4llt5p6deC12EJ5fvQ==}
+    deprecated: deprecate
     peerDependencies:
       '@vueuse/core': '>=10.0.0'
       vue: '>=3.0.0'
@@ -6800,12 +6801,10 @@ packages:
       yaml:
         optional: true
 
-  vitest-browser-vue@1.1.0:
-    resolution: {integrity: sha512-zeMJ0fXRmvG225dXx4sMf5rb7vQC4OCRK7tuVRPCca4x93e2E7VRuPiKSwHRWDvCQQoA3VV09mJPO0xGm9VEEA==}
-    engines: {node: ^18.0.0 || >=20.0.0}
+  vitest-browser-vue@2.0.1:
+    resolution: {integrity: sha512-IfTJY3Olr27AXCVAhOqx4g5iUgzdWLmYr40svg7rOrunjsqc9trrzi/eI3i11+UYddbKXu3HJl2bo8o8lqKm4A==}
     peerDependencies:
-      '@vitest/browser': ^2.1.0 || ^3.0.0 || ^4.0.0-0
-      vitest: ^2.1.0 || ^3.0.0 || ^4.0.0-0
+      vitest: ^4.0.0-0
       vue: ^3.0.0
 
   vitest@3.2.4:
@@ -14488,9 +14487,8 @@ snapshots:
       terser: 5.39.0
       yaml: 2.8.1
 
-  vitest-browser-vue@1.1.0(@vitest/browser@3.2.4)(vitest@3.2.4)(vue@3.5.21(typescript@5.9.3)):
+  vitest-browser-vue@2.0.1(vitest@3.2.4)(vue@3.5.21(typescript@5.9.3)):
     dependencies:
-      '@vitest/browser': 3.2.4(playwright@1.55.1)(vite@7.1.9(@types/node@24.6.2)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.1))(vitest@3.2.4)
       '@vue/test-utils': 2.4.6
       vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.6.2)(@vitest/browser@3.2.4)(jiti@2.6.1)(lightningcss@1.30.1)(terser@5.39.0)(yaml@2.8.1)
       vue: 3.5.21(typescript@5.9.3)
