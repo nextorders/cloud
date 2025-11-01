@@ -2,14 +2,14 @@
   <UCard variant="outline">
     <div class="flex flex-col gap-4">
       <div class="flex flex-row gap-4 items-center">
-        <UIcon name="i-lucide-wallet" class="size-10 text-(--ui-text-dimmed)" />
+        <UIcon name="i-lucide-wallet" class="size-10 text-dimmed" />
 
         <div>
           <h2 class="text-2xl font-semibold">
             {{ balance }} ₽
           </h2>
 
-          <p class="text-sm text-(--ui-text-muted)">
+          <p class="text-sm text-muted">
             Активный баланс
           </p>
         </div>

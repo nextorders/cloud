@@ -5,7 +5,7 @@
         <UIcon
           v-if="tariff?.icon"
           :name="tariff.icon"
-          class="size-10 text-(--ui-text-dimmed)"
+          class="size-10 text-dimmed"
         />
 
         <div>
@@ -13,7 +13,7 @@
             {{ tariff?.name }}
           </h2>
 
-          <p class="text-sm text-(--ui-text-muted)">
+          <p class="text-sm text-muted">
             Выбранный тариф
           </p>
         </div>

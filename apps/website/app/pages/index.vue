@@ -4,7 +4,7 @@
     :description="description"
   >
     <template #top>
-      <div class="mb-4 font-semibold text-(--ui-primary) flex items-center justify-center gap-1.5">
+      <div class="mb-4 font-semibold text-primary flex items-center justify-center gap-1.5">
         <UBadge color="neutral" variant="soft">
           Открытый код
         </UBadge>
@@ -46,7 +46,7 @@
         alt="Демо версия NextOrders: Food"
         class="w-full h-auto rounded-lg motion-preset-slide-up"
       />
-      <figcaption class="mt-2 text-center italic text-(--ui-text-muted)">
+      <figcaption class="mt-2 text-center italic text-muted">
         Так выглядит веб-сайт: каталог, удобная корзина
       </figcaption>
     </figure>
@@ -54,10 +54,10 @@
 
   <UContainer class="mt-8 flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16 lg:grid-cols-2 lg:items-center">
     <div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted)">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted">
         Редактирование веб-сайта
       </h2>
-      <p class="text-base sm:text-lg text-(--ui-text-muted) text-pretty mt-6">
+      <p class="text-base sm:text-lg text-muted text-pretty mt-6">
         Удобная панель управления позволит легко управлять меню, товарами и настройками сайта, пока клиенты продолжают заказывать еду.
       </p>
 
@@ -68,7 +68,7 @@
           class="relative flex items-start gap-2.5"
         >
           <div class="inline-flex items-center justify-center p-0.5">
-            <UIcon :name="feature.icon" class="size-6 text-(--ui-primary)" />
+            <UIcon :name="feature.icon" class="size-6 text-primary" />
           </div>
           <div>{{ feature.label }}</div>
         </li>
@@ -106,10 +106,10 @@
 
   <UContainer class="flex flex-col lg:grid py-16 sm:py-24 lg:py-32 gap-8 sm:gap-16">
     <div>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-(--ui-text-highlighted) text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl text-pretty tracking-tight font-bold text-highlighted text-center">
         Преимущества и возможности
       </h2>
-      <div class="text-base sm:text-lg text-(--ui-text-muted) text-center text-balance mt-6">
+      <div class="text-base sm:text-lg text-muted text-center text-balance mt-6">
         Откройте для себя новый уровень организации доставки еды.
       </div>
     </div>
@@ -126,10 +126,10 @@
           class="size-6"
         />
 
-        <h3 class="text-base text-pretty font-semibold text-(--ui-text-highlighted)">
+        <h3 class="text-base text-pretty font-semibold text-highlighted">
           {{ feature.title }}
         </h3>
-        <div class="text-sm text-pretty text-(--ui-text-muted) mt-1">
+        <div class="text-sm text-pretty text-muted mt-1">
           {{ feature.description }}
         </div>
       </UCard>
