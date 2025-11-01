@@ -23,7 +23,7 @@ catalogs:
     husky: ^9.1.7
     lint-staged: ^16.2.6
     nitropack: ^2.12.9
-    nuxt: ^4.1.2
+    nuxt: ^4.2.0
     nuxt-auth-utils: ^0.5.25
     tailwindcss-motion: ^1.1.1
     typescript: ^5.9.3
