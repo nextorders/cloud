@@ -35,12 +35,10 @@ useHead({
 })
 
 const tariff = useTariffStore()
-const city = useCityStore()
 
 onMounted(async () => {
   await Promise.all([
     tariff.update(),
-    city.update(),
   ])
 })
 </script>

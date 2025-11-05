@@ -1,6 +1,6 @@
 import { cuid2 } from 'drizzle-cuid2/postgres'
 import { relations } from 'drizzle-orm'
-import { integer, numeric, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 export const users = pgTable('users', {
   id: cuid2('id').defaultRandom().primaryKey(),
@@ -209,58 +209,6 @@ export const telegramReceivers = pgTable('telegram_receivers', {
   serviceId: cuid2('service_id').notNull().references(() => services.id),
 })
 
-export const cities = pgTable('cities', {
-  id: cuid2('id').defaultRandom().primaryKey(),
-  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  title: varchar('title').notNull(),
-  slug: varchar('slug').notNull(),
-})
-
-export const companies = pgTable('companies', {
-  id: cuid2('id').defaultRandom().primaryKey(),
-  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  slug: varchar('slug').notNull(),
-  title: varchar('title').notNull(),
-  description: varchar('description'),
-  rating: numeric('rating', { mode: 'number' }).notNull().default(0),
-})
-
-export const companyUnits = pgTable('company_units', {
-  id: cuid2('id').defaultRandom().primaryKey(),
-  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  companyId: cuid2('company_id').notNull().references(() => companies.id, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-  }),
-  cityId: cuid2('city_id').notNull().references(() => cities.id, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-  }),
-})
-
-export const points = pgTable('points', {
-  id: cuid2('id').defaultRandom().primaryKey(),
-  createdAt: timestamp('created_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  updatedAt: timestamp('updated_at', { precision: 3, mode: 'string' }).notNull().defaultNow(),
-  name: varchar('name').notNull(),
-  address: varchar('address').notNull(),
-  cityId: cuid2('city_id').notNull().references(() => cities.id, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-  }),
-  companyId: cuid2('company_id').notNull().references(() => companies.id, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-  }),
-  companyUnitId: cuid2('company_unit_id').references(() => companyUnits.id, {
-    onDelete: 'cascade',
-    onUpdate: 'cascade',
-  }),
-})
-
 export const usersRelations = relations(users, ({ many }) => ({
   spaces: many(spaces),
   memberInSpaces: many(spaceMembers),
@@ -396,42 +344,5 @@ export const telegramReceiversRelations = relations(telegramReceivers, ({ one })
   service: one(services, {
     fields: [telegramReceivers.serviceId],
     references: [services.id],
-  }),
-}))
-
-export const cityRelations = relations(cities, ({ many }) => ({
-  companyUnits: many(companyUnits),
-  points: many(points),
-}))
-
-export const companyRelations = relations(companies, ({ many }) => ({
-  companyUnits: many(companyUnits),
-  points: many(points),
-}))
-
-export const companyUnitRelations = relations(companyUnits, ({ one, many }) => ({
-  company: one(companies, {
-    fields: [companyUnits.companyId],
-    references: [companies.id],
-  }),
-  city: one(cities, {
-    fields: [companyUnits.cityId],
-    references: [cities.id],
-  }),
-  points: many(points),
-}))
-
-export const pointRelations = relations(points, ({ one }) => ({
-  city: one(cities, {
-    fields: [points.cityId],
-    references: [cities.id],
-  }),
-  company: one(companies, {
-    fields: [points.companyId],
-    references: [companies.id],
-  }),
-  companyUnit: one(companyUnits, {
-    fields: [points.companyUnitId],
-    references: [companyUnits.id],
   }),
 }))
