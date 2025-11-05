@@ -8,14 +8,6 @@ function _useApp() {
     to: '/avatar',
     active: route.path.startsWith('/avatar'),
   }, {
-    label: 'Города',
-    to: '/geo/kaliningrad',
-    active: route.path.startsWith('/geo'),
-  }, {
-    label: 'Компании',
-    to: '/org/papasha-beppe',
-    active: route.path.startsWith('/org'),
-  }, {
     label: 'Документация',
     to: '/docs/getting-started',
     active: route.path.startsWith('/docs'),
