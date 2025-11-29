@@ -23,7 +23,7 @@
     "@types/node": "catalog:types",
     "@types/pg": "8.15.6",
     "dotenv": "catalog:dev",
-    "drizzle-kit": "0.31.6",
+    "drizzle-kit": "0.31.7",
     "typescript": "catalog:dev"
   }
 }
