@@ -13,7 +13,7 @@ catalogs:
     '@iconify-json/simple-icons': ^1.2.56
     '@nuxt/content': ^3.8.0
     '@nuxt/devtools': ^3.0.1
-    '@nuxt/image': ^1.11.0
+    '@nuxt/image': ^2.0.0
     '@nuxt/scripts': ^0.13.0
     '@nuxtjs/i18n': ^10.1.2
     '@nuxtjs/seo': ^3.2.2
